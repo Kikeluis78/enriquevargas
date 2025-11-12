@@ -1,63 +1,98 @@
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Container from "@mui/material/Container";
 import ModalConstruccion from "../Components/ModalConstruccion";
-import Logo from "../Components/Logo";
 
 export default function Clientes() {
-  const clientes = Array.from({ length: 8 }, (_, i) => i + 1);
-
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
 
+  const proyectos = [
+    {
+      title: "E-Commerce Fashion",
+      category: "Diseño Web",
+      image:
+        "https://images.pexels.com/photos/6214476/pexels-photo-6214476.jpeg?auto=compress&cs=tinysrgb&w=800",
+    },
+    {
+      title: "App Fitness Tracker",
+      category: "Android App",
+      image:
+        "https://images.pexels.com/photos/4162449/pexels-photo-4162449.jpeg?auto=compress&cs=tinysrgb&w=800",
+    },
+    {
+      title: "Restaurant Booking",
+      category: "Diseño Web",
+      image:
+        "https://images.pexels.com/photos/1307698/pexels-photo-1307698.jpeg?auto=compress&cs=tinysrgb&w=800",
+    },
+    {
+      title: "Banking App",
+      category: "Android App",
+      image:
+        "https://images.pexels.com/photos/6120214/pexels-photo-6120214.jpeg?auto=compress&cs=tinysrgb&w=800",
+    },
+    {
+      title: "Portfolio Creativo",
+      category: "Diseño Web",
+      image:
+        "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800",
+    },
+    {
+      title: "Social Media App",
+      category: "Android App",
+      image:
+        "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800",
+    },
+  ];
+
   return (
     <>
       <ModalConstruccion />
- <Logo />
-      {/* Sección con fondo degradado oscuro y texto claro */}
-      <section className="py-16 px-6 md:px-20 bg-gradient-to-b from-gray-900 via-black to-black text-gray-200 min-h-screen flex flex-col items-center">
-        <div className="max-w-6xl w-full mx-auto text-center">
-          {/* Título principal */}
-          <h1
-            className="text-4xl md:text-5xl font-extrabold mb-6 text-amber-400 drop-shadow-md"
-            data-aos="fade-up"
-          >
-            Nuestros Clientes
-          </h1>
 
-          {/* Subtítulo / descripción */}
-          <p
-            className="text-lg md:text-xl max-w-3xl mx-auto mb-16 text-gray-400 leading-relaxed"
+
+      {/* ✅ Sección de Proyectos */}
+      <section id="clientes" className="py-20 px-6 bg-[#0A0A0A]">
+        <Container>
+          <div data-aos="fade-up" className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+              Proyectos <span className="text-[#00D9FF]">Destacados</span>
+            </h2>
+            <p className="text-gray-400 text-lg">
+              Algunos de mis trabajos más recientes
+            </p>
+          </div>
+
+          <div
             data-aos="fade-up"
             data-aos-delay="200"
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            Estas son algunas de las marcas y empresas que han confiado en mi
-            trabajo.
-          </p>
-
-          {/* Grid responsivo con logos de clientes */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-12 items-center justify-center">
-            {clientes.map((i, index) => (
+            {proyectos.map((project, index) => (
               <div
-                key={i}
-                className="flex items-center justify-center p-4 bg-gray-800 rounded-lg shadow-lg transition-transform hover:scale-105"
-                data-aos="zoom-in"
-                data-aos-delay={index * 100} // efecto en cascada
+                key={index}
+                className="group relative overflow-hidden rounded-2xl cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500"
               >
                 <img
-                  src={`https://via.placeholder.com/150x80?text=Cliente+${i}`}
-                  alt={`Cliente ${i}`}
-                  className="h-20 object-contain grayscale hover:grayscale-0 transition duration-300"
-                  loading="lazy"
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                  <span className="text-[#00D9FF] text-sm font-semibold mb-2">
+                    {project.category}
+                  </span>
+                  <h3 className="text-2xl font-bold text-white">
+                    {project.title}
+                  </h3>
+                </div>
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
-      
-        
     </>
   );
 }

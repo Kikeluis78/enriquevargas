@@ -6,6 +6,8 @@ import Clientes from "../Pages/Clientes";
 import Contacto from "../Pages/Contacto";
 import NoFound404 from "../Pages/NoFound404";
 import Politica from "../Pages/Politica";
+import TerminosServicio from "../Pages/TerminosServicio";
+import PoliticaCookies from "../Pages/PoliticaCookies";
 
 function AppRouter() {
   return (
@@ -15,7 +17,9 @@ function AppRouter() {
       <Route path="/precios2" element={<Precios2 />} />
       <Route path="/clientes" element={<Clientes />} />
       <Route path="/contacto" element={<Contacto />} />
-       <Route path="/politica" element={<Politica />} />
+      <Route path="/politica" element={<Politica />} />
+      <Route path="/terminosServicio" element={<TerminosServicio />} />
+      <Route path="/cookies" element={<PoliticaCookies />} />
       <Route path="*" element={<NoFound404 />} />
     </Routes>
   );

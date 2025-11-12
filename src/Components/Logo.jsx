@@ -1,11 +1,38 @@
-import React from "react";
+import Typography from "@mui/material/Typography";
 
 export default function Logo() {
   return (
-    <div className="font-extrabold text md:text-2xl select-none">
-      <span className="bg-gradient-to-r from-yellow-300 to-cyan-400 bg-clip-text text-transparent">
-        Enrique Vargas
+    <Typography
+      variant="h4"
+      sx={{
+        fontFamily: "'Montserrat', sans-serif",
+        fontWeight: 900,
+        letterSpacing: "-0.5px",
+        userSelect: "none",
+        display: "flex",
+        alignItems: "center",
+        gap: "6px",
+      }}
+    >
+      {/* ENRIQUE */}
+      <span
+        style={{
+          color: "#00D9FF",
+          fontWeight: 900,
+        }}
+      >
+        Enrique
       </span>
-    </div>
+
+      {/* VARGAS */}
+      <span
+        style={{
+          color: "#FFFFFF", // blanco puro
+          fontWeight: 900,
+        }}
+      >
+        Vargas
+      </span>
+    </Typography>
   );
 }

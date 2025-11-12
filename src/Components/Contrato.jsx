@@ -1,5 +1,8 @@
-// src/components/Contrato.jsx
 import { jsPDF } from "jspdf";
+
+// ✅ Material UI
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 
 export default function Contrato({ datosCliente }) {
   const generarPDF = () => {
@@ -10,7 +13,11 @@ export default function Contrato({ datosCliente }) {
     // Título
     doc.setFontSize(18);
     doc.setTextColor(20, 20, 20);
-    doc.text("Contrato de Prestación de Servicios de Desarrollo Web", 20, 20);
+    doc.text(
+      "Contrato de Prestación de Servicios de Desarrollo Web",
+      20,
+      20
+    );
 
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 0);
@@ -22,7 +29,7 @@ export default function Contrato({ datosCliente }) {
     doc.text(`Teléfono: ${datosCliente.telefono}`, 20, 70);
     doc.text(`Correo: ${datosCliente.correo}`, 20, 80);
 
-    // Contenido del contrato (borrador simple)
+    // Contenido del contrato
     const contenido = `
 Este Acuerdo de Servicios establece los términos y condiciones entre el Diseñador/Desarrollador (Proveedor) 
 y el Cliente (Establecimiento), con respecto al servicio de diseño y desarrollo web.
@@ -58,7 +65,7 @@ Cláusulas:
 
 7. Aceptación:
    Ambas partes declaran haber leído y aceptado los términos aquí establecidos.
-    `;
+`;
 
     doc.text(contenido, 20, 100, { maxWidth: 170, lineHeightFactor: 1.3 });
 
@@ -71,13 +78,31 @@ Cláusulas:
   };
 
   return (
-    <div className="flex flex-col items-center justify-center mt-6">
-      <button
+    <Box
+      sx={{
+        mt: 6,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Button
+        variant="contained"
         onClick={generarPDF}
-        className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-3 px-6 rounded-lg transition"
+        sx={{
+          backgroundColor: "#facc15", // amarillo
+          color: "black",
+          fontWeight: 600,
+          px: 4,
+          py: 1.5,
+          borderRadius: 2,
+          "&:hover": {
+            backgroundColor: "#eab308", // amarillo oscuro
+          },
+        }}
       >
         Descargar Contrato
-      </button>
-    </div>
+      </Button>
+    </Box>
   );
 }

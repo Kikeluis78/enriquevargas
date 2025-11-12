@@ -1,5 +1,17 @@
 import { useRef, useState } from "react";
 import Swal from "sweetalert2";
+
+// ✅ Material UI
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Divider from "@mui/material/Divider";
+
+// ✅ Componentes propios
 import Contrato from "../Components/Contrato";
 import InfoContrato from "../Components/ImfoContrato";
 import Logo from "../Components/Logo";
@@ -7,6 +19,20 @@ import Logo from "../Components/Logo";
 export default function Contacto() {
   const formRef = useRef(null);
   const [datosCliente, setDatosCliente] = useState(null);
+
+  // 🎨 Estilos de inputs
+  const inputStyles = {
+    borderRadius: 2,
+    bgcolor: "rgba(92,125,190,0.3)", 
+    color: "white",
+    borderColor: "#3b82f6",
+    transition: "all 0.3s ease",
+    "&:hover": { borderColor: "#60a5fa" },
+    "&.Mui-focused": {
+      bgcolor: "rgba(96,165,250,0.15)",
+      borderColor: "#60a5fa",
+    },
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,7 +44,6 @@ export default function Contacto() {
     const telefono = formEl["telefono"].value.trim();
     const correo = formEl["correo"].value.trim();
 
-    // Validar campos vacíos
     if (!nombre || !negocio || !giro || !telefono || !correo) {
       Swal.fire({
         icon: "error",
@@ -31,13 +56,12 @@ export default function Contacto() {
       return;
     }
 
-    // Validar correo
     const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
     if (!isValidEmail(correo)) {
       Swal.fire({
         icon: "error",
         title: "Correo inválido",
-        text: "Introduce un correo electrónico válido (ej. usuario@dominio.com).",
+        text: "Introduce un correo electrónico válido.",
         confirmButtonColor: "#2563EB",
         background: "#1f2937",
         color: "#f9fafb",
@@ -45,13 +69,12 @@ export default function Contacto() {
       return;
     }
 
-    // Validar teléfono
     const isValidPhone = (tel) => /^\d{10}$/.test(tel);
     if (!isValidPhone(telefono)) {
       Swal.fire({
         icon: "error",
         title: "Teléfono inválido",
-        text: "El número debe tener exactamente 10 dígitos (solo números).",
+        text: "El número debe tener exactamente 10 dígitos.",
         confirmButtonColor: "#2563EB",
         background: "#1f2937",
         color: "#f9fafb",
@@ -59,7 +82,6 @@ export default function Contacto() {
       return;
     }
 
-    // Spinner y envío
     Swal.fire({
       title: "Enviando...",
       allowOutsideClick: false,
@@ -70,6 +92,7 @@ export default function Contacto() {
         Swal.showLoading();
         setTimeout(() => {
           formEl.submit();
+
           Swal.fire({
             icon: "success",
             title: "Datos enviados",
@@ -80,14 +103,13 @@ export default function Contacto() {
           });
 
           formEl.reset();
-
-          // Guardar datos para generar el contrato
           setDatosCliente({ nombre, negocio, giro, telefono, correo });
-        }, 800);
+        }, 900);
       },
     });
   };
 
+  
   const steps = [
     "Registra tus datos",
     "Firma tu contrato",
@@ -98,111 +120,169 @@ export default function Contacto() {
   ];
 
   return (
-    <div>
-      <Logo />
+    <>
 
-      <div className="min-h-screen bg-black flex flex-col items-center justify-center px-4 py-8">
-        {/* Título */}
-        <h1 className="text-3xl md:text-5xl font-bold mb-8 text-center">
-          <span className="text-blue-400">Últimos pasos para</span>{" "}
-          <span className="text-yellow-400">Contratación</span>
-        </h1>
 
-        {/* Pasos */}
-        <div className="w-full max-w-4xl mb-10">
-          {/* Desktop: horizontal */}
-          <div className="hidden md:flex justify-between items-center">
-            {steps.map((step, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center text-center"
-              >
-                <div className="w-12 h-12 rounded-full bg-blue-500 text-white font-bold flex items-center justify-center mb-2">
-                  {index + 1}
-                </div>
-                <span className="text-gray-200 font-semibold">{step}</span>
-                {index !== steps.length - 1 && (
-                  <div className="flex-1 h-1 bg-gray-600 mt-4 mx-4"></div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Mobile: vertical cards */}
-          <div className="md:hidden flex flex-col gap-4">
-            {steps.map((step, index) => (
-              <div
-                key={index}
-                className="bg-gray-800 text-white rounded-xl p-4 flex items-center gap-4 shadow-lg"
-              >
-                <div className="w-10 h-10 rounded-full bg-yellow-500 text-black font-bold flex items-center justify-center">
-                  {index + 1}
-                </div>
-                <span className="font-semibold">{step}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <InfoContrato />
-
-        {/* Formulario */}
-        <form
-          ref={formRef}
-          target="dummyFrame"
-          action="https://script.google.com/macros/s/AKfycbxRLOBv59HTTmL_zhVDuH-8cCNzZEoNLbDCJIMoS9by8VNLdJREX79DdR3OnerkVFKdPw/exec"
-          method="POST"
-          onSubmit={handleSubmit}
-          className="bg-black border-2 border-blue-500 rounded-xl shadow-lg shadow-blue-500/50 w-full max-w-md p-6 space-y-4"
-          noValidate
-        >
-          <iframe name="dummyFrame" style={{ display: "none" }}></iframe>
-
-          <input
-            type="text"
-            name="nombre"
-            placeholder="Nombre"
-            className="w-full px-4 py-3 bg-black border border-blue-500 text-white placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
-          />
-
-          <input
-            type="text"
-            name="negocio"
-            placeholder="Nombre del Negocio"
-            className="w-full px-4 py-3 bg-black border border-blue-500 text-white placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
-          />
-
-          <input
-            type="text"
-            name="giro"
-            placeholder="Giro del Negocio"
-            className="w-full px-4 py-3 bg-black border border-blue-500 text-white placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
-          />
-
-          <input
-            type="text"
-            name="telefono"
-            placeholder="Teléfono"
-            className="w-full px-4 py-3 bg-black border border-blue-500 text-white placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
-          />
-
-          <input
-            type="text"
-            name="correo"
-            placeholder="Correo Electrónico"
-            className="w-full px-4 py-3 bg-black border border-blue-500 text-white placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
-          />
-
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-all duration-300"
+      <Box sx={{ minHeight: "100vh", py: 3, }}>
+        <Container maxWidth="md">
+          {/* Título */}
+          <Typography
+            variant="h3"
+            sx={{
+              fontWeight: 700,
+              textAlign: "center",
+              color: "white",
+              mb: 4,
+            }}
           >
-            Enviar
-          </button>
-        </form>
+            <span style={{ color: "#60a5fa" }}>Últimos pasos para</span>{" "}
+            <span style={{ color: "#facc15" }}>Contratación</span>
+          </Typography>
 
-        {/* Contrato dinámico */}
-        {datosCliente && <Contrato datosCliente={datosCliente} />}
-      </div>
-    </div>
+          {/* Pasos Desktop */}
+          <Box sx={{ display: { xs: "none", md: "flex" }, mb: 6 }}>
+            <Grid container alignItems="center" justifyContent="space-between" spacing={2}>
+              {steps.map((step, index) => (
+                <Grid key={index} item xs="auto" sx={{ textAlign: "center", position: "relative" }}>
+                  <Box
+                    sx={{
+                      width: 48,
+                      height: 48,
+                      mx: "auto",
+                      borderRadius: "50%",
+                      bgcolor: "#3b82f6",
+                      color: "white",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      fontWeight: "bold",
+                      mb: 1,
+                    }}
+                  >
+                    {index + 1}
+                  </Box>
+                  <Typography sx={{ color: "#e5e7eb", fontWeight: 600 }}>
+                    {step}
+                  </Typography>
+
+                  {index !== steps.length - 1 && (
+                    <Divider
+                      sx={{
+                        width: "100%",
+                        bgcolor: "#4b5563",
+                        height: 2,
+                        position: "absolute",
+                        top: 22,
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                      }}
+                    />
+                  )}
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+
+          {/* Pasos Mobile */}
+          <Box sx={{ display: { xs: "flex", md: "none" }, flexDirection: "column", gap: 2 }}>
+            {steps.map((step, index) => (
+              <Paper
+                key={index}
+                sx={{
+                  p: 2,
+                  display: "flex",
+                  gap: 2,
+                  alignItems: "center",
+                  bgcolor: "#1f2937",
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: "50%",
+                    bgcolor: "#facc15",
+                    color: "black",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {index + 1}
+                </Box>
+                <Typography sx={{ color: "white", fontWeight: 600 }}>
+                  {step}
+                </Typography>
+              </Paper>
+            ))}
+          </Box>
+
+          {/* InfoContrato */}
+          <Box sx={{ mt: 4, mb: 4 }}>
+            <InfoContrato />
+          </Box>
+
+          {/* Formulario */}
+          <Paper
+            sx={{
+              p: 4,
+              backgroundColor: "black",
+              border: "2px solid #3b82f6",
+              boxShadow: "0px 0px 20px rgba(59,130,246,0.4)",
+              borderRadius: 3,
+            }}
+          >
+            <form
+              ref={formRef}
+              target="dummyFrame"
+              action="https://script.google.com/macros/s/AKfycbxRLOBv59HTTmL_zhVDuH-8cCNzZEoNLbDCJIMoS9by8VNLdJREX79DdR3OnerkVFKdPw/exec"
+              method="POST"
+              onSubmit={handleSubmit}
+              noValidate
+            >
+              <iframe name="dummyFrame" style={{ display: "none" }}></iframe>
+
+              {["nombre", "negocio", "giro", "telefono", "correo"].map((name) => (
+                <TextField
+                  key={name}
+                  label={name === "correo" ? "Correo Electrónico" :
+                         name === "negocio" ? "Nombre del Negocio" :
+                         name === "giro" ? "Giro del Negocio" : "Nombre"}
+                  name={name}
+                  fullWidth
+                  variant="outlined"
+                  margin="normal"
+                  InputProps={{ sx: inputStyles }}
+                  InputLabelProps={{ sx: { color: "white" } }}
+                />
+              ))}
+
+              <Button
+                type="submit"
+                fullWidth
+                sx={{
+                  mt: 2,
+                  py: 1.5,
+                  bgcolor: "#2563eb",
+                  color: "white",
+                  fontWeight: 600,
+                  "&:hover": { bgcolor: "#1d4ed8" },
+                }}
+              >
+                Enviar
+              </Button>
+            </form>
+          </Paper>
+
+          {/* Contrato dinámico */}
+          {datosCliente && (
+            <Box sx={{ mt: 4, textAlign: "center" }}>
+              <Contrato datosCliente={datosCliente} />
+            </Box>
+          )}
+        </Container>
+      </Box>
+    </>
   );
 }

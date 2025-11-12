@@ -1,50 +1,103 @@
 import { useState } from "react";
 
-export default function ModalConstruccion() {
-  const [show, setShow] = useState(true); // cambia a false si no quieres mostrarlo al inicio
+// ✅ Material UI
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
-  if (!show) return null;
+export default function ModalConstruccion() {
+  const [show, setShow] = useState(true); // true = visible al inicio
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-      <div
-        className="
-          bg-gradient-to-b from-gray-900 via-gray-800 to-black
-          rounded-2xl shadow-2xl relative border border-gray-700
-          w-[90%] sm:w-[80%] max-w-4xl h-[70vh]
-          flex flex-col p-8
-        "
+    <Dialog
+      open={show}
+      onClose={() => setShow(false)}
+      maxWidth="md"
+      fullWidth
+      PaperProps={{
+        sx: {
+          background: "linear-gradient(to bottom, #111827, #1f2937, #000)",
+          borderRadius: 4,
+          border: "1px solid #374151",
+          height: { xs: "70vh", md: "70vh" },
+          display: "flex",
+          flexDirection: "column",
+          p: { xs: 2, sm: 4 },
+        },
+      }}
+      BackdropProps={{
+        sx: { backgroundColor: "rgba(0,0,0,0.8)" },
+      }}
+    >
+      <DialogContent
+        sx={{
+          flex: 1,
+          overflowY: "auto",
+          textAlign: "center",
+          px: { xs: 1, sm: 4 },
+        }}
       >
-        {/* Contenido con scroll */}
-        <div className="overflow-y-auto flex-1 custom-scroll px-4 text-center">
-          {/* Título */}
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-amber-400 mb-6 drop-shadow-lg mt-6">
-            🚧 Estamos en Construcción 🚧
-          </h2>
+        {/* TÍTULO */}
+        <Typography
+          variant="h3"
+          sx={{
+            fontWeight: 800,
+            color: "#fbbf24", // amber-400
+            textShadow: "0 0 12px rgba(0,0,0,0.8)",
+            mb: 3,
+            mt: 2,
+            fontSize: { xs: "1.8rem", sm: "2.5rem" },
+          }}
+        >
+          🚧 Estamos en Construcción 🚧
+        </Typography>
 
-          {/* Texto */}
-          <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-18">
-            Esta sección aún no está disponible.  
-            <span className="text-blue-400 font-semibold"> ¡Estamos trabajando </span>  
-            <span className="text-yellow-400 font-semibold" >    para que esté lista muy pronto! 🚀  </span>
-         
-          </p>
+        {/* TEXTO */}
+        <Typography
+          sx={{
+            color: "#d1d5db",
+            fontSize: { xs: "1rem", sm: "1.15rem", md: "1.25rem" },
+            maxWidth: "650px",
+            mx: "auto",
+            lineHeight: 1.7,
+            mb: 8,
+          }}
+        >
+          Esta sección aún no está disponible.  
+          <span style={{ color: "#60a5fa", fontWeight: 600 }}>
+            {" "}¡Estamos trabajando{" "}
+          </span>
+          <span style={{ color: "#facc15", fontWeight: 600 }}>
+            para que esté lista muy pronto! 🚀
+          </span>
+        </Typography>
+      </DialogContent>
 
-        
-        </div>
-
-        {/* Botón centrado */}
-        <div className="pt-6">
-          <button
-            onClick={() => setShow(false)}
-            className="mx-auto block px-6 py-2 bg-blue-500 hover:bg-blue-600 
-                       text-white font-semibold rounded-full shadow-md 
-                       transition-transform transform hover:scale-105 text-sm sm:text-base mt-12"
-          >
-            Cerrar
-          </button>
-        </div>
-      </div>
-    </div>
+      {/* BOTÓN */}
+      <Box sx={{ textAlign: "center", pb: 3 }}>
+        <Button
+          onClick={() => setShow(false)}
+          sx={{
+            backgroundColor: "#3b82f6",
+            color: "white",
+            fontWeight: 600,
+            px: 4,
+            py: 1.2,
+            borderRadius: "9999px",
+            textTransform: "none",
+            fontSize: { xs: "0.85rem", sm: "1rem" },
+            "&:hover": {
+              backgroundColor: "#2563eb",
+              transform: "scale(1.05)",
+            },
+            transition: "all 0.2s ease",
+          }}
+        >
+          Cerrar
+        </Button>
+      </Box>
+    </Dialog>
   );
 }

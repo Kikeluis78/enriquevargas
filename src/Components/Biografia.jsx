@@ -1,102 +1,106 @@
-// src/Components/Biografia.tsx
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import ModalMisionVision from "./ModalMisionVision";
 
+// ✅ Material UI
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+
+// ✅ Framer Motion
+import { motion } from "framer-motion";
+
+// ✅ Modal
+import ModalMisionVision from "./ModalMisionVision";
 
 export default function Biografia() {
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({ duration: 900, once: true });
   }, []);
 
   return (
     <>
-      <section className="flex flex-col md:flex-row items-center justify-center gap-8 px-4 py-16 bg-gray-900 text-white">
-        {/* Fotografía */}
-        <div
-          data-aos="fade-right"
-          className="flex-shrink-0 w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-xl border-4 border-blue-400"
-        >
-          <img
-            src="/img/foto.jpeg"
-            alt="Enrique Vargas"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Texto de biografía */}
-        <div data-aos="fade-left" className="max-w-xl text-center md:text-left">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-yellow-300">
-            Sobre mí
-          </h2>
-
-          <p className="text-lg sm:text-xl text-gray-200 mb-4 leading-relaxed">
-            Hola, soy Enrique Vargas, tengo 47 años y cuento con más de 15 años
-            de experiencia en ventas y trato directo con la gente. Siempre he
-            buscado estrategias de marketing directo para alcanzar objetivos
-            claros de ventas y, ahora, combinando mi experiencia con el
-            desarrollo web, busco ayudar a pequeños y medianos negocios a
-            impulsar su presencia en línea.
-          </p>
-
-          <p className="text-lg sm:text-xl text-gray-200 mb-4 leading-relaxed">
-            ✨ Mi objetivo es acompañarte a entrar al mundo digital, para que
-            conectes con tus clientes y hagas crecer tu negocio de manera
-            profesional y efectiva. Lo hago de forma cercana y personalizada,
-            como si estuviera hablando directamente contigo.
-          </p>
-
-          <h3 className="text-xl sm:text-2xl font-semibold text-white mt-6 mb-4">
-            🚀 5 Razones para que impulses tu negocio en internet:
-          </h3>
-
-          <ul className="list-disc list-inside space-y-2 text-lg sm:text-xl text-gray-200 leading-relaxed">
-            <li>
-              🌐 <strong>Página web profesional:</strong> tu carta de
-              presentación 24/7.
-            </li>
-            <li>
-              📱 <strong>Redes sociales (Facebook, Instagram, TikTok):</strong>{" "}
-              conecta, genera confianza y atrae nuevos clientes.
-            </li>
-            <li>
-              ✉️ <strong>Email marketing:</strong> comunica promociones y
-              fideliza a tus clientes.
-            </li>
-            <li>
-              🔎 <strong>Posicionamiento en Google (SEO y Google Maps):</strong>{" "}
-              haz que te encuentren fácilmente.
-            </li>
-            <li>
-              💳 <strong>Tiendas en línea y pasarelas de pago:</strong> vende
-              tus productos o servicios de forma segura y sencilla.
-            </li>
-          </ul>
-
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              setModalOpen(true);
-            }}
-            className="mt-6 inline-block font-bold text-lg relative transition-all duration-300 hover:scale-105"
+      {/* ✅ Sección principal */}
+      <section className="py-20 px-6 bg-[#1A1A1A]" id="biografia">
+        <Container maxWidth="lg">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 gap-12 items-center"
           >
-            <span className="text-yellow-400">Misión</span>{" "}
-            <span className="text-blue-400">y Visión</span>
-            {/* Línea decorativa completa debajo del texto */}
-            <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-blue-400 
-                   rounded-full opacity-50 transition-all duration-300 hover:opacity-100"></span>
-          </a>
-        </div>
+            {/* 📷 Columna de la fotografía */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+              className="flex justify-center"
+            >
+              <div className="relative group">
+                <img
+                  src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Foto de Enrique Vargas"
+                  className="rounded-3xl w-72 md:w-96 shadow-2xl border-4 border-[#00D9FF]/30 transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-3xl"></div>
+              </div>
+            </motion.div>
+
+            {/* 🧠 Columna del texto */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9 }}
+              className="text-center md:text-left"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white">
+                Sobre <span className="text-[#00D9FF]">Mí</span>
+              </h2>
+
+              <div className="bg-[#0A0A0A] p-8 md:p-10 rounded-3xl border border-gray-800 shadow-xl">
+                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                  Soy <span className="text-[#00D9FF] font-semibold">Enrique Vargas</span>, diseñador web y desarrollador Android con más de 8 años de experiencia creando soluciones digitales innovadoras. Mi pasión es combinar creatividad con funcionalidad para entregar productos que no solo se ven increíbles, sino que también ofrecen experiencias de usuario excepcionales.
+                </p>
+                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                  He trabajado con empresas de diversos sectores, desde startups tecnológicas hasta corporaciones establecidas, ayudándoles a materializar su visión digital. Mi enfoque se centra en entender las necesidades únicas de cada cliente y traducirlas en diseños que impulsan resultados.
+                </p>
+                <p className="text-lg text-gray-300 leading-relaxed">
+                  Especializado en <span className="text-[#FF6B35] font-semibold">diseño web responsivo</span>, <span className="text-[#FF6B35] font-semibold">desarrollo de aplicaciones Android nativas</span> y <span className="text-[#FF6B35] font-semibold">experiencia de usuario (UX/UI)</span>. Mi objetivo es crear productos digitales que no solo cumplan con los estándares más altos, sino que superen las expectativas.
+                </p>
+
+                {/* ✅ Botón Modal */}
+                <div className="mt-8">
+                  <Button
+                    onClick={() => setModalOpen(true)}
+                    sx={{
+                      fontWeight: 700,
+                      fontSize: "1rem",
+                      textTransform: "none",
+                      color: "#facc15",
+                      borderBottom: "2px solid transparent",
+                      transition: "all 0.3s ease",
+                      "&:hover": {
+                        color: "#60a5fa",
+                        borderBottom: "2px solid #60a5fa",
+                        transform: "translateY(-2px)",
+                      },
+                    }}
+                  >
+                    Misión <span style={{ color: "#60a5fa", marginLeft: 4 }}> y Visión</span>
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </Container>
       </section>
 
-      {/* Modal */}
+      {/* ✅ Modal */}
       <ModalMisionVision isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-
-   
     </>
   );
 }

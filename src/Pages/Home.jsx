@@ -1,12 +1,21 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+
+// ✅ Material UI
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+
+// ✅ Framer Motion
+import { motion } from "framer-motion";
+
 import Biografia from "../Components/Biografia";
-import Logo from "../Components/Logo";
 
 const phrases = [
   "Desarrollo de sitios web modernos 🌐",
-  "Aplicaciones Android 📱",
+  "Transformo ideas en experiencias digitales 📱",
 ];
 
 export default function Home() {
@@ -19,84 +28,90 @@ export default function Home() {
 
   useEffect(() => {
     let isMounted = true;
-
     const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-    const typeEffect = async () => {
+    const write = async () => {
       while (isMounted) {
-        const phrase = phrases[phraseIndex];
+        const text = phrases[phraseIndex];
 
-        // escribe
-        for (let i = 0; i <= phrase.length; i++) {
+        // typing
+        for (let i = 0; i <= text.length; i++) {
           if (!isMounted) return;
-          setCurrentText(phrase.substring(0, i));
-          await delay(120 + Math.random() * 40);
+          setCurrentText(text.slice(0, i));
+          await delay(90);
         }
 
-        await delay(1500); // mantener texto completo
+        await delay(1300);
 
-        // desaparecer de golpe
+        // clear
         setCurrentText("");
-        await delay(400);
+        await delay(300);
 
-        setPhraseIndex((prev) => (prev + 1) % phrases.length);
+        setPhraseIndex((p) => (p + 1) % phrases.length);
       }
     };
 
-    typeEffect();
-
-    return () => {
-      isMounted = false;
-    };
+    write();
+    return () => (isMounted = false);
   }, [phraseIndex]);
 
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) section.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <main className="flex-grow w-full">
-      <Logo />
-
-      {/* BANNER */}
-      <section
-        className="relative min-h-[50vh] md:min-h-screen bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/banner 1.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-black/50"></div>
-
-        <div className="relative z-10 flex flex-col items-center justify-center text-center text-white px-4 py-10 h-full">
-          {/* Título principal */}
-          <h1
-            data-aos="fade-down"
-            className="text-center font-extrabold leading-tight mt-12 drop-shadow-md"
+    <Box id="home" sx={{ pt: 12, pb: 10, px: 2, backgroundColor: "#0a0a0a" }}>
+      <Container maxWidth="lg">
+        {/* 🌟 Hero Section */}
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* 👉 Texto principal */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-yellow-400 mt-16">
-              Web's que impactan  💻
-            </span>
-            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-cyan-400 mt-8">
-              App's que enamoran   📱
-            </span>
-            <span className="block text-2xl sm:text-3xl md:text-4xl mt-4">❤️</span>
-          </h1>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
+              Diseño Web &<br />
+              <span className="text-[#00D9FF] text-center">Android</span>
+            </h1>
 
-          {/* Texto animado */}
-          <p
-            className="text-lg sm:text-xl md:text-2xl font-mono mt-8"
-          >
-            <span>{currentText}</span>
-            <span className="animate-pulse">|</span>
-          </p>
+            <p className="text-xl text-gray-400 mb-8">
+             "Cambiando la manera de hacer Publicidad en México".
+              .
+            </p>
 
-          {/* Subtítulo */}
-          <h2
-            data-aos="fade-up"
-            data-aos-delay="300"
-            className="text-center text-xl sm:text-2xl md:text-2xl lg:text-3xl text-yellow-300 font-semibold mt-22"
+            <p className="text-lg text-[#00D9FF] mb-8 font-mono h-7">
+              {currentText}
+              <span className="animate-pulse">|</span>
+            </p>
+
+          
+          </motion.div>
+
+          {/* 👉 Imagen lateral */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative"
           >
-            Revolucionando la manera de hacer <span className="text-cyan-400">publicidad</span> en México
-          </h2>
+            <div className="relative z-10 bg-gradient-to-br from-[#00D9FF]/20 to-[#FF6B35]/20 p-4 rounded-3xl backdrop-blur-sm border border-[#00D9FF]/30">
+              <img
+                src="https://images.pexels.com/photos/7988086/pexels-photo-7988086.jpeg"
+                alt="Diseñador trabajando"
+                className="rounded-2xl w-full h-auto shadow-2xl"
+              />
+            </div>
+            <div className="absolute -bottom-6 -right-6 w-72 h-72 bg-[#00D9FF]/20 rounded-full blur-3xl"></div>
+          </motion.div>
         </div>
-      </section>
 
-      {/* Biografía */}
-      <Biografia />
-    </main>
+        {/* ✅ BIOGRAFÍA */}
+        <Box sx={{ mt: 12 }}>
+          <Biografia />
+        </Box>
+      </Container>
+    </Box>
   );
 }

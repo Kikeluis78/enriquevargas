@@ -1,30 +1,49 @@
 import React from "react";
 import { FaWhatsapp } from "react-icons/fa";
 
-const BotonWhatsApp: React.FC = () => {
+// ✅ Material UI
+import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
+
+export default function BotonWhatsApp() {
   const numero = "5611001627";
   const mensaje = "¡Hola! Me interesa más información.";
   const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
 
   return (
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Chatear por WhatsApp"
-      title="Chatear por WhatsApp"
-      className="fixed bottom-6 right-6 z-50 
-                 flex items-center justify-center 
-                 w-16 h-16 rounded-full 
-                 bg-green-500 text-white 
-                 border-4 border-green-700 
-                 shadow-[0_0_20px_rgba(16,185,129,0.8)]
-                 transition-transform hover:scale-110
-                 animate-whatsapp-glow"
+    <Box
+      sx={{
+        position: "fixed",
+        bottom: 24,
+        right: 24,
+        zIndex: 50,
+      }}
     >
-      <FaWhatsapp className="w-8 h-8" />
-    </a>
+      <IconButton
+        component="a"
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chatear por WhatsApp"
+        title="Chatear por WhatsApp"
+        sx={{
+          width: 64,
+          height: 64,
+          borderRadius: "50%",
+          bgcolor: "#22c55e", // verde tailwind
+          color: "white",
+          border: "4px solid #15803d",
+          boxShadow: "0 0 20px rgba(16,185,129,0.8)",
+          transition: "transform 0.2s ease",
+          "&:hover": {
+            transform: "scale(1.12)",
+            bgcolor: "#16a34a",
+          },
+        }}
+        className="animate-whatsapp-glow"
+      >
+        <FaWhatsapp size={32} />
+      </IconButton>
+    </Box>
   );
-};
-
-export default BotonWhatsApp;
+}

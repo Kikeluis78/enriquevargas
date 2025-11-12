@@ -1,111 +1,136 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
   const footerRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const currentRef = footerRef.current; // 👈 copiar el ref
+    const current = footerRef.current;
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { root: null, threshold: 0.1 }
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
     );
 
-    if (currentRef) observer.observe(currentRef);
-
-    return () => {
-      if (currentRef) observer.unobserve(currentRef); // 👈 usar la copia
-    };
-  }, []); // ✅ no necesita agregar footerRef al array de deps
+    if (current) observer.observe(current);
+    return () => current && observer.unobserve(current);
+  }, []);
 
   return (
     <footer
       ref={footerRef}
-      className={`bg-gray-900 text-white text-center py-6 sm:py-8 px-4 sm:px-6 transition-opacity duration-700 ${
-        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+      className={`bg-gradient-to-b from-[#0d1117] to-[#111827] border-t border-gray-800 py-12 px-6 w-full text-white transition-all duration-1000 ease-out ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
-      {/* Derechos */}
-      <div className="mb-4 sm:mb-6 text-xs sm:text-sm text-gray-400">
-        &copy; 2025 Enrique Vargas. Todos los derechos reservados.
-      </div>
+      <div className="container mx-auto max-w-7xl">
+        {/* 🧩 GRID PRINCIPAL */}
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+          {/* 🧩 Columna 1 */}
+          <div className="space-y-2">
+            <h3 className="text-3xl font-extrabold mb-1 tracking-tight">
+              <span className="bg-gradient-to-r from-[#00D9FF] to-[#38bdf8] bg-clip-text text-transparent">
+                ENRIQUE
+              </span>{" "}
+              <span className="text-[#f1f5f9]">VARGAS</span>
+            </h3>
 
-      {/* Enlaces de navegación */} 
-      
-      <div className="mb-5 sm:mb-6 flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm sm:text-base">
-     {/*   <a
-          href="https://ejemplo.com/inicio"
-          target="_blank"
-          className="hover:underline text-gray-300 hover:text-white"
-        >
-          Inicio
-        </a>
-        <a
-          href="https://ejemplo.com/sobre-mi"
-          target="_blank"
-          className="hover:underline text-gray-300 hover:text-white"
-        >
-          Sobre mí
-        </a>
-        <a
-          href="https://ejemplo.com/portafolio"
-          target="_blank"
-          className="hover:underline text-gray-300 hover:text-white"
-        >
-          Portafolio
-        </a>
-        <a
-          href="https://ejemplo.com/blog"
-          target="_blank"
-          className="hover:underline text-gray-300 hover:text-white"
-        >
-          Blog
-        </a>
-        <a
-          href="https://ejemplo.com/contacto"
-          target="_blank"
-          className="hover:underline text-gray-300 hover:text-white"
-        >
-          Contacto
-        </a>  */}
-        <Link
-          to="/politica"
-          className="hover:underline text-gray-300 hover:text-white"
-        >
-          Política de privacidad
-        </Link>
-      </div>
+            <p className="text-[#d1d5db] text-lg font-medium">
+              Diseñador Web & Android
+            </p>
 
-      {/* Redes sociales */}
-      <div className="flex justify-center gap-6 sm:gap-12 text-white text-lg sm:text-xl">
-        <a
-          href="https://www.facebook.com/share/16GF1dVBJK/"
-          target="_blank"
-          aria-label="Facebook"
-          className="hover:text-blue-500 transition"
-        >
-          <FaFacebookF className="w-5 h-5 sm:w-6 sm:h-6" />
-        </a>
-        <a
-          href="https://www.instagram.com/enrique_vargas78/profilecard/?igsh=MWRkZXp2c3A1cHN0OQ=="
-          target="_blank"
-          aria-label="Instagram"
-          className="hover:text-pink-500 transition"
-        >
-          <FaInstagram className="w-5 h-5 sm:w-6 sm:h-6" />
-        </a>
-        <a
-          href="https://youtube.com/@enriqueg_v078?si=yNkYuswDl_eSaM_b"
-          target="_blank"
-          aria-label="YouTube"
-          className="hover:text-red-500 transition"
-        >
-          <FaYoutube className="w-5 h-5 sm:w-6 sm:h-6" />
-        </a>
+            <p className="text-[#94a3b8] text-sm max-w-xs leading-relaxed">
+              Creando experiencias digitales modernas, rápidas y funcionales.
+            </p>
+          </div>
+          {/* 🌐 Columna 2 */}
+          <div>
+            <h4 className="font-semibold mb-4 text-[#f1f5f9]">
+              Redes Sociales
+            </h4>
+            <div className="space-y-2">
+              {[
+                [
+                  "TikTok",
+                  "https://www.tiktok.com/@enrique_vargas78?_r=1&_t=ZS-91HtncI6YV7",
+                ],
+                [
+                  "YouTube",
+                  "https://youtube.com/@enriqueg_v078?si=1dnfkiUWwHFXuav4",
+                ],
+                ["Facebook", "https://facebook.com"],
+                ["Instagram", "https://instagram.com"],
+                ["Threads", "https://www.threads.net/@enrique_vargas78"],
+                [
+                  "X",
+                  "https://x.com/EnriqueVargas78?t=25WkjbMn3Z0wROzI60eY3A&s=08",
+                ],
+                ["Telegram", "http://t.me/EnriqueVargas78"],
+              ].map(([name, link]) => (
+                <a
+                  key={name}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-gray-400 hover:text-[#00D9FF] transition-colors"
+                >
+                  {name}
+                </a>
+              ))}
+            </div>
+          </div>
+
+
+          { /* Columna 3  */ }
+          <div>
+            <h4 className="font-semibold mb-4 text-[#f1f5f9]">Legal</h4>
+            <div className="space-y-2">
+              {[
+                ["Política de Privacidad", "/politica"],
+                ["Términos de Servicio", "/terminosServicio"],
+                ["Cookies", "/cookies"],
+              ].map(([name, link]) => (
+                <Link
+                  key={name}
+                  to={link}
+                  className="block text-gray-400 hover:text-[#00D9FF] transition-colors"
+                >
+                  {name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          
+          {/* 🚀 Columna 4 */}
+          <div>
+            <h4 className="font-semibold mb-4 text-[#f1f5f9]">
+              Otros Servicios
+            </h4>
+            <div className="space-y-2">
+              {[
+                ["Criptomonedas", "*"],
+                ["Consultoría Digital", "*"],
+                ["Branding", "*"],
+                ["Marketing Digital", "*"],
+                ["SEO", "*"],
+              ].map(([name, link]) => (
+                <a
+                  key={name}
+                  href={link}
+                  className="block text-gray-400 hover:text-[#00D9FF] transition-colors"
+                >
+                  {name}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* 🔹 Línea inferior */}
+        <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm sm:text-base">
+          <p>&copy; 2025 Enrique Vargas. Todos los derechos reservados.</p>
+        </div>
       </div>
     </footer>
   );
