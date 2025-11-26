@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Logo from "../Components/Logo";
 
-// ✅ Material UI
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import LinearProgress from "@mui/material/LinearProgress";
 import Paper from "@mui/material/Paper";
 
-// ✅ Constantes afuera → NO causan warnings de ESLint
 const images = [
   "/img/Flutter.png",
   "/img/Vite.png",
@@ -30,33 +28,45 @@ export default function LoadingScreen({ onComplete }) {
   const [imageIndex, setImageIndex] = useState(0);
   const [phraseIndex, setPhraseIndex] = useState(0);
 
-  // ✅ EFECTO CORREGIDO — SIN WARNINGS
+  const onCompleteCalled = useRef(false);
+
+  // Guardamos intervalos PARA QUE NO SE REINICIEN EN CADA RENDER
+  const progressInterval = useRef(null);
+  const imageInterval = useRef(null);
+  const phraseInterval = useRef(null);
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((old) => {
-        if (old >= 100) {
-          clearInterval(interval);
-          setTimeout(onComplete, 500);
-          return 100;
-        }
-        return old + 1;
-      });
+    // Progreso estable
+    progressInterval.current = setInterval(() => {
+      setProgress((p) => (p < 100 ? p + 1 : 100));
     }, 50);
 
-    const imageInterval = setInterval(() => {
+    // Rota imágenes
+    imageInterval.current = setInterval(() => {
       setImageIndex((prev) => (prev + 1) % images.length);
     }, 1500);
 
-    const phraseInterval = setInterval(() => {
+    // Rota frases
+    phraseInterval.current = setInterval(() => {
       setPhraseIndex((prev) => (prev + 1) % phrases.length);
     }, 2000);
 
     return () => {
-      clearInterval(interval);
-      clearInterval(imageInterval);
-      clearInterval(phraseInterval);
+      clearInterval(progressInterval.current);
+      clearInterval(imageInterval.current);
+      clearInterval(phraseInterval.current);
     };
-  }, [onComplete]);
+  }, []);
+
+  // Detecta final SIN cortar los intervalos
+  useEffect(() => {
+    if (progress === 100 && !onCompleteCalled.current) {
+      onCompleteCalled.current = true;
+      setTimeout(() => {
+        onComplete?.();
+      }, 500);
+    }
+  }, [progress, onComplete]);
 
   return (
     <Box
@@ -66,7 +76,6 @@ export default function LoadingScreen({ onComplete }) {
         color: "white",
       }}
     >
-      {/* Logo */}
       <Box sx={{ p: 3 }}>
         <Logo />
       </Box>
@@ -83,16 +92,13 @@ export default function LoadingScreen({ onComplete }) {
           gap: 4,
         }}
       >
-        {/* Título principal */}
         <Typography
           variant="h2"
           sx={{
             fontWeight: 800,
-            animation: "pulse 2s infinite",
             background: "linear-gradient(to right, #facc15, #f472b6, #a855f7)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            textShadow: "0 0 12px rgba(0,0,0,0.5)",
             fontSize: {
               xs: "2rem",
               sm: "3rem",
@@ -105,7 +111,6 @@ export default function LoadingScreen({ onComplete }) {
           Diseño y Desarrollo Web
         </Typography>
 
-        {/* Imagen rotativa */}
         <Paper
           elevation={10}
           sx={{
@@ -118,10 +123,6 @@ export default function LoadingScreen({ onComplete }) {
             justifyContent: "center",
             p: 2,
             background: "rgba(255,255,255,0.05)",
-            transition: "0.5s",
-            "&:hover": {
-              transform: "scale(1.08)",
-            },
           }}
         >
           <img
@@ -131,18 +132,11 @@ export default function LoadingScreen({ onComplete }) {
               width: "100%",
               height: "100%",
               objectFit: "contain",
-              transition: "opacity 0.7s",
             }}
           />
         </Paper>
 
-        {/* Barra de progreso */}
-        <Box
-          sx={{
-            width: { xs: "75%", md: "45%" },
-            mt: 2,
-          }}
-        >
+        <Box sx={{ width: { xs: "75%", md: "45%" } }}>
           <LinearProgress
             variant="determinate"
             value={progress}
@@ -150,15 +144,10 @@ export default function LoadingScreen({ onComplete }) {
               height: 12,
               borderRadius: 6,
               backgroundColor: "#374151",
-              "& .MuiLinearProgress-bar": {
-                background:
-                  "linear-gradient(to right, #ec4899, #22d3ee, #3b82f6)",
-              },
             }}
           />
         </Box>
 
-        {/* Porcentaje */}
         <Typography
           sx={{
             mt: 1,
@@ -167,13 +156,11 @@ export default function LoadingScreen({ onComplete }) {
             background: "linear-gradient(to right,#22d3ee,#3b82f6)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            animation: "pulse 2s infinite",
           }}
         >
           {progress}%
         </Typography>
 
-        {/* Frase dinámica */}
         <Typography
           sx={{
             mt: 2,
