@@ -34,8 +34,6 @@ export default function Precios() {
             </h2>
             <p className="text-gray-400 text-center mb-12 text-lg">
                Diseños listos para impulsar tu negocio en menos de una semana 🚀
-               <br/>
-              Soluciones prácticas para tu negocio — Hosting y Dominio incluidos
             </p>
           </motion.div>
 
@@ -83,6 +81,7 @@ export default function Precios() {
                   "✅ Soporte técnico incluido",
                   "✅ Botón WhatsApp integrado",
                   "✅ Diseño adaptado a tu oficio (plomero, carpintero, etc.)",
+                  "✅ 1 revision incluida",
                 ],
                 bestFor: [
                   "Plomeros",
@@ -98,7 +97,7 @@ export default function Precios() {
                 name: "Básico Plus",
                 price: "$1999",
                 featured: true,
-                description: "Mini tienda con carrito vía WhatsApp. Lista en 5 días.",
+                description: "Mini tienda con carrito vía WhatsApp. Lista en 7 días.",
                 features: [
                   "✅ Diseño web avanzado",
                   "✅ Hasta 5 páginas (Inicio, Productos, Contacto, etc.)",
@@ -110,7 +109,7 @@ export default function Precios() {
                   "✅ Soporte 24/7",
                   "✅ 3 revisiones incluidas",
                 ],
-                bestFor: ["Tiendas locales", "Emprendedores", "Talleres", "Consultorios"],
+                bestFor: ["Pizzerias", "Cualquier negocio con servicio a Domicilio"],
               },
 
               // 🧭 TARJETA 3 (agenda de citas)
@@ -120,13 +119,14 @@ export default function Precios() {
                 description: "Ideal para profesionales que necesitan agendar citas online.",
                 features: [
                   "✅ Página web profesional con agenda de citas sencilla",
-                  "✅ Hasta 5 secciones (Inicio, Servicios, Agenda, Contacto, Políticas)",
+                  "✅ Hasta 4 secciones (Inicio, Servicios, Agenda, Contacto,)",
                   "✅ Sistema de reservas online con confirmación por WhatsApp",
                   "✅ Integración con Google Maps",
                   "✅ Hosting y dominio por 1 año",
                   "✅ SEO básico + diseño responsivo",
                   "✅ Formularios de contacto personalizados",
                   "✅ Soporte técnico por 1 año",
+                  "✅ 2 revisiones incluidas",
                 ],
                 bestFor: [
                   "Salones de belleza",

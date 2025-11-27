@@ -17,7 +17,7 @@ export default function Precios2() {
   const planes = [
     {
       name: "E-Commerce PRO",
-      price: "$7,499",
+      price: "$9,499",
       description:
         "Tienda online completa con carrito de compras, pasarelas de pago y panel de administración.",
       features: [
@@ -27,7 +27,7 @@ export default function Precios2() {
         "✅ Integración con WhatsApp para atención al cliente",
         "✅ SEO avanzado + Google Analytics",
         "✅ Hosting y dominio por 1 año",
-        "✅ Soporte técnico 6 meses",
+        "✅ Soporte técnico 24/7",
       ],
       bestFor: ["Tiendas físicas", "Emprendedores", "Marcas locales"],
     },
@@ -50,7 +50,7 @@ export default function Precios2() {
     },
     {
       name: "Oferta 2026: Web + App",
-      price: "$12,999",
+      price: "$13,999",
       description:
         "Lanzamiento especial: sitio web completo con aplicación Android incluida.",
       features: [
@@ -209,7 +209,7 @@ export default function Precios2() {
                 <li>✅ App nativa o híbrida (según tus necesidades)</li>
                 <li>✅ Publicación en Google Play incluida</li>
                 <li>✅ Integración con base de datos y API</li>
-                <li>✅ Diseño moderno y responsivo</li>
+                <li>✅ Diseños modernos</li>
                 <li>✅ Hosting + Dominio + soporte por 1 año</li>
               </ul>
               <Box sx={{ mt: 5 }}>
@@ -258,7 +258,7 @@ export default function Precios2() {
 
         <Accordion
           question="⏳ ¿Cuánto tarda un proyecto Premium?"
-          answer="Entre 7 y 15 días hábiles, dependiendo de la complejidad."
+          answer="Entre 10 y 30 días hábiles, dependiendo de la complejidad."
         />
         <Accordion
           question="💳 ¿Incluye Hosting y Dominio?"

@@ -57,67 +57,67 @@ export default function Biografia() {
                 Sobre <span className="text-[#00D9FF]">Mí</span>
               </h2>
 
-              {/* 🟦 CONTENEDOR DE TEXTO RESPONSIVE */}
-              <div
-                className="
-                  bg-[#0A0A0A]
-                  w-full
-                  p-4 md:p-8 
-                  rounded-3xl 
-                  border border-gray-800 
-                  shadow-xl
-                  mx-0
-                  md:max-w-2xl">
-                <p className="text-base md:text-lg text-gray-300 mb-5 leading-relaxed md:leading-loose">
-                  Soy{" "}
-                  <span className="text-[#00D9FF] font-semibold">
-                    Enrique Vargas
-                  </span>
-                  , diseñador web y desarrollador Android con más de 8 años de
-                  experiencia creando soluciones digitales innovadoras.
-                </p>
 
-                <p className="text-base md:text-lg text-gray-300 mb-5 leading-relaxed md:leading-loose">
-                  He trabajado con empresas de diversos sectores, desde startups
-                  hasta corporaciones, ayudándoles a materializar su visión
-                  digital con enfoque en rendimiento y experiencia de usuario.
-                </p>
+      {/* 🟦 CONTENEDOR DE TEXTO RESPONSIVE */}
+<div
+  className="
+    bg-[#0A0A0A]
+    w-full
+    p-4 md:p-8
+    rounded-3xl
+    border border-gray-800
+    shadow-xl
+    mx-0
+    md:max-w-2xl
+  "
+>
+  <p className="text-base md:text-lg text-gray-300 mb-5 leading-relaxed md:leading-loose">
+    Hola, soy 
+    <span className="text-[#00D9FF] font-semibold"> Enrique Vargas</span>.<br/>Trabajo con entusiasmo y dedicación para ayudarte a construir tu presencia digital desde cero.
+    Ofrezco soluciones digitales innovadoras para pequeños y grandes negocios, enfocadas en crear una imagen sólida y conectar con tus usuarios.
+    No importa si tu presupuesto es grande o pequeño: lo importante es que tu idea llegue a miles de personas en internet.
+  </p>
 
-                <p className="text-base md:text-lg text-gray-300 leading-relaxed md:leading-loose">
-                  Especializado en{" "}
-                  <span className="text-[#FF6B35] font-semibold">
-                    diseño web responsivo
-                  </span>
-                  ,{" "}
-                  <span className="text-[#FF6B35] font-semibold">
-                    aplicaciones Android nativas
-                  </span>{" "}
-                  y <span className="text-[#FF6B35] font-semibold">UX/UI</span>.
-                </p>
+  <p className="text-base md:text-lg text-gray-300 mb-5 leading-relaxed md:leading-loose">
+    Mi experiencia en publicidad impresa y trato directo con clientes me ha llevado a transformar la manera de comunicar en el mundo digital.
+    Hoy combino esa visión tradicional con estrategias modernas para crear publicidad efectiva, clara y atractiva.
+    Lo más importante es generar una verdadera conexión entre tus usuarios y tu negocio.
+    <br />
+    <span className="text-[#00D9FF] font-semibold">“Platícame tu idea y juntos la pondremos en línea 🚀”</span>
+  </p>
+ <span className="text-[rgb(251,255,0)] font-semibold"> Te Ofresco:</span>
+  <ul className="text-base md:text-lg text-gray-300 leading-relaxed md:leading-loose list-disc pl-6 space-y-2">
+  <li><span className="text-[#FF6B35] font-semibold">Diseño 100% responsivo</span></li>
+  <li><span className="text-[#FF6B35] font-semibold">Aplicaciones Android</span></li>
+  <li><span className="text-[#FF6B35] font-semibold">Precios Accesibles sin perder Calidad</span></li>
+   <li><span className="text-[#FF6B35] font-semibold">Asesoria Gratuita.</span></li>
+</ul>
+
+
 
                 {/* BOTÓN */}
-                <div className="mt-6">
-                  <Button
-                    onClick={() => setModalOpen(true)}
-                    sx={{
-                      fontWeight: 700,
-                      fontSize: "1rem",
-                      textTransform: "none",
-                      color: "#facc15",
-                      borderBottom: "2px solid transparent",
-                      transition: "all 0.3s ease",
-                      "&:hover": {
-                        color: "#60a5fa",
-                        borderBottom: "2px solid #60a5fa",
-                        transform: "translateY(-2px)",
-                      },
-                    }}
-                  >
-                    Misión{" "}
-                    <span style={{ color: "#60a5fa", marginLeft: 4 }}>
-                      y Visión
-                    </span>
-                  </Button>
+             <div className="w-full flex justify-center mt-8">
+<button
+onClick={() => setModalOpen(true)}
+className="
+px-6
+py-3
+rounded-full
+font-semibold
+text-base
+text-black
+bg-gradient-to-r from-[#00D9FF] to-[#FF6B35]
+shadow-lg
+transition-all
+duration-300
+hover:opacity-90
+hover:-translate-y-1
+"
+>
+Misión <span className="ml-1">y Visión</span>
+</button>
+
+
                 </div>
               </div>
             </motion.div>

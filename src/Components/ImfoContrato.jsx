@@ -40,7 +40,7 @@ export default function InfoContrato() {
           },
         }}
       >
-        <span>NOTA: Tu Contrato disponible tras enviar tus datos</span>
+        <span>Descarga tu Contrato al Final.</span>
 
         <span
           style={{
@@ -67,7 +67,7 @@ export default function InfoContrato() {
           }}
         >
           <Typography sx={{ fontSize: "0.75rem", lineHeight: 1.5 }}>
-            Nota: Al enviar tus datos, podrás <strong>descargar tu contrato</strong> para leerlo y firmarlo.
+            Al enviar tus datos, podrás <strong>descargar tu contrato</strong> para leerlo y firmarlo.
           </Typography>
         </Paper>
       </Collapse>

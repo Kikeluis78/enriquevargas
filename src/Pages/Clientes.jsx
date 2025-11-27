@@ -58,10 +58,10 @@ export default function Clientes() {
         <Container>
           <div data-aos="fade-up" className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-              Proyectos <span className="text-[#00D9FF]">Destacados</span>
+              Echa Un Vistazo   <span className="text-[#00D9FF]">A mi Trabajo</span>
             </h2>
             <p className="text-gray-400 text-lg">
-              Algunos de mis trabajos más recientes
+               Mis primeros Clientes que Confiaron en mi Capacidad. 
             </p>
           </div>
 
