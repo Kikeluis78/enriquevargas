@@ -1,35 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import Logo from "../Components/Logo";
-<<<<<<< HEAD
 import { TECHNOLOGIES, LOADING_PHRASES } from "../utils/constants";
-=======
->>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import LinearProgress from "@mui/material/LinearProgress";
 import Paper from "@mui/material/Paper";
 
-<<<<<<< HEAD
-=======
-const images = [
-  "/img/Flutter.png",
-  "/img/Vite.png",
-  "/img/css.png",
-  "/img/Android.png",
-  "/img/Firebase.png",
-  "/img/python.png",
-];
-
-const phrases = [
-  " interfaces modernas ⚡",
-  " UI increíble 🎨",
-  "Desarrollo Android  📱",
-  "Optimizacion 💻",
-  "Rendimiento 🚀",
-];
-
->>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
 export default function LoadingScreen({ onComplete }) {
   const [progress, setProgress] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
@@ -50,20 +27,12 @@ export default function LoadingScreen({ onComplete }) {
 
     // Rota imágenes
     imageInterval.current = setInterval(() => {
-<<<<<<< HEAD
       setImageIndex((prev) => (prev + 1) % TECHNOLOGIES.length);
-=======
-      setImageIndex((prev) => (prev + 1) % images.length);
->>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
     }, 1500);
 
     // Rota frases
     phraseInterval.current = setInterval(() => {
-<<<<<<< HEAD
       setPhraseIndex((prev) => (prev + 1) % LOADING_PHRASES.length);
-=======
-      setPhraseIndex((prev) => (prev + 1) % phrases.length);
->>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
     }, 2000);
 
     return () => {
@@ -141,11 +110,7 @@ export default function LoadingScreen({ onComplete }) {
           }}
         >
           <img
-<<<<<<< HEAD
             src={TECHNOLOGIES[imageIndex]}
-=======
-            src={images[imageIndex]}
->>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
             alt="Tecnología"
             style={{
               width: "100%",
@@ -194,11 +159,7 @@ export default function LoadingScreen({ onComplete }) {
                 : "#a78bfa",
           }}
         >
-<<<<<<< HEAD
           {LOADING_PHRASES[phraseIndex]}
-=======
-          {phrases[phraseIndex]}
->>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
         </Typography>
       </Box>
     </Box>
