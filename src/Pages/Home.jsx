@@ -35,7 +35,7 @@ export default function Home() {
 
         const text = HOME_PHRASES[phraseIndex];
 
-        const text = phrases[phraseIndex];
+      
 
         for (let i = 0; i <= text.length; i++) {
           if (!isMounted) return;
