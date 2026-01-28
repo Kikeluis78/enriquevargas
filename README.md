@@ -17,8 +17,8 @@ Mi portafolio personal, creado con 💻 y ❤️ para mostrar mis proyectos y se
 
 ```bash
 # Clonar repositorio
-git clone https://github.com/Kikeluis78/Myportafolio.git
-cd Myportafolio
+git clone https://github.com/Kikeluis78/enriquevargas.git
+cd enriquevargas
 
 # Instalar dependencias
 npm install
