@@ -13,11 +13,6 @@ import { motion } from "framer-motion";
 
 import Biografia from "../Components/Biografia";
 
-const phrases = [
-  "Desarrollo de sitios web modernos 🌐",
-  "Transformo ideas en experiencias digitales 📱",
-];
-
 export default function Home() {
   const [currentText, setCurrentText] = useState("");
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -32,10 +27,7 @@ export default function Home() {
 
     const write = async () => {
       while (isMounted) {
-
         const text = HOME_PHRASES[phraseIndex];
-
-      
 
         for (let i = 0; i <= text.length; i++) {
           if (!isMounted) return;
@@ -49,14 +41,13 @@ export default function Home() {
         await delay(300);
 
         setPhraseIndex((p) => (p + 1) % HOME_PHRASES.length);
-
-        setPhraseIndex((p) => (p + 1) % phrases.length);
-
       }
     };
 
     write();
-    return () => (isMounted = false);
+    return () => {
+      isMounted = false;
+    };
   }, [phraseIndex]);
 
   const scrollToSection = (id) => {
@@ -70,16 +61,14 @@ export default function Home() {
       sx={{
         pt: { xs: 10, md: 14 },
         pb: 10,
-        minHeight: "100vh",          
+        minHeight: "100vh",
         display: "flex",
-        alignItems: "center",        
+        alignItems: "center",
         backgroundColor: "#0a0a0a",
       }}
     >
-      <Container maxWidth="xl">    
-        
+      <Container maxWidth="xl">
         <div className="grid md:grid-cols-2 gap-16 items-center w-full">
-
           {/* ------------ TEXTO ------------ */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -87,7 +76,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="flex flex-col justify-center"
           >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white text-left md:text-left">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
               Diseño Web &<br />
               <span className="text-[#00D9FF]">Android</span>
             </h1>
@@ -120,14 +109,12 @@ export default function Home() {
 
             <div className="absolute -bottom-6 -right-6 w-72 h-72 bg-[#00D9FF]/20 rounded-full blur-3xl"></div>
           </motion.div>
-
         </div>
 
         {/* ------------ BIO ------------ */}
         <Box sx={{ mt: 16 }}>
           <Biografia />
         </Box>
-
       </Container>
     </Box>
   );
