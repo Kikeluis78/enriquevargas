@@ -8,7 +8,10 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import BotonWhatsApp from "../Components/BotonWhatsApp";
 import Logo from "../Components/Logo";
+<<<<<<< HEAD
 import ModalPromocion from "../Components/ModalPromocion";
+=======
+>>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
 
 export default function Layout({ children }) {
   return (
@@ -41,9 +44,12 @@ export default function Layout({ children }) {
       {/* WHATSAPP FLOAT BUTTON */}
       <BotonWhatsApp />
 
+<<<<<<< HEAD
       {/* MODAL DE PROMOCIÓN */}
       <ModalPromocion />
 
+=======
+>>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
       {/* FOOTER */}
       <Divider sx={{ my: 2 }} />
       <Footer />

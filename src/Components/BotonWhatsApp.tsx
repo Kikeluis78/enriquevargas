@@ -1,13 +1,22 @@
 import React from "react";
 import { FaWhatsapp } from "react-icons/fa";
+<<<<<<< HEAD
 import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE } from "../utils/constants";
+=======
+>>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
 
 // ✅ Material UI
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 
 export default function BotonWhatsApp() {
+<<<<<<< HEAD
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+=======
+  const numero = "5611001627";
+  const mensaje = "¡Hola! Me interesa más información.";
+  const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+>>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
 
   return (
     <Box

@@ -2,7 +2,10 @@
 import { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+<<<<<<< HEAD
 import { HOME_PHRASES } from "../utils/constants";
+=======
+>>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
 
 // Material UI
 import Box from "@mui/material/Box";
@@ -13,6 +16,14 @@ import { motion } from "framer-motion";
 
 import Biografia from "../Components/Biografia";
 
+<<<<<<< HEAD
+=======
+const phrases = [
+  "Desarrollo de sitios web modernos 🌐",
+  "Transformo ideas en experiencias digitales 📱",
+];
+
+>>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
 export default function Home() {
   const [currentText, setCurrentText] = useState("");
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -27,7 +38,11 @@ export default function Home() {
 
     const write = async () => {
       while (isMounted) {
+<<<<<<< HEAD
         const text = HOME_PHRASES[phraseIndex];
+=======
+        const text = phrases[phraseIndex];
+>>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
 
         for (let i = 0; i <= text.length; i++) {
           if (!isMounted) return;
@@ -40,7 +55,11 @@ export default function Home() {
         setCurrentText("");
         await delay(300);
 
+<<<<<<< HEAD
         setPhraseIndex((p) => (p + 1) % HOME_PHRASES.length);
+=======
+        setPhraseIndex((p) => (p + 1) % phrases.length);
+>>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
       }
     };
 
@@ -103,7 +122,10 @@ export default function Home() {
                 src="https://images.pexels.com/photos/7988086/pexels-photo-7988086.jpeg"
                 alt="Diseñador trabajando"
                 className="rounded-2xl w-full h-auto shadow-2xl"
+<<<<<<< HEAD
                 loading="lazy"
+=======
+>>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
               />
             </div>
 
