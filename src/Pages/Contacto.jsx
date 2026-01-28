@@ -243,7 +243,6 @@ export default function Contacto() {
             >
               <iframe name="dummyFrame" style={{ display: "none" }}></iframe>
 
-<<<<<<< HEAD
               <TextField
                 label="Nombre Completo"
                 name="nombre"
@@ -301,7 +300,7 @@ export default function Contacto() {
                 InputProps={{ sx: inputStyles }}
                 InputLabelProps={{ sx: { color: "white" } }}
               />
-=======
+
               {["nombre", "negocio", "giro", "telefono", "correo"].map((name) => (
                 <TextField
                   key={name}
@@ -316,7 +315,7 @@ export default function Contacto() {
                   InputLabelProps={{ sx: { color: "white" } }}
                 />
               ))}
->>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
+
 
               <Button
                 type="submit"

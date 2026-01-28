@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
+
 import { SOCIAL_LINKS } from "../utils/constants";
-=======
->>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
+
 
 export default function Footer() {
   const footerRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const current = footerRef.current;
@@ -53,7 +52,7 @@ export default function Footer() {
             </h4>
             <div className="space-y-2">
               {[
-<<<<<<< HEAD
+
                 ["TikTok", SOCIAL_LINKS.tiktok],
                 ["YouTube", SOCIAL_LINKS.youtube],
                 ["Facebook", SOCIAL_LINKS.facebook],
@@ -61,7 +60,6 @@ export default function Footer() {
                 ["Threads", SOCIAL_LINKS.threads],
                 ["X", SOCIAL_LINKS.x],
                 ["Telegram", SOCIAL_LINKS.telegram],
-=======
                 [
                   "TikTok",
                   "https://www.tiktok.com/@enrique_vargas78?_r=1&_t=ZS-91HtncI6YV7",
@@ -78,7 +76,6 @@ export default function Footer() {
                   "https://x.com/EnriqueVargas78?t=25WkjbMn3Z0wROzI60eY3A&s=08",
                 ],
                 ["Telegram", "http://t.me/EnriqueVargas78"],
->>>>>>> 667f29b77d5f478d3953a3784b3b9355338575ad
               ].map(([name, link]) => (
                 <a
                   key={name}
