@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import Logo from "../Components/Logo";
+import Logo from "./Logo";
 import { TECHNOLOGIES, LOADING_PHRASES } from "../utils/constants";
 
 import Box from "@mui/material/Box";
