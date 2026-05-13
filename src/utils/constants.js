@@ -9,7 +9,7 @@ export const SOCIAL_LINKS = {
   facebook: "https://www.facebook.com/share/1FdHRWYSYf/",
   instagram: "https://www.instagram.com/enrique_vargas78",
   threads: "https://www.threads.net/@enrique_vargas78",
-  x: "https://x.com/EnriqueVargas78?t=25WkjbMn3Z0wROzI60eY3A&s=08",
+  x: "https://x.com/EnriqueVargas78",
   telegram: "https://t.me/EnriqueVargas78",
 };
 
