@@ -32,9 +32,9 @@ export default function Footer() {
           {/* 🧩 Columna 1 */}
           <div className="space-y-2">
             <img
-              src="/logo1.png"
-              alt="Mi logo"
-              className="w-30 h-auto mx-auto"
+              src="/EVlogo.png"
+              alt="Enrique Vargas Logo"
+              className="w-40 h-auto mx-auto"
             />
 
             <p className="text-[#d1d5db] text-lg font-medium">

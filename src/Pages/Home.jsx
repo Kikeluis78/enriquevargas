@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { HOME_PHRASES } from "../utils/constants";
@@ -7,11 +8,13 @@ import { HOME_PHRASES } from "../utils/constants";
 // Material UI
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
 
 // Framer Motion
 import { motion } from "framer-motion";
 
 import Biografia from "../Components/Biografia";
+import ComoTrabajamos from "../Components/ComoTrabajamos";
 
 export default function Home() {
   const [currentText, setCurrentText] = useState("");
@@ -89,6 +92,54 @@ export default function Home() {
               {currentText}
               <span className="animate-pulse">|</span>
             </p>
+
+            {/* ✅ CTA PRINCIPAL */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <Button
+                component={Link}
+                to="/precios"
+                sx={{
+                  px: 6,
+                  py: 2,
+                  borderRadius: 3,
+                  fontWeight: 700,
+                  fontSize: "1.1rem",
+                  background: "linear-gradient(45deg, #00D9FF, #FF6B35)",
+                  color: "white",
+                  boxShadow: "0 0 20px rgba(0, 217, 255, 0.4)",
+                  "&:hover": {
+                    background: "linear-gradient(45deg, #00C4E6, #E55A30)",
+                    transform: "translateY(-3px)",
+                    boxShadow: "0 10px 30px rgba(0, 217, 255, 0.5)",
+                  },
+                  transition: "all 0.3s ease",
+                }}
+              >
+                🚀 Ver Planes
+              </Button>
+              <Button
+                component={Link}
+                to="/contacto"
+                sx={{
+                  px: 6,
+                  py: 2,
+                  borderRadius: 3,
+                  fontWeight: 700,
+                  fontSize: "1.1rem",
+                  border: "2px solid #00D9FF",
+                  color: "#00D9FF",
+                  background: "transparent",
+                  "&:hover": {
+                    background: "rgba(0, 217, 255, 0.1)",
+                    transform: "translateY(-3px)",
+                    boxShadow: "0 0 20px rgba(0, 217, 255, 0.3)",
+                  },
+                  transition: "all 0.3s ease",
+                }}
+              >
+                📞 Contactar
+              </Button>
+            </div>
           </motion.div>
 
           {/* ------------ IMAGEN ------------ */}
@@ -110,6 +161,76 @@ export default function Home() {
             <div className="absolute -bottom-6 -right-6 w-72 h-72 bg-[#00D9FF]/20 rounded-full blur-3xl"></div>
           </motion.div>
         </div>
+
+        {/* ------------ TESTIMONIOS ------------ */}
+        <Box sx={{ mt: 20 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+              Lo Que Dicen <span className="text-[#00D9FF]">Mis Clientes</span>
+            </h2>
+            <p className="text-gray-400 text-lg">
+              Testimonios reales de proyectos exitosos
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                name: "Carlos Méndez",
+                role: "Dueño de Pizzería La Napolitana",
+                text: "Mi negocio creció un 40% después de tener mi página web. Ahora recibo pedidos online y mis clientes pueden ver el menú desde su celular. ¡Excelente trabajo!",
+                avatar: "https://i.pravatar.cc/150?img=12",
+              },
+              {
+                name: "Ana Rodríguez",
+                role: "Estilista Profesional",
+                text: "La agenda digital me cambió la vida. Mis clientes ahora reservan sus citas online y yo puedo organizar mejor mi tiempo. Súper recomendado.",
+                avatar: "https://i.pravatar.cc/150?img=5",
+              },
+              {
+                name: "Luis Hernández",
+                role: "Plomero Independiente",
+                text: "Antes dependía del boca a boca. Ahora con mi tarjeta digital profesional, los clientes me encuentran fácil y confían más en mi servicio.",
+                avatar: "https://i.pravatar.cc/150?img=33",
+              },
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="relative p-6 rounded-2xl bg-[#0A0A0A] border border-gray-800 hover:border-[#00D9FF]/50 transition-all duration-300"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-16 h-16 rounded-full border-2 border-[#00D9FF]"
+                  />
+                  <div>
+                    <h4 className="text-white font-bold">{testimonial.name}</h4>
+                    <p className="text-gray-400 text-sm">{testimonial.role}</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  "{testimonial.text}"
+                </p>
+                <div className="absolute top-4 right-4 text-[#00D9FF] text-4xl opacity-20">
+                  "
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </Box>
+
+        {/* ------------ CÓMO TRABAJAMOS ------------ */}
+        <ComoTrabajamos />
 
         {/* ------------ BIO ------------ */}
         <Box sx={{ mt: 16 }}>

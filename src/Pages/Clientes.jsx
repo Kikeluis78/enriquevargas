@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Container from "@mui/material/Container";
-import ModalConstruccion from "../Components/ModalConstruccion";
 
 export default function Clientes() {
   useEffect(() => {
@@ -76,8 +75,6 @@ export default function Clientes() {
 
   return (
     <>
-      <ModalConstruccion />
-
       <section id="clientes" className="py-20 px-6 bg-[#0A0A0A]">
         <Container>
           <div data-aos="fade-up" className="text-center mb-12">

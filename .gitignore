@@ -23,3 +23,7 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+
+# documentos privados
+CAMBIOS_REALIZADOS.md
+CONTRATO_REFERENCIA.md

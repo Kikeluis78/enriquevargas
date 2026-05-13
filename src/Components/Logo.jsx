@@ -1,38 +1,14 @@
-import Typography from "@mui/material/Typography";
-
 export default function Logo() {
   return (
-    <Typography
-      variant="h4"
-      sx={{
-        fontFamily: "'Montserrat', sans-serif",
-        fontWeight: 900,
-        letterSpacing: "-0.5px",
-        userSelect: "none",
-        display: "flex",
-        alignItems: "center",
-        gap: "6px",
-      }}
-    >
-      {/* ENRIQUE */}
-      <span
+    <div className="flex items-center">
+      <img
+        src="/enriquevargas.png"
+        alt="Enrique Vargas"
+        className="h-16 md:h-20 w-auto"
         style={{
-          color: "#00D9FF",
-          fontWeight: 900,
+          filter: "drop-shadow(0 0 10px rgba(0, 217, 255, 0.3))",
         }}
-      >
-        Enrique
-      </span>
-
-      {/* VARGAS */}
-      <span
-        style={{
-          color: "#FFFFFF", // blanco puro
-          fontWeight: 900,
-        }}
-      >
-        Vargas
-      </span>
-    </Typography>
+      />
+    </div>
   );
 }
