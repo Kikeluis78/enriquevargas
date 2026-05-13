@@ -31,11 +31,9 @@ export default function Footer() {
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-2 mb-2">
           {/* 🧩 Columna 1 */}
           <div className="space-y-2">
-            <img
-              src="/EVlogo.png"
-              alt="Enrique Vargas Logo"
-              className="w-40 h-auto mx-auto"
-            />
+            <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#00D9FF] to-[#0066FF] shadow-lg shadow-[#00D9FF]/30 mx-auto">
+              <span className="text-white font-extrabold text-2xl tracking-tight">EV</span>
+            </div>
 
             <p className="text-[#d1d5db] text-lg font-medium">
               {/* Espacio para  mas texto */}
@@ -52,7 +50,6 @@ export default function Footer() {
             </h4>
             <div className="space-y-2">
               {[
-
                 ["TikTok", SOCIAL_LINKS.tiktok],
                 ["YouTube", SOCIAL_LINKS.youtube],
                 ["Facebook", SOCIAL_LINKS.facebook],
@@ -60,22 +57,6 @@ export default function Footer() {
                 ["Threads", SOCIAL_LINKS.threads],
                 ["X", SOCIAL_LINKS.x],
                 ["Telegram", SOCIAL_LINKS.telegram],
-                [
-                  "TikTok",
-                  "https://www.tiktok.com/@enrique_vargas78?_r=1&_t=ZS-91HtncI6YV7",
-                ],
-                [
-                  "YouTube",
-                  "https://youtube.com/@enriqueg_v078?si=1dnfkiUWwHFXuav4",
-                ],
-                ["Facebook", "https://facebook.com"],
-                ["Instagram", "https://instagram.com"],
-                ["Threads", "https://www.threads.net/@enrique_vargas78"],
-                [
-                  "X",
-                  "https://x.com/EnriqueVargas78?t=25WkjbMn3Z0wROzI60eY3A&s=08",
-                ],
-                ["Telegram", "http://t.me/EnriqueVargas78"],
               ].map(([name, link]) => (
                 <a
                   key={name}
@@ -117,19 +98,19 @@ export default function Footer() {
             </h4>
             <div className="space-y-2">
               {[
-                ["Criptomonedas", "*"],
-                ["Consultoría Digital", "*"],
-                ["Branding", "*"],
-                ["Marketing Digital", "*"],
-                ["SEO", "*"],
+                ["Criptomonedas", "/proximamente"],
+                ["Consultoría Digital", "/proximamente"],
+                ["Branding", "/proximamente"],
+                ["Marketing Digital", "/proximamente"],
+                ["SEO", "/proximamente"],
               ].map(([name, link]) => (
-                <a
+                <Link
                   key={name}
-                  href={link}
+                  to={link}
                   className="block text-gray-400 hover:text-[#00D9FF] transition-colors"
                 >
                   {name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

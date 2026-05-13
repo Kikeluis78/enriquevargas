@@ -157,9 +157,9 @@ export default function Home() {
                 loading="lazy"
               />
             </div>
-
             <div className="absolute -bottom-6 -right-6 w-72 h-72 bg-[#00D9FF]/20 rounded-full blur-3xl"></div>
           </motion.div>
+
         </div>
 
         {/* ------------ TESTIMONIOS ------------ */}
@@ -184,19 +184,16 @@ export default function Home() {
                 name: "Carlos Méndez",
                 role: "Dueño de Pizzería La Napolitana",
                 text: "Mi negocio creció un 40% después de tener mi página web. Ahora recibo pedidos online y mis clientes pueden ver el menú desde su celular. ¡Excelente trabajo!",
-                avatar: "https://i.pravatar.cc/150?img=12",
               },
               {
                 name: "Ana Rodríguez",
                 role: "Estilista Profesional",
                 text: "La agenda digital me cambió la vida. Mis clientes ahora reservan sus citas online y yo puedo organizar mejor mi tiempo. Súper recomendado.",
-                avatar: "https://i.pravatar.cc/150?img=5",
               },
               {
                 name: "Luis Hernández",
                 role: "Plomero Independiente",
                 text: "Antes dependía del boca a boca. Ahora con mi tarjeta digital profesional, los clientes me encuentran fácil y confían más en mi servicio.",
-                avatar: "https://i.pravatar.cc/150?img=33",
               },
             ].map((testimonial, index) => (
               <motion.div
@@ -207,16 +204,9 @@ export default function Home() {
                 transition={{ delay: index * 0.1 }}
                 className="relative p-6 rounded-2xl bg-[#0A0A0A] border border-gray-800 hover:border-[#00D9FF]/50 transition-all duration-300"
               >
-                <div className="flex items-center gap-4 mb-4">
-                  <img
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    className="w-16 h-16 rounded-full border-2 border-[#00D9FF]"
-                  />
-                  <div>
-                    <h4 className="text-white font-bold">{testimonial.name}</h4>
-                    <p className="text-gray-400 text-sm">{testimonial.role}</p>
-                  </div>
+                <div className="mb-4">
+                  <h4 className="text-white font-bold">{testimonial.name}</h4>
+                  <p className="text-gray-400 text-sm">{testimonial.role}</p>
                 </div>
                 <p className="text-gray-300 text-sm leading-relaxed">
                   "{testimonial.text}"

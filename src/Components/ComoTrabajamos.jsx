@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { WHATSAPP_NUMBER } from "../utils/constants";
@@ -225,10 +226,8 @@ export default function ComoTrabajamos() {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
               <Button
-                component="a"
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                component={Link}
+                to="/contacto"
                 sx={{
                   px: 10,
                   py: 2.5,
@@ -250,7 +249,7 @@ export default function ComoTrabajamos() {
 
               <Button
                 component="a"
-                href="https://pizzerias-gold.vercel.app/"
+                href="https://pizzerias-eight.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{
@@ -271,6 +270,31 @@ export default function ComoTrabajamos() {
                 }}
               >
                 👀 Ver Demo en Vivo
+              </Button>
+
+              <Button
+                component="a"
+                href="https://podologos-ten.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  px: 10,
+                  py: 2.5,
+                  borderRadius: 3,
+                  fontWeight: 700,
+                  fontSize: "1.2rem",
+                  border: "3px solid #FF6B35",
+                  color: "#FF6B35",
+                  background: "rgba(0, 0, 0, 0.5)",
+                  "&:hover": {
+                    background: "rgba(255, 107, 53, 0.15)",
+                    transform: "translateY(-4px)",
+                    boxShadow: "0 0 30px rgba(255, 107, 53, 0.5)",
+                  },
+                  transition: "all 0.3s ease",
+                }}
+              >
+                🦶 Ver Demo Podólogos
               </Button>
             </div>
 

@@ -14,7 +14,6 @@ import Divider from "@mui/material/Divider";
 // ✅ Componentes propios
 import Contrato from "../Components/Contrato";
 import InfoContrato from "../Components/ImfoContrato";
-import Logo from "../Components/Logo";
 
 export default function Contacto() {
   const formRef = useRef(null);
@@ -91,8 +90,6 @@ export default function Contacto() {
       didOpen: () => {
         Swal.showLoading();
         setTimeout(() => {
-          formEl.submit();
-
           Swal.fire({
             icon: "success",
             title: "Datos enviados",
@@ -102,8 +99,8 @@ export default function Contacto() {
             color: "#f9fafb",
           });
 
-          formEl.reset();
           setDatosCliente({ nombre, negocio, giro, telefono, correo });
+          formEl.reset();
         }, 900);
       },
     });
@@ -300,21 +297,6 @@ export default function Contacto() {
                 InputProps={{ sx: inputStyles }}
                 InputLabelProps={{ sx: { color: "white" } }}
               />
-
-              {["nombre", "negocio", "giro", "telefono", "correo"].map((name) => (
-                <TextField
-                  key={name}
-                  label={name === "correo" ? "Correo Electrónico" :
-                         name === "negocio" ? "Nombre del Negocio" :
-                         name === "giro" ? "Giro del Negocio" : "Nombre"}
-                  name={name}
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
-                  InputProps={{ sx: inputStyles }}
-                  InputLabelProps={{ sx: { color: "white" } }}
-                />
-              ))}
 
 
               <Button

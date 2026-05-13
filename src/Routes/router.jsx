@@ -7,6 +7,7 @@ import NoFound404 from "../Pages/NoFound404";
 import Politica from "../Pages/Politica";
 import TerminosServicio from "../Pages/TerminosServicio";
 import PoliticaCookies from "../Pages/PoliticaCookies";
+import Proximamente from "../Pages/Proximamente";
 
 function AppRouter() {
   return (
@@ -16,6 +17,7 @@ function AppRouter() {
       <Route path="/precios2" element={<Navigate to="/precios" replace />} />
       <Route path="/clientes" element={<Clientes />} />
       <Route path="/contacto" element={<Contacto />} />
+      <Route path="/proximamente" element={<Proximamente />} />
       <Route path="/politica" element={<Politica />} />
       <Route path="/terminosServicio" element={<TerminosServicio />} />
       <Route path="/cookies" element={<PoliticaCookies />} />

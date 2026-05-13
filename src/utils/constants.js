@@ -6,11 +6,11 @@ export const WHATSAPP_MESSAGE = "¡Hola! Me interesa más información.";
 export const SOCIAL_LINKS = {
   tiktok: "https://www.tiktok.com/@enrique_vargas78?_r=1&_t=ZS-91HtncI6YV7",
   youtube: "https://youtube.com/@enriqueg_v078?si=1dnfkiUWwHFXuav4",
-  facebook: "https://facebook.com",
-  instagram: "https://instagram.com",
+  facebook: "https://www.facebook.com/share/1FdHRWYSYf/",
+  instagram: "https://www.instagram.com/enrique_vargas78",
   threads: "https://www.threads.net/@enrique_vargas78",
   x: "https://x.com/EnriqueVargas78?t=25WkjbMn3Z0wROzI60eY3A&s=08",
-  telegram: "http://t.me/EnriqueVargas78",
+  telegram: "https://t.me/EnriqueVargas78",
 };
 
 export const NEON_COLORS = {

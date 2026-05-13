@@ -14,8 +14,8 @@ export const PROMOTIONS = [
       "✅ Página Web Profesional",
       "✅ Aplicación Android Nativa",
       "✅ Diseño Responsivo",
-      "✅ Panel de Administración",
-      "✅ Soporte Técnico 3 meses"
+      "✅ Hosting y Dominio por un año",
+      "✅ Soporte Técnico 24/7"
     ],
     buttonText: "¡Contratar Ahora!",
     gradient: "from-purple-600 via-pink-600 to-orange-500",
