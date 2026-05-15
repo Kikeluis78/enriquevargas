@@ -2,10 +2,31 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { useState, useEffect } from "react";
 import { WHATSAPP_NUMBER } from "../utils/constants";
 import { ShoppingCart, Zap, TrendingUp, Clock, MessageCircle, CheckCircle2 } from "lucide-react";
 
+function useCountdown(targetDate) {
+  const getTime = () => {
+    const diff = new Date(targetDate) - new Date();
+    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    return {
+      days: Math.floor(diff / 86400000),
+      hours: Math.floor((diff % 86400000) / 3600000),
+      minutes: Math.floor((diff % 3600000) / 60000),
+      seconds: Math.floor((diff % 60000) / 1000),
+    };
+  };
+  const [time, setTime] = useState(getTime);
+  useEffect(() => {
+    const id = setInterval(() => setTime(getTime()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+}
+
 export default function ComoTrabajamos() {
+  const countdown = useCountdown("2026-06-15T23:59:59");
   const beneficios = [
     {
       icon: <Zap size={48} />,
@@ -212,7 +233,6 @@ export default function ComoTrabajamos() {
                 "✅ Hasta 30 productos",
                 "✅ Pedidos automáticos a WhatsApp",
                 "✅ Hosting + Dominio 1 año",
-                "✅ Diseño personalizado",
                 "✅ Soporte técnico 24/7",
                 "✅ Actualizaciones gratis",
               ].map((item, i) => (
@@ -244,7 +264,7 @@ export default function ComoTrabajamos() {
                   transition: "all 0.3s ease",
                 }}
               >
-                🚀 Quiero Mi Sistema Ahora
+                ⚡ ¡Lo Quiero Ya!
               </Button>
 
               <Button
@@ -258,54 +278,41 @@ export default function ComoTrabajamos() {
                   borderRadius: 3,
                   fontWeight: 700,
                   fontSize: "1.2rem",
-                  border: "3px solid #00D9FF",
-                  color: "#00D9FF",
-                  background: "rgba(0, 0, 0, 0.5)",
+                  background: "linear-gradient(45deg, #00D9FF, #FF6B35)",
+                  color: "white",
+                  boxShadow: "0 0 20px rgba(0, 217, 255, 0.4)",
                   "&:hover": {
-                    background: "rgba(0, 217, 255, 0.15)",
+                    background: "linear-gradient(45deg, #00C4E6, #E55A30)",
                     transform: "translateY(-4px)",
-                    boxShadow: "0 0 30px rgba(0, 217, 255, 0.5)",
+                    boxShadow: "0 15px 50px rgba(0, 217, 255, 0.7)",
                   },
                   transition: "all 0.3s ease",
                 }}
               >
-                👀 Ver Demo en Vivo
-              </Button>
-
-              <Button
-                component="a"
-                href="https://podologos-ten.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{
-                  px: 10,
-                  py: 2.5,
-                  borderRadius: 3,
-                  fontWeight: 700,
-                  fontSize: "1.2rem",
-                  border: "3px solid #FF6B35",
-                  color: "#FF6B35",
-                  background: "rgba(0, 0, 0, 0.5)",
-                  "&:hover": {
-                    background: "rgba(255, 107, 53, 0.15)",
-                    transform: "translateY(-4px)",
-                    boxShadow: "0 0 30px rgba(255, 107, 53, 0.5)",
-                  },
-                  transition: "all 0.3s ease",
-                }}
-              >
-                🦶 Ver Demo Podólogos
+                👀 Ver Demo
               </Button>
             </div>
 
             {/* Urgencia */}
             <div className="text-center">
-              <p className="text-[#FFE45E] font-bold text-lg mb-2">
-                ⏰ Solo quedan 5 espacios este mes
+              <p className="text-[#FFE45E] font-bold text-lg mb-3">
+                ⏰ Oferta válida solo hasta el 15 de Junio 2026
               </p>
-              <p className="text-gray-400 text-sm">
-                Oferta válida solo para restaurantes, pizzerías y negocios con delivery
-              </p>
+              <div className="flex justify-center gap-4">
+                {[
+                  { label: "Días", value: countdown.days },
+                  { label: "Horas", value: countdown.hours },
+                  { label: "Min", value: countdown.minutes },
+                  { label: "Seg", value: countdown.seconds },
+                ].map(({ label, value }) => (
+                  <div key={label} className="flex flex-col items-center bg-black/40 border border-[#00D9FF]/30 rounded-xl px-4 py-2 min-w-[64px]">
+                    <span className="text-3xl font-black text-[#00D9FF]">
+                      {String(value).padStart(2, "0")}
+                    </span>
+                    <span className="text-xs text-gray-400 font-semibold">{label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </motion.div>

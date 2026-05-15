@@ -27,17 +27,20 @@ export default function InfoContrato() {
         fullWidth
         onClick={() => setIsOpen((prev) => !prev)}
         sx={{
-          backgroundColor: "#3b82f6", // blue-500
-          color: "#facc15", // yellow-400
-          fontWeight: 600,
+          fontWeight: 700,
           px: 2,
           py: 1.5,
           display: "flex",
           justifyContent: "space-between",
           textTransform: "none",
+          background: "linear-gradient(45deg, #00D9FF, #FF6B35)",
+          color: "white",
+          boxShadow: "0 0 20px rgba(0, 217, 255, 0.3)",
           "&:hover": {
-            backgroundColor: "#2563eb", // blue-600
+            background: "linear-gradient(45deg, #00C4E6, #E55A30)",
+            boxShadow: "0 10px 30px rgba(0, 217, 255, 0.5)",
           },
+          transition: "all 0.3s ease",
         }}
       >
         <span>Descarga tu Contrato al Final.</span>

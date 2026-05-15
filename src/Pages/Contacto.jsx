@@ -305,10 +305,16 @@ export default function Contacto() {
                 sx={{
                   mt: 2,
                   py: 1.5,
-                  bgcolor: "#2563eb",
+                  fontWeight: 700,
+                  background: "linear-gradient(45deg, #00D9FF, #FF6B35)",
                   color: "white",
-                  fontWeight: 600,
-                  "&:hover": { bgcolor: "#1d4ed8" },
+                  boxShadow: "0 0 20px rgba(0, 217, 255, 0.4)",
+                  "&:hover": {
+                    background: "linear-gradient(45deg, #00C4E6, #E55A30)",
+                    transform: "translateY(-2px)",
+                    boxShadow: "0 10px 30px rgba(0, 217, 255, 0.5)",
+                  },
+                  transition: "all 0.3s ease",
                 }}
               >
                 Enviar

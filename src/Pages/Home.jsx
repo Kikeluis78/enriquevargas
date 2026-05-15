@@ -126,13 +126,13 @@ export default function Home() {
                   borderRadius: 3,
                   fontWeight: 700,
                   fontSize: "1.1rem",
-                  border: "2px solid #00D9FF",
-                  color: "#00D9FF",
-                  background: "transparent",
+                  background: "linear-gradient(45deg, #FF6B35, #FF3CAC)",
+                  color: "white",
+                  boxShadow: "0 0 20px rgba(255, 107, 53, 0.4)",
                   "&:hover": {
-                    background: "rgba(0, 217, 255, 0.1)",
+                    background: "linear-gradient(45deg, #E55A30, #E030A0)",
                     transform: "translateY(-3px)",
-                    boxShadow: "0 0 20px rgba(0, 217, 255, 0.3)",
+                    boxShadow: "0 10px 30px rgba(255, 107, 53, 0.5)",
                   },
                   transition: "all 0.3s ease",
                 }}

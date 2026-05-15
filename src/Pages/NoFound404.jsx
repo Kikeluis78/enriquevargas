@@ -101,17 +101,19 @@ export default function NoFound() {
           to="/"
           sx={{
             mt: 2,
-            px: 4,
+            px: 6,
             py: 1.5,
             fontSize: "1.1rem",
             fontWeight: 700,
-            background: "linear-gradient(to right, #2563eb, #1d4ed8)",
+            background: "linear-gradient(45deg, #00D9FF, #FF6B35)",
             color: "white",
             textTransform: "none",
             borderRadius: "9999px",
+            boxShadow: "0 0 20px rgba(0, 217, 255, 0.4)",
             "&:hover": {
+              background: "linear-gradient(45deg, #00C4E6, #E55A30)",
               transform: "scale(1.05)",
-              background: "linear-gradient(to right, #1d4ed8, #2563eb)",
+              boxShadow: "0 10px 30px rgba(0, 217, 255, 0.5)",
             },
             transition: "all 0.3s ease",
           }}
