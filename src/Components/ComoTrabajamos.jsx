@@ -62,7 +62,7 @@ export default function ComoTrabajamos() {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMsg)}`;
 
   return (
-    <section className="py-20 px-6 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] relative overflow-hidden">
+    <section className="py-20 px-3 md:px-6 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] relative overflow-hidden">
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00D9FF]/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#FF6B35]/10 rounded-full blur-3xl"></div>
 
@@ -188,7 +188,7 @@ export default function ComoTrabajamos() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="relative p-8 md:p-12 rounded-3xl overflow-hidden"
+          className="relative p-4 md:p-12 rounded-3xl overflow-hidden"
           style={{
             background: "linear-gradient(135deg, #00D9FF22, #FF6B3522)",
             border: "3px solid #00D9FF",
