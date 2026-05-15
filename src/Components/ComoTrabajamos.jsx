@@ -249,11 +249,12 @@ export default function ComoTrabajamos() {
                 component={Link}
                 to="/contacto"
                 sx={{
-                  px: 10,
+                  px: { xs: 4, sm: 10 },
                   py: 2.5,
                   borderRadius: 3,
                   fontWeight: 700,
                   fontSize: "1.2rem",
+                  whiteSpace: "nowrap",
                   background: "linear-gradient(45deg, #00D9FF, #FF6B35)",
                   color: "white",
                   boxShadow: "0 0 40px rgba(0, 217, 255, 0.6)",
@@ -273,11 +274,12 @@ export default function ComoTrabajamos() {
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{
-                  px: 10,
+                  px: { xs: 4, sm: 10 },
                   py: 2.5,
                   borderRadius: 3,
                   fontWeight: 700,
                   fontSize: "1.2rem",
+                  whiteSpace: "nowrap",
                   background: "linear-gradient(45deg, #00D9FF, #FF6B35)",
                   color: "white",
                   boxShadow: "0 0 20px rgba(0, 217, 255, 0.4)",
