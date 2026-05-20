@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { findCoupon, getDisponibles, validateCoupon, redeemCoupon } from "../utils/couponStorage";
 import Swal from "sweetalert2";
 
 // ✅ Material UI
@@ -18,6 +19,8 @@ import InfoContrato from "../Components/ImfoContrato";
 export default function Contacto() {
   const formRef = useRef(null);
   const [datosCliente, setDatosCliente] = useState(null);
+  const [couponCode, setCouponCode] = useState("");
+  const [couponInfo, setCouponInfo] = useState(null); // { valid, message, coupon, disponibles }
 
   // 🎨 Estilos de inputs
   const inputStyles = {
@@ -31,6 +34,14 @@ export default function Contacto() {
       bgcolor: "rgba(96,165,250,0.15)",
       borderColor: "#60a5fa",
     },
+  };
+
+  const handleCouponChange = (e) => {
+    const val = e.target.value.toUpperCase();
+    setCouponCode(val);
+    if (!val) { setCouponInfo(null); return; }
+    const result = validateCoupon(val);
+    setCouponInfo(result);
   };
 
   const handleSubmit = (e) => {
@@ -81,6 +92,19 @@ export default function Contacto() {
       return;
     }
 
+    // Validar cupón si se ingresó uno
+    if (couponCode && (!couponInfo || !couponInfo.valid)) {
+      Swal.fire({
+        icon: "error",
+        title: "Cupón inválido",
+        text: couponInfo?.message || "El cupón ingresado no es válido.",
+        confirmButtonColor: "#2563EB",
+        background: "#1f2937",
+        color: "#f9fafb",
+      });
+      return;
+    }
+
     Swal.fire({
       title: "Enviando...",
       allowOutsideClick: false,
@@ -90,16 +114,26 @@ export default function Contacto() {
       didOpen: () => {
         Swal.showLoading();
         setTimeout(() => {
+          // Redimir cupón si fue usado
+          if (couponCode && couponInfo?.valid) {
+            redeemCoupon(couponInfo.coupon.clave);
+            setCouponInfo(validateCoupon(couponCode)); // actualiza contador en UI
+          }
+
           Swal.fire({
             icon: "success",
             title: "Datos enviados",
-            text: "Tus datos fueron enviados exitosamente.",
+            text: couponInfo?.valid
+              ? `Tus datos fueron enviados. Cupón aplicado: ${couponInfo.coupon.descuento}`
+              : "Tus datos fueron enviados exitosamente.",
             confirmButtonColor: "#2563EB",
             background: "#1f2937",
             color: "#f9fafb",
           });
 
-          setDatosCliente({ nombre, negocio, giro, telefono, correo });
+          setDatosCliente({ nombre, negocio, giro, telefono, correo, cupon: couponCode || "Sin cupón" });
+          setCouponCode("");
+          setCouponInfo(null);
           formEl.reset();
         }, 900);
       },
@@ -297,6 +331,58 @@ export default function Contacto() {
                 InputProps={{ sx: inputStyles }}
                 InputLabelProps={{ sx: { color: "white" } }}
               />
+
+              {/* Campo Cupón con contador */}
+              <Box sx={{ display: "flex", alignItems: "flex-start", gap: 1, mt: 1 }}>
+                <TextField
+                  label="Cupón de descuento (opcional)"
+                  name="cupon"
+                  fullWidth
+                  variant="outlined"
+                  margin="normal"
+                  value={couponCode}
+                  onChange={handleCouponChange}
+                  inputProps={{ style: { textTransform: "uppercase" } }}
+                  InputProps={{
+                    sx: {
+                      ...inputStyles,
+                      ...(couponInfo?.valid && { borderColor: "#22c55e" }),
+                      ...(couponInfo && !couponInfo.valid && { borderColor: "#ef4444" }),
+                    },
+                  }}
+                  InputLabelProps={{ sx: { color: "white" } }}
+                  helperText={
+                    couponInfo
+                      ? couponInfo.valid
+                        ? `✅ ${couponInfo.coupon.descuento}`
+                        : `❌ ${couponInfo.message}`
+                      : " "
+                  }
+                  FormHelperTextProps={{
+                    sx: { color: couponInfo?.valid ? "#22c55e" : "#ef4444" },
+                  }}
+                />
+                {/* Contador total/disponibles */}
+                {couponInfo?.valid && (
+                  <Box
+                    sx={{
+                      mt: 2,
+                      minWidth: 72,
+                      textAlign: "center",
+                      bgcolor: "rgba(34,197,94,0.15)",
+                      border: "1px solid #22c55e",
+                      borderRadius: 2,
+                      px: 1.5,
+                      py: 1,
+                    }}
+                  >
+                    <Typography sx={{ color: "#22c55e", fontWeight: 700, fontSize: 13, lineHeight: 1 }}>
+                      {couponInfo.coupon.total}/{getDisponibles(couponInfo.coupon.clave)}
+                    </Typography>
+                    <Typography sx={{ color: "#9ca3af", fontSize: 10 }}>disponibles</Typography>
+                  </Box>
+                )}
+              </Box>
 
 
               <Button
