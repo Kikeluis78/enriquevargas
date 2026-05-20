@@ -124,6 +124,7 @@ export default function Contacto() {
 
         fetch("https://script.google.com/macros/s/AKfycbwr0NY5QOaooCZS022nXaTji9mW3VE-N1CUioFJduxHk41LH5seuVA_xP0uOpJxZgGaMw/exec", {
           method: "POST",
+          mode: "no-cors",
           body: formData,
         })
           .catch(() => {}) // Google Script responde con error CORS pero sí guarda los datos
