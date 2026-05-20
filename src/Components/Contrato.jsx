@@ -6,64 +6,108 @@ export default function Contrato({ datosCliente }) {
     if (!datosCliente) return;
 
     const doc = new jsPDF("p", "mm", "a4");
+    const marginX = 20;
+    const maxWidth = 170;
+    const lineHeight = 6;
+    let y = 20;
 
-    doc.setFontSize(18);
-    doc.setTextColor(20, 20, 20);
-    doc.text("Contrato de Prestación de Servicios de Desarrollo Web", 20, 20);
+    const writeLine = (text, opts = {}) => {
+      const lines = doc.splitTextToSize(text, maxWidth);
+      lines.forEach((line) => {
+        if (y > 270) { doc.addPage(); y = 20; }
+        doc.text(line, marginX, y, opts);
+        y += lineHeight;
+      });
+    };
 
-    doc.setFontSize(12);
-    doc.setTextColor(0, 0, 0);
+    const skip = (n = 1) => { y += lineHeight * n; };
 
-    doc.text(`Nombre del Cliente: ${datosCliente.nombre}`, 20, 40);
-    doc.text(`Negocio: ${datosCliente.negocio}`, 20, 50);
-    doc.text(`Giro: ${datosCliente.giro}`, 20, 60);
-    doc.text(`Teléfono: ${datosCliente.telefono}`, 20, 70);
-    doc.text(`Correo: ${datosCliente.correo}`, 20, 80);
+    // Título
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    writeLine("Contrato de Prestación de Servicios de Desarrollo Web");
+    skip();
+
+    // Datos del cliente
+    doc.setFontSize(11);
+    doc.setFont("helvetica", "normal");
+    writeLine(`Nombre del Cliente: ${datosCliente.nombre}`);
+    writeLine(`Negocio: ${datosCliente.negocio}`);
+    writeLine(`Giro: ${datosCliente.giro}`);
+    writeLine(`Teléfono: ${datosCliente.telefono}`);
+    writeLine(`Correo: ${datosCliente.correo}`);
     if (datosCliente.cupon && datosCliente.cupon !== "Sin cupón") {
-      doc.text(`Cupón aplicado: ${datosCliente.cupon}`, 20, 90);
+      writeLine(`Cupón aplicado: ${datosCliente.cupon}`);
     }
+    skip();
 
-    const contenido = `
-Este Acuerdo de Servicios establece los términos y condiciones entre el Diseñador/Desarrollador (Proveedor) 
-y el Cliente (Establecimiento), con respecto al servicio de diseño y desarrollo web.
+    // Introducción
+    writeLine("Este Acuerdo de Servicios establece los términos y condiciones entre el Diseñador/Desarrollador (Proveedor) y el Cliente (Establecimiento), con respecto al servicio de diseño y desarrollo web.");
+    skip();
 
-Cláusulas:
+    doc.setFont("helvetica", "bold");
+    writeLine("Cláusulas:");
+    doc.setFont("helvetica", "normal");
+    skip(0.5);
 
-1. Alcance del servicio:
-   El Proveedor se compromete a diseñar y desarrollar una página web conforme a las necesidades 
-   previamente acordadas con el Cliente.
+    const clausulas = [
+      {
+        titulo: "1. Alcance del servicio:",
+        items: ["El Proveedor se compromete a diseñar y desarrollar una página web conforme a las necesidades previamente acordadas con el Cliente."],
+      },
+      {
+        titulo: "2. Responsabilidades del Proveedor:",
+        items: [
+          "- Entregar el proyecto en los tiempos establecidos.",
+          "- Mantener comunicación clara y constante sobre los avances.",
+          "- Realizar ajustes menores acordados durante el desarrollo.",
+          "- Garantizar el correcto funcionamiento técnico al momento de la entrega.",
+        ],
+      },
+      {
+        titulo: "3. Responsabilidades del Cliente:",
+        items: [
+          "- Proporcionar información, materiales, logotipos y contenido necesarios en tiempo y forma.",
+          "- Realizar los pagos acordados en las fechas establecidas.",
+          "- Revisar y aprobar los avances del proyecto.",
+          "- Cumplir con los requisitos legales relacionados con el uso de imágenes, textos o marcas.",
+        ],
+      },
+      {
+        titulo: "4. Pagos:",
+        items: [
+          "- El Cliente abonará un anticipo del 50% para iniciar el proyecto.",
+          "- El 50% restante se pagará contra entrega del sitio web terminado.",
+        ],
+      },
+      {
+        titulo: "5. Entrega:",
+        items: ["El proyecto será publicado en internet una vez aprobado y liquidado por el Cliente."],
+      },
+      {
+        titulo: "6. Vigencia:",
+        items: ["Este contrato entra en vigor a partir de la fecha de firma por ambas partes y permanecerá válido hasta la conclusión del proyecto."],
+      },
+      {
+        titulo: "7. Aceptación:",
+        items: ["Ambas partes declaran haber leído y aceptado los términos aquí establecidos."],
+      },
+    ];
 
-2. Responsabilidades del Proveedor:
-   - Entregar el proyecto en los tiempos establecidos.
-   - Mantener comunicación clara y constante sobre los avances.
-   - Realizar ajustes menores acordados durante el desarrollo.
-   - Garantizar el correcto funcionamiento técnico al momento de la entrega.
+    clausulas.forEach(({ titulo, items }) => {
+      doc.setFont("helvetica", "bold");
+      writeLine(titulo);
+      doc.setFont("helvetica", "normal");
+      items.forEach((item) => writeLine(`   ${item}`));
+      skip(0.5);
+    });
 
-3. Responsabilidades del Cliente:
-   - Proporcionar información, materiales, logotipos y contenido necesarios en tiempo y forma.
-   - Realizar los pagos acordados en las fechas establecidas.
-   - Revisar y aprobar los avances del proyecto.
-   - Cumplir con los requisitos legales relacionados con el uso de imágenes, textos o marcas.
-
-4. Pagos:
-   - El Cliente abonará un anticipo del 50% para iniciar el proyecto.
-   - El 50% restante se pagará contra entrega del sitio web terminado.
-
-5. Entrega:
-   El proyecto será publicado en internet una vez aprobado y liquidado por el Cliente.
-
-6. Vigencia:
-   Este contrato entra en vigor a partir de la fecha de firma por ambas partes y permanecerá válido
-   hasta la conclusión del proyecto.
-
-7. Aceptación:
-   Ambas partes declaran haber leído y aceptado los términos aquí establecidos.
-    `;
-
-    doc.text(contenido, 20, 100, { maxWidth: 170, lineHeightFactor: 1.3 });
-
-    doc.text("Firma del Cliente: __________________________", 20, 250);
-    doc.text("Firma del Proveedor: ________________________", 20, 270);
+    // Firmas con espacio garantizado
+    skip();
+    if (y > 250) { doc.addPage(); y = 20; }
+    writeLine("Firma del Cliente: __________________________");
+    skip();
+    writeLine("Firma del Proveedor: ________________________");
 
     doc.save(`Contrato_${datosCliente.nombre}.pdf`);
   };
