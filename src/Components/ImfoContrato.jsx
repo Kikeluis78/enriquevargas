@@ -19,10 +19,9 @@ export default function InfoContrato() {
         mb: 3,
         borderRadius: 3,
         overflow: "hidden",
-        border: "1px solid #374151", // border-gray-700
+        border: "1px solid #374151",
       }}
     >
-      {/* Botón superior */}
       <Button
         fullWidth
         onClick={() => setIsOpen((prev) => !prev)}
@@ -44,7 +43,6 @@ export default function InfoContrato() {
         }}
       >
         <span>Descarga tu Contrato al Final.</span>
-
         <span
           style={{
             transition: "transform 0.3s",
@@ -55,13 +53,12 @@ export default function InfoContrato() {
         </span>
       </Button>
 
-      {/* Contenido colapsable */}
       <Collapse in={isOpen}>
         <Paper
           elevation={0}
           sx={{
-            backgroundColor: "#111827", // bg-gray-900
-            color: "#d1d5db", // gray-300
+            backgroundColor: "#111827",
+            color: "#d1d5db",
             px: 2,
             py: 1.5,
             fontSize: "0.8rem",
