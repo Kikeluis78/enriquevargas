@@ -11,3 +11,7 @@ function doPost(e) {
   sheet.appendRow([nombre, negocio, giro, telefono, correo, cupon, fecha]);
   return ContentService.createTextOutput(JSON.stringify({result:"ok"})).setMimeType(ContentService.MimeType.JSON);
 }
+
+function doGet(e) {
+  return ContentService.createTextOutput("OK");
+}

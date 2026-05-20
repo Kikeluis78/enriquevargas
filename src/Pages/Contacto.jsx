@@ -114,7 +114,7 @@ export default function Contacto() {
       didOpen: () => {
         Swal.showLoading();
 
-        const formData = new FormData();
+        const formData = new URLSearchParams();
         formData.append("nombre", nombre);
         formData.append("negocio", negocio);
         formData.append("giro", giro);
@@ -125,7 +125,8 @@ export default function Contacto() {
         fetch("https://script.google.com/macros/s/AKfycbwr0NY5QOaooCZS022nXaTji9mW3VE-N1CUioFJduxHk41LH5seuVA_xP0uOpJxZgGaMw/exec", {
           method: "POST",
           mode: "no-cors",
-          body: formData,
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: formData.toString(),
         })
           .catch(() => {}) // Google Script responde con error CORS pero sí guarda los datos
           .finally(() => {
