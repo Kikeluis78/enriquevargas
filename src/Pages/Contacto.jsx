@@ -113,29 +113,42 @@ export default function Contacto() {
       color: "#f9fafb",
       didOpen: () => {
         Swal.showLoading();
-        setTimeout(() => {
-          // Redimir cupón si fue usado
-          if (couponCode && couponInfo?.valid) {
-            redeemCoupon(couponInfo.coupon.clave);
-            setCouponInfo(validateCoupon(couponCode)); // actualiza contador en UI
-          }
 
-          Swal.fire({
-            icon: "success",
-            title: "Datos enviados",
-            text: couponInfo?.valid
-              ? `Tus datos fueron enviados. Cupón aplicado: ${couponInfo.coupon.descuento}`
-              : "Tus datos fueron enviados exitosamente.",
-            confirmButtonColor: "#2563EB",
-            background: "#1f2937",
-            color: "#f9fafb",
+        const formData = new FormData();
+        formData.append("nombre", nombre);
+        formData.append("negocio", negocio);
+        formData.append("giro", giro);
+        formData.append("telefono", telefono);
+        formData.append("correo", correo);
+        formData.append("cupon", couponCode || "Sin cupón");
+
+        fetch("https://script.google.com/macros/s/AKfycbxRLOBv59HTTmL_zhVDuH-8cCNzZEoNLbDCJIMoS9by8VNLdJREX79DdR3OnerkVFKdPw/exec", {
+          method: "POST",
+          body: formData,
+        })
+          .catch(() => {}) // Google Script responde con error CORS pero sí guarda los datos
+          .finally(() => {
+            if (couponCode && couponInfo?.valid) {
+              redeemCoupon(couponInfo.coupon.clave);
+              setCouponInfo(validateCoupon(couponCode));
+            }
+
+            Swal.fire({
+              icon: "success",
+              title: "Datos enviados",
+              text: couponInfo?.valid
+                ? `Tus datos fueron enviados. Cupón aplicado: ${couponInfo.coupon.descuento}`
+                : "Tus datos fueron enviados exitosamente.",
+              confirmButtonColor: "#2563EB",
+              background: "#1f2937",
+              color: "#f9fafb",
+            });
+
+            setDatosCliente({ nombre, negocio, giro, telefono, correo, cupon: couponCode || "Sin cupón" });
+            setCouponCode("");
+            setCouponInfo(null);
+            formEl.reset();
           });
-
-          setDatosCliente({ nombre, negocio, giro, telefono, correo, cupon: couponCode || "Sin cupón" });
-          setCouponCode("");
-          setCouponInfo(null);
-          formEl.reset();
-        }, 900);
       },
     });
   };
@@ -266,9 +279,6 @@ export default function Contacto() {
           >
             <form
               ref={formRef}
-              target="dummyFrame"
-              action="https://script.google.com/macros/s/AKfycbxRLOBv59HTTmL_zhVDuH-8cCNzZEoNLbDCJIMoS9by8VNLdJREX79DdR3OnerkVFKdPw/exec"
-              method="POST"
               onSubmit={handleSubmit}
               noValidate
             >
