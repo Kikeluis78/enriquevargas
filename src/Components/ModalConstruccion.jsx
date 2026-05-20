@@ -80,19 +80,17 @@ export default function ModalConstruccion() {
         <Button
           onClick={() => setShow(false)}
           sx={{
-            px: 6,
-            py: 1.5,
-            borderRadius: "9999px",
-            fontWeight: 700,
-            fontSize: { xs: "0.85rem", sm: "1rem" },
-            background: "linear-gradient(45deg, #00D9FF, #FF6B35)",
+            backgroundColor: "#3b82f6",
             color: "white",
-            boxShadow: "0 0 20px rgba(0, 217, 255, 0.4)",
+            fontWeight: 600,
+            px: 4,
+            py: 1.2,
+            borderRadius: "9999px",
             textTransform: "none",
+            fontSize: { xs: "0.85rem", sm: "1rem" },
             "&:hover": {
-              background: "linear-gradient(45deg, #00C4E6, #E55A30)",
+              backgroundColor: "#2563eb",
               transform: "scale(1.05)",
-              boxShadow: "0 10px 30px rgba(0, 217, 255, 0.5)",
             },
             transition: "all 0.2s ease",
           }}

@@ -1,151 +1,81 @@
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import Container from "@mui/material/Container";
-import ModalConstruccion from "../Components/ModalConstruccion";
+// src/components/Contrato.jsx
+import { jsPDF } from "jspdf";
 
-export default function Clientes() {
-  useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
-  }, []);
+export default function Contrato({ datosCliente }) {
+  const generarPDF = () => {
+    if (!datosCliente) return;
 
-  const proyectos = [
-    {
-      title: "E-Commerce Fashion",
-      category: "PWA",
-      description: "Tienda online responsiva con carrito de compras",
-      image:
-        "https://images.unsplash.com/photo-1460925895917-adf4e565db18?auto=format&fit=crop&w=800&q=80",
-      url: "https://vercel.com",
-    },
-    {
-      title: "App Fitness Tracker",
-      category: "Android App",
-      description: "Aplicación nativa para seguimiento de ejercicio",
-      image:
-        "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
-      url: "https://vercel.com",
-    },
-    {
-      title: "Restaurant Booking",
-      category: "PWA",
-      description: "Sistema de reservas para restaurantes",
-      image:
-        "https://images.pexels.com/photos/4162449/pexels-photo-4162449.jpeg?auto=compress&cs=tinysrgb&w=800",
-      url: "https://vercel.com",
-    },
-    {
-      title: "Restaurant Booking",
-      category: "Diseño Web",
-      description: "Landing page moderna para restaurantes",
-      image:
-        "https://images.pexels.com/photos/1307698/pexels-photo-1307698.jpeg?auto=compress&cs=tinysrgb&w=800",
-    },
-    {
-      title: "Banking App",
-      category: "Android App",
-      description: "Aplicación bancaria segura y rápida",
-      image:
-        "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
-      url: "https://vercel.com",
-    },
-    {
-      title: "Portfolio Creativo",
-      category: "PWA",
-      description: "Portafolio interactivo para diseñadores",
-      image:
-        "https://images.pexels.com/photos/6120214/pexels-photo-6120214.jpeg?auto=compress&cs=tinysrgb&w=800",
-      url: "https://vercel.com",
-    },
-    {
-      title: "Portfolio Creativo",
-      category: "Diseño Web",
-      description: "Sitio web creativo y minimalista",
-      image:
-        "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800",
-    },
-    {
-      title: "Social Media App",
-      category: "Android App",
-      description: "Red social con mensajería en tiempo real",
-      image:
-        "https://images.unsplash.com/photo-1611532736579-6b16e2b50449?auto=format&fit=crop&w=800&q=80",
-      url: "https://vercel.com",
-    },
-  ];
+    const doc = new jsPDF("p", "mm", "a4");
+
+    doc.setFontSize(18);
+    doc.setTextColor(20, 20, 20);
+    doc.text("Contrato de Prestación de Servicios de Desarrollo Web", 20, 20);
+
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
+
+    doc.text(`Nombre del Cliente: ${datosCliente.nombre}`, 20, 40);
+    doc.text(`Negocio: ${datosCliente.negocio}`, 20, 50);
+    doc.text(`Giro: ${datosCliente.giro}`, 20, 60);
+    doc.text(`Teléfono: ${datosCliente.telefono}`, 20, 70);
+    doc.text(`Correo: ${datosCliente.correo}`, 20, 80);
+    if (datosCliente.cupon && datosCliente.cupon !== "Sin cupón") {
+      doc.text(`Cupón aplicado: ${datosCliente.cupon}`, 20, 90);
+    }
+
+    const contenido = `
+Este Acuerdo de Servicios establece los términos y condiciones entre el Diseñador/Desarrollador (Proveedor) 
+y el Cliente (Establecimiento), con respecto al servicio de diseño y desarrollo web.
+
+Cláusulas:
+
+1. Alcance del servicio:
+   El Proveedor se compromete a diseñar y desarrollar una página web conforme a las necesidades 
+   previamente acordadas con el Cliente.
+
+2. Responsabilidades del Proveedor:
+   - Entregar el proyecto en los tiempos establecidos.
+   - Mantener comunicación clara y constante sobre los avances.
+   - Realizar ajustes menores acordados durante el desarrollo.
+   - Garantizar el correcto funcionamiento técnico al momento de la entrega.
+
+3. Responsabilidades del Cliente:
+   - Proporcionar información, materiales, logotipos y contenido necesarios en tiempo y forma.
+   - Realizar los pagos acordados en las fechas establecidas.
+   - Revisar y aprobar los avances del proyecto.
+   - Cumplir con los requisitos legales relacionados con el uso de imágenes, textos o marcas.
+
+4. Pagos:
+   - El Cliente abonará un anticipo del 50% para iniciar el proyecto.
+   - El 50% restante se pagará contra entrega del sitio web terminado.
+
+5. Entrega:
+   El proyecto será publicado en internet una vez aprobado y liquidado por el Cliente.
+
+6. Vigencia:
+   Este contrato entra en vigor a partir de la fecha de firma por ambas partes y permanecerá válido
+   hasta la conclusión del proyecto.
+
+7. Aceptación:
+   Ambas partes declaran haber leído y aceptado los términos aquí establecidos.
+    `;
+
+    doc.text(contenido, 20, 100, { maxWidth: 170, lineHeightFactor: 1.3 });
+
+    doc.text("Firma del Cliente: __________________________", 20, 250);
+    doc.text("Firma del Proveedor: ________________________", 20, 270);
+
+    doc.save(`Contrato_${datosCliente.nombre}.pdf`);
+  };
 
   return (
-    <>
-      <ModalConstruccion />
-
-      <section id="clientes" className="py-20 px-6 bg-[#0A0A0A]">
-        <Container>
-          <div data-aos="fade-up" className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-              Echa Un Vistazo <span className="text-[#00D9FF]">A Mi Trabajo</span>
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Proyectos realizados con PWA y aplicaciones Android. Soluciones modernas y escalables.
-            </p>
-          </div>
-
-          <div
-            data-aos="fade-up"
-            data-aos-delay="200"
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {proyectos.map((project, index) => {
-              const Card = (
-                <>
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                    <span className="text-[#00D9FF] text-sm font-semibold mb-2">
-                      {project.category}
-                    </span>
-                    <h3 className="text-2xl font-bold text-white mb-2">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-300 text-sm">
-                      {project.description}
-                    </p>
-                  </div>
-                </>
-              );
-
-              return project.url ? (
-                <a
-                  key={index}
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 block"
-                >
-                  {Card}
-                </a>
-              ) : (
-                <div
-                  key={index}
-                  className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500"
-                >
-                  {Card}
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="mt-16 p-6 bg-[#1A1A1A] rounded-2xl border border-gray-800">
-            <p className="text-gray-400 text-center">
-              <span className="text-[#00D9FF] font-semibold">Nota:</span> Las URLs de los proyectos
-              serán reemplazadas con enlaces reales cuando estén disponibles.
-            </p>
-          </div>
-        </Container>
-      </section>
-    </>
+    <div className="flex flex-col items-center justify-center mt-6">
+      <button
+        onClick={generarPDF}
+        className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-3 px-6 rounded-lg transition"
+      >
+        Descargar Contrato
+      </button>
+    </div>
   );
 }
