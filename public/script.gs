@@ -18,3 +18,4 @@ function doPost(e) {
 function testEmail() {
   MailApp.sendEmail("enriquegv078@gmail.com", "Test", "Funciona el correo");
 }
+
