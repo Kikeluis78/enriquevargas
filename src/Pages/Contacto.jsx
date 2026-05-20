@@ -122,7 +122,7 @@ export default function Contacto() {
         formData.append("correo", correo);
         formData.append("cupon", couponCode || "Sin cupón");
 
-        fetch("https://script.google.com/macros/s/AKfycbxRLOBv59HTTmL_zhVDuH-8cCNzZEoNLbDCJIMoS9by8VNLdJREX79DdR3OnerkVFKdPw/exec", {
+        fetch("https://script.google.com/macros/s/AKfycbyxKD3v9PJkhzg1qpEJ3yiK4kADby9urqI4HBnBbfN7FKY2Kh_91JWE8HmwqJOYzyJ-QQ/exec", {
           method: "POST",
           body: formData,
         })
