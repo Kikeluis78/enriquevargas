@@ -113,60 +113,18 @@ export default function Clientes() {
 
   const proyectos = [
     {
-      title: "E-Commerce Fashion",
-      category: "PWA",
-      description: "Tienda online responsiva con carrito de compras",
-      image: "https://images.unsplash.com/photo-1460925895917-adf4e565db18?auto=format&fit=crop&w=800&q=80",
-      url: "https://pizzerias-eight.vercel.app/",
-    },
-    {
-      title: "App Fitness Tracker",
-      category: "Android App",
-      description: "Aplicación nativa para seguimiento de ejercicio",
-      image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
-      url: "https://podologos-ten.vercel.app/",
-    },
-    {
-      title: "Restaurant Booking",
-      category: "PWA",
-      description: "Sistema de reservas para restaurantes",
-      image: "https://images.pexels.com/photos/4162449/pexels-photo-4162449.jpeg?auto=compress&cs=tinysrgb&w=800",
-      url: "https://pizzerias-eight.vercel.app/",
-    },
-    {
-      title: "Restaurant Booking",
+      title: "Pizza Express MX",
       category: "Diseño Web",
-      description: "Landing page moderna para restaurantes",
-      image: "https://images.pexels.com/photos/1307698/pexels-photo-1307698.jpeg?auto=compress&cs=tinysrgb&w=800",
-      url: "https://podologos-ten.vercel.app/",
-    },
-    {
-      title: "Banking App",
-      category: "Android App",
-      description: "Aplicación bancaria segura y rápida",
-      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
+      description: "Sitio web profesional para pizzería con menú digital y pedidos por WhatsApp.",
+      image: "/capturas/Pizza Express MX.png",
       url: "https://pizzerias-eight.vercel.app/",
     },
     {
-      title: "Portfolio Creativo",
-      category: "PWA",
-      description: "Portafolio interactivo para diseñadores",
-      image: "https://images.pexels.com/photos/6120214/pexels-photo-6120214.jpeg?auto=compress&cs=tinysrgb&w=800",
-      url: "https://podologos-ten.vercel.app/",
-    },
-    {
-      title: "Portfolio Creativo",
-      category: "Diseño Web",
-      description: "Sitio web creativo y minimalista",
-      image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800",
-      url: "https://pizzerias-eight.vercel.app/",
-    },
-    {
-      title: "Social Media App",
-      category: "Android App",
-      description: "Red social con mensajería en tiempo real",
-      image: "https://images.unsplash.com/photo-1611532736579-6b16e2b50449?auto=format&fit=crop&w=800&q=80",
-      url: "https://podologos-ten.vercel.app/",
+      title: "Tarjeta Digital Oficios",
+      category: "Tarjeta Digital",
+      description: "Presencia online profesional para plomeros, electricistas y más oficios.",
+      image: "/capturas/ tarjeta-oficios.png",
+      url: "https://web-oficios.vercel.app/",
     },
   ];
 
@@ -232,10 +190,19 @@ export default function Clientes() {
             })}
           </div>
 
-          <div className="mt-16 p-6 bg-[#1A1A1A] rounded-2xl border border-gray-800">
-            <p className="text-gray-400 text-center">
-              <span className="text-[#00D9FF] font-semibold"></span> 
+          <div className="mt-16 p-8 bg-gradient-to-r from-[#00D9FF]/10 to-[#FF6B35]/10 rounded-2xl border border-[#00D9FF]/30 text-center">
+            <p className="text-2xl font-bold text-white mb-2">
+              ¿Tu negocio podría ser el próximo?
             </p>
+            <p className="text-gray-400 mb-6">
+              Cada proyecto que ves aquí empezó con una llamada. <span className="text-[#00D9FF]">El tuyo puede ser el siguiente.</span>
+            </p>
+            <Link
+              to="/contacto"
+              className="inline-block px-8 py-3 rounded-full font-bold text-black bg-gradient-to-r from-[#00D9FF] to-[#FF6B35] hover:opacity-90 transition"
+            >
+              🚀 Quiero mi sitio web
+            </Link>
           </div>
         </Container>
       </section>
