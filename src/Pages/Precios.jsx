@@ -16,7 +16,6 @@ import Accordion from "../Components/Accordion";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { WHATSAPP_NUMBER } from "../utils/constants";
 
 export default function Precios() {
   const [activeTab, setActiveTab] = useState(0);
@@ -140,9 +139,6 @@ export default function Precios() {
   ];
 
   const renderPlanCard = (plan, index) => {
-    const whatsappMsg = `Hola, me interesa el plan *${plan.name}* de ${plan.price} MX`;
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMsg)}`;
-
     return (
       <motion.div
         key={index}
@@ -194,10 +190,8 @@ export default function Precios() {
 
         <Box sx={{ mt: 6, textAlign: "center" }}>
           <Button
-            component="a"
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            component={Link}
+            to="/contacto"
             sx={{
               mt: 3,
               px: 4,
@@ -339,12 +333,8 @@ export default function Precios() {
                     </ul>
                     <Box sx={{ mt: 5 }}>
                       <Button
-                        component="a"
-                        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                          "Hola, me interesa una Aplicación Android"
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        component={Link}
+                        to="/contacto"
                         sx={{
                           px: 5,
                           py: 1.5,
