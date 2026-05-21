@@ -147,13 +147,6 @@ export default function Clientes() {
       image: "/capturas/pagina1.png",
       url: "https://world.org/mini-app?app_id=app_975134dd4e44462f3a9d043e50afac5e&path=&draft_id=meta_d7511074a6b5fdb80815b92a5a85d8b3",
     },
-    {
-      title: "Mini App World — Vista 2",
-      category: "App",
-      description: "Segunda pantalla de la mini app publicada en World.",
-      image: "/capturas/pagina3.png",
-      url: "https://world.org/mini-app?app_id=app_975134dd4e44462f3a9d043e50afac5e&path=&draft_id=meta_d7511074a6b5fdb80815b92a5a85d8b3",
-    },
   ];
 
   return (
