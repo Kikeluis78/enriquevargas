@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import ModalPromocion from "../Components/ModalPromocion";
 import { motion } from "framer-motion";
 
 // ✅ Material UI
@@ -413,6 +414,7 @@ export default function Precios() {
           answer="Perfectos para oficios, tiendas locales, consultorios, salones de belleza y todo tipo de pequeños negocios."
         />
       </Box>
+      <ModalPromocion />
     </>
   );
 }

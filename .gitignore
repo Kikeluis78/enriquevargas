@@ -27,3 +27,4 @@ yarn-error.log*
 # documentos privados
 CAMBIOS_REALIZADOS.md
 CONTRATO_REFERENCIA.md
+.vercel

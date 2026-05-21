@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Accordion from "../Components/Accordion";
+import ModalPromocion from "../Components/ModalPromocion";
 
 export default function Precios2() {
   useEffect(() => {
@@ -275,6 +276,7 @@ export default function Precios2() {
           answer="Sí, ofrecemos planes de soporte y mantenimiento a medida."
         />
       </Box>
+      <ModalPromocion />
     </>
   );
 }
