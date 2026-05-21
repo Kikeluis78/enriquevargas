@@ -85,7 +85,7 @@ export default function Home() {
             </h1>
 
             <p className="text-xl text-gray-400 mb-8 max-w-md">
-              "Cambiando la manera de hacer Publicidad en México".
+              Tu negocio merece estar en internet. <span className="text-white font-semibold">Desde $699 MXN.</span>
             </p>
 
             <p className="text-lg text-[#00D9FF] mb-8 font-mono h-7">

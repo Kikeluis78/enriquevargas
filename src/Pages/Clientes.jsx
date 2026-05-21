@@ -107,8 +107,6 @@ function ModalRemodelacion({ onClose }) {
 }
 
 export default function Clientes() {
-  const [showModal, setShowModal] = useState(true);
-
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
@@ -174,7 +172,6 @@ export default function Clientes() {
 
   return (
     <>
-      {showModal && <ModalRemodelacion onClose={() => setShowModal(false)} />}
       <section id="clientes" className="py-20 px-6 bg-[#0A0A0A]">
         <Container>
           <div data-aos="fade-up" className="text-center mb-12">
