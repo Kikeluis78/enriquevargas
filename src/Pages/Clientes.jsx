@@ -126,6 +126,34 @@ export default function Clientes() {
       image: "/capturas/ tarjeta-oficios.png",
       url: "https://web-oficios.vercel.app/",
     },
+    {
+      title: "CRM Pagos",
+      category: "Sistema Web",
+      description: "Sistema de gestión de pagos y clientes para negocios.",
+      image: "/capturas/CRM Pagos.png",
+      url: "https://coy-rho.vercel.app/",
+    },
+    {
+      title: "Sistema Universal de Citas",
+      category: "Diseño Web",
+      description: "Plataforma de agendamiento de citas para cualquier giro de negocio.",
+      image: "/capturas/Sistema Universal de Citas.png",
+      url: "https://podologos-ten.vercel.app/",
+    },
+    {
+      title: "Mini App World",
+      category: "App",
+      description: "Aplicación publicada en World — plataforma global de mini apps.",
+      image: "/capturas/pagina1.png",
+      url: "https://world.org/mini-app?app_id=app_975134dd4e44462f3a9d043e50afac5e&path=&draft_id=meta_d7511074a6b5fdb80815b92a5a85d8b3",
+    },
+    {
+      title: "Mini App World — Vista 2",
+      category: "App",
+      description: "Segunda pantalla de la mini app publicada en World.",
+      image: "/capturas/pagina3.png",
+      url: "https://world.org/mini-app?app_id=app_975134dd4e44462f3a9d043e50afac5e&path=&draft_id=meta_d7511074a6b5fdb80815b92a5a85d8b3",
+    },
   ];
 
   return (
