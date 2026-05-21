@@ -123,7 +123,7 @@ export default function Clientes() {
       title: "Tarjeta Digital Oficios",
       category: "Tarjeta Digital",
       description: "Presencia online profesional para plomeros, electricistas y más oficios.",
-      image: "/capturas/ tarjeta-oficios.png",
+      image: "/capturas/tarjeta-oficios.png",
       url: "https://web-oficios.vercel.app/",
     },
     {
