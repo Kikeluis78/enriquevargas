@@ -181,19 +181,19 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
-                name: "Carlos Méndez",
-                role: "Dueño de Pizzería La Napolitana",
-                text: "Mi negocio creció un 40% después de tener mi página web. Ahora recibo pedidos online y mis clientes pueden ver el menú desde su celular. ¡Excelente trabajo!",
+                name: "Pizza Express MX",
+                role: "Restaurante — Cliente real",
+                text: "Ahora mis clientes pueden ver el menú y hacer pedidos por WhatsApp desde la página. Las ventas aumentaron desde el primer mes.",
               },
               {
-                name: "Ana Rodríguez",
-                role: "Estilista Profesional",
-                text: "La agenda digital me cambió la vida. Mis clientes ahora reservan sus citas online y yo puedo organizar mejor mi tiempo. Súper recomendado.",
+                name: "Tarjeta Digital Oficios",
+                role: "Servicios para el hogar — Cliente real",
+                text: "Antes nadie me encontraba en internet. Con mi tarjeta digital profesional los clientes me llaman directo y confían más en mi trabajo.",
               },
               {
-                name: "Luis Hernández",
-                role: "Plomero Independiente",
-                text: "Antes dependía del boca a boca. Ahora con mi tarjeta digital profesional, los clientes me encuentran fácil y confían más en mi servicio.",
+                name: "Sistema Universal de Citas",
+                role: "Salud y bienestar — Cliente real",
+                text: "Mis pacientes agendan solos desde el celular. Ya no pierdo tiempo en llamadas y mi agenda siempre está organizada.",
               },
             ].map((testimonial, index) => (
               <motion.div
@@ -214,6 +214,22 @@ export default function Home() {
                 <div className="absolute top-4 right-4 text-[#00D9FF] text-4xl opacity-20">
                   "
                 </div>
+              </motion.div>
+            ))}
+
+            {/* Espacios disponibles */}
+            {[1, 2].map((i) => (
+              <motion.div
+                key={`empty-${i}`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 + i * 0.1 }}
+                className="relative p-6 rounded-2xl border border-dashed border-[#00D9FF]/30 flex flex-col items-center justify-center text-center gap-3 min-h-[160px]"
+              >
+                <span className="text-3xl">🔒</span>
+                <p className="text-[#00D9FF] font-semibold text-sm">Este espacio te está esperando</p>
+                <p className="text-gray-500 text-xs">¿Tu negocio podría ser el siguiente?</p>
               </motion.div>
             ))}
           </div>
