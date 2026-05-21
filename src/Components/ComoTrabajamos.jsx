@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
-import { WHATSAPP_NUMBER } from "../utils/constants";
 import { ShoppingCart, Zap, TrendingUp, Clock, MessageCircle, CheckCircle2 } from "lucide-react";
 
 function useCountdown(targetDate) {
@@ -57,9 +56,6 @@ export default function ComoTrabajamos() {
       color: "#FF6B35",
     },
   ];
-
-  const whatsappMsg = "Hola, quiero mi sistema de pedidos vía WhatsApp para mi restaurante 🍕";
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMsg)}`;
 
   return (
     <section className="py-20 px-3 md:px-6 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] relative overflow-hidden">
