@@ -47,6 +47,7 @@ export const LOADING_PHRASES = [
 ];
 
 export const HOME_PHRASES = [
-  "Desarrollo de sitios web modernos 🌐",
-  "Transformo ideas en experiencias digitales 📱",
+  "Páginas web que convierten visitas en clientes 💰",
+  "Tu negocio abierto 24/7 en internet 🌐",
+  "Apps y webs listas en 7 días 🚀",
 ];

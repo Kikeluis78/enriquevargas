@@ -158,7 +158,7 @@ export default function Clientes() {
               Echa Un Vistazo <span className="text-[#00D9FF]">A Mi Trabajo</span>
             </h2>
             <p className="text-gray-400 text-lg">
-              Proyectos realizados con PWA y aplicaciones Android. Soluciones modernas y escalables.
+              Proyectos realizados con <span className="text-[#00D9FF] font-semibold">PWA</span> y <span className="text-[#FF6B35] font-semibold">aplicaciones Android</span>. Soluciones <span className="text-[#FFE45E] font-semibold">modernas y escalables</span>.
             </p>
           </div>
 
@@ -216,7 +216,7 @@ export default function Clientes() {
               ¿Tu negocio podría ser el próximo?
             </p>
             <p className="text-gray-400 mb-6">
-              Cada proyecto que ves aquí empezó con una llamada. <span className="text-[#00D9FF]">El tuyo puede ser el siguiente.</span>
+              Cada proyecto que ves aquí empezó con una llamada. <span className="text-[#FFE45E] font-semibold">El tuyo puede ser el siguiente.</span>
             </p>
             <Link
               to="/contacto"

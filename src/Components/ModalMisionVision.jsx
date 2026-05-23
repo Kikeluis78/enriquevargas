@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 
-// ✅ Icono (ya tienes lucide-react instalado)
+// ✅ Icono
 import { X } from "lucide-react";
 
 export default function ModalMisionVision({ isOpen, onClose }) {
@@ -27,7 +27,7 @@ export default function ModalMisionVision({ isOpen, onClose }) {
       PaperProps={{
         "data-aos": "zoom-in",
         sx: {
-          backgroundColor: "#111827", // bg-gray-900
+          backgroundColor: "#111827",
           color: "white",
           borderRadius: 4,
           p: { xs: 2, sm: 4 },
@@ -36,7 +36,7 @@ export default function ModalMisionVision({ isOpen, onClose }) {
       }}
       BackdropProps={{
         sx: {
-          backgroundColor: "rgba(0,0,0,0.6)",
+          backgroundColor: "rgba(0,0,0,0.65)",
           backdropFilter: "blur(4px)",
         },
       }}
@@ -59,9 +59,9 @@ export default function ModalMisionVision({ isOpen, onClose }) {
       <DialogTitle
         sx={{
           textAlign: "center",
-          fontSize: { xs: "1.8rem", md: "2.2rem" },
+          fontSize: { xs: "1.9rem", md: "2.4rem" },
           fontWeight: 700,
-          color: "#facc15", // yellow-300
+          color: "#facc15",
           mb: 2,
         }}
       >
@@ -80,54 +80,102 @@ export default function ModalMisionVision({ isOpen, onClose }) {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: 4,
-            fontSize: { xs: "1rem", md: "1.2rem" },
+            gap: 5,
             color: "#e5e7eb",
-            lineHeight: 1.7,
+            lineHeight: 1.8,
           }}
         >
-          {/* Misión */}
+          {/* MISIÓN */}
           <Box>
             <Typography
               variant="h6"
-              sx={{ color: "#60a5fa", fontWeight: 600, mb: 1 }}
+              sx={{
+                color: "#60a5fa",
+                fontWeight: 700,
+                mb: 1,
+                fontSize: "1.3rem",
+              }}
             >
               Misión
             </Typography>
 
-            <Typography sx={{ mb: 1 }}>
-              Ayudar a pequeños y medianos negocios a posicionarse en el mundo
-              digital conectando con sus clientes de manera efectiva y profesional.
-              Entrego aplicaciones web funcionales y accesibles, creando una sinergia
-              entre cliente y usuario.
+            <Typography
+              sx={{
+                mb: 2,
+                fontSize: { xs: "1rem", md: "1.1rem" },
+              }}
+            >
+              Ayudar a pequeños y medianos negocios a modernizarse mediante
+              soluciones digitales accesibles, funcionales y profesionales.
             </Typography>
 
-            <Typography>
-              Para negocios con servicio a domicilio, busco agilizar la atención al
-              cliente mediante páginas web automatizadas, optimizando tiempos de
-              respuesta y mejorando la experiencia del usuario.
+            <Typography
+              sx={{
+                fontSize: { xs: "1rem", md: "1.1rem" },
+              }}
+            >
+              Mi objetivo es crear páginas web, sistemas de pedidos y
+              herramientas digitales que mejoren la atención al cliente,
+              aumenten la presencia online y ayuden a cada negocio a crecer.
             </Typography>
           </Box>
 
-          {/* Visión */}
+          {/* VISIÓN */}
           <Box>
             <Typography
               variant="h6"
-              sx={{ color: "#60a5fa", fontWeight: 600, mb: 1 }}
+              sx={{
+                color: "#60a5fa",
+                fontWeight: 700,
+                mb: 1,
+                fontSize: "1.3rem",
+              }}
             >
               Visión
             </Typography>
 
-            <Typography sx={{ mb: 1 }}>
-              Revolucionar la publicidad digital reduciendo el impacto ambiental
-              de volantes y papelería innecesaria. Transformo estos elementos en
-              estrategias digitales efectivas para tu negocio.
+            <Typography
+              sx={{
+                mb: 2,
+                fontSize: { xs: "1rem", md: "1.1rem" },
+              }}
+            >
+              Construir un entorno donde cualquier negocio, sin importar su
+              tamaño, pueda competir digitalmente de manera profesional.
             </Typography>
 
-            <Typography>
-              Busco que cada cliente tenga presencia online de manera profesional,
-              accesible y responsable con el medio ambiente, aumentando la visibilidad
-              y la eficiencia de su negocio.
+            <Typography
+              sx={{
+                fontSize: { xs: "1rem", md: "1.1rem" },
+              }}
+            >
+              Busco aprovechar la tecnología actual y la inteligencia artificial
+              para ofrecer soluciones rápidas, modernas y accesibles,
+              facilitando la transformación digital de negocios reales.
+            </Typography>
+          </Box>
+
+          {/* CIERRE */}
+          <Box
+            sx={{
+              mt: 1,
+              p: 3,
+              borderRadius: 3,
+              background:
+                "linear-gradient(135deg, rgba(59,130,246,0.15), rgba(250,204,21,0.08))",
+              border: "1px solid rgba(255,255,255,0.08)",
+              textAlign: "center",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: { xs: "1rem", md: "1.1rem" },
+                fontWeight: 500,
+                color: "#f9fafb",
+              }}
+            >
+              Tecnología moderna, soluciones reales y atención personalizada
+              para ayudarte a llevar tu negocio al siguiente nivel.
             </Typography>
           </Box>
         </Box>

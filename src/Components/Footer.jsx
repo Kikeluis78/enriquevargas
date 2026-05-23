@@ -45,7 +45,7 @@ export default function Footer() {
           </div>
           {/* 🌐 Columna 2 */}
           <div>
-            <h4 className="font-semibold mb-6 text-[#f1f5f9]">
+            <h4 className="font-semibold mb-6 text-[#00D9FF]">
               Redes Sociales
             </h4>
             <div className="space-y-2">
@@ -73,7 +73,7 @@ export default function Footer() {
 
           {/* Columna 3  */}
           <div>
-            <h4 className="font-semibold mb-4 text-[#f1f5f9]">Legal</h4>
+            <h4 className="font-semibold mb-4 text-[#FFE45E]">Legal</h4>
             <div className="space-y-2">
               {[
                 ["Política de Privacidad", "/politica"],
@@ -93,7 +93,7 @@ export default function Footer() {
 
           {/* 🚀 Columna 4 */}
           <div>
-            <h4 className="font-semibold mb-4 text-[#f1f5f9]">
+            <h4 className="font-semibold mb-4 text-[#FF6B35]">
               Otros Servicios
             </h4>
             <div className="space-y-2">
@@ -118,7 +118,7 @@ export default function Footer() {
 
         {/* 🔹 Línea inferior */}
         <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm sm:text-base">
-          <p>&copy; 2025 Enrique Vargas. Todos los derechos reservados.</p>
+          <p>&copy; 2026 <span className="text-[#00D9FF] font-semibold">Enrique</span> <span className="text-[#FF6B35] font-semibold">Vargas</span>. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

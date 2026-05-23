@@ -2,30 +2,9 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { useState, useEffect } from "react";
 import { ShoppingCart, Zap, TrendingUp, Clock, MessageCircle, CheckCircle2 } from "lucide-react";
 
-function useCountdown(targetDate) {
-  const getTime = () => {
-    const diff = new Date(targetDate) - new Date();
-    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    return {
-      days: Math.floor(diff / 86400000),
-      hours: Math.floor((diff % 86400000) / 3600000),
-      minutes: Math.floor((diff % 3600000) / 60000),
-      seconds: Math.floor((diff % 60000) / 1000),
-    };
-  };
-  const [time, setTime] = useState(getTime);
-  useEffect(() => {
-    const id = setInterval(() => setTime(getTime()), 1000);
-    return () => clearInterval(id);
-  }, []);
-  return time;
-}
-
 export default function ComoTrabajamos() {
-  const countdown = useCountdown("2026-06-15T23:59:59");
   const beneficios = [
     {
       icon: <Zap size={48} />,
@@ -82,9 +61,13 @@ export default function ComoTrabajamos() {
           </h2>
           
           <p className="text-gray-300 text-xl max-w-3xl mx-auto mb-8">
-            Tu menú online + carrito de compras + pedidos automáticos a WhatsApp.
+            <span className="text-[#00D9FF] font-semibold">Menú online</span> + <span className="text-[#FF6B35] font-semibold">carrito de compras</span> = <span className="text-[#FFE45E] font-semibold">pedidos automáticos</span> a tu WhatsApp.
             <br />
-            <span className="text-[#FFE45E] font-semibold">Más ventas, menos errores, clientes felices.</span>
+            <span className="text-white font-semibold">Tu cliente no espera. </span>
+            <span className="text-[#00D9FF] font-semibold">Un CRM </span>
+            <span className="text-white font-semibold">que atiende tu negocio </span>
+            <span className="text-[#FF6B35] font-bold">24/7</span>
+            <span className="text-[#FFE45E] font-semibold">, sin que muevas un dedo.</span>
           </p>
         </motion.div>
 
@@ -211,13 +194,13 @@ export default function ComoTrabajamos() {
             {/* Precio Destacado */}
             <div className="flex items-center justify-center gap-6 mb-8">
               <div className="text-center">
-                <span className="text-gray-400 text-xl line-through block">Antes $4,499</span>
+                <span className="text-gray-400 text-2xl font-bold line-through block">Antes $4,499</span>
               </div>
               <div className="text-center">
-                <div className="text-6xl md:text-7xl font-black text-[#00D9FF] drop-shadow-[0_0_30px_rgba(0,217,255,0.8)]">
+                <div className="text-6xl md:text-8xl font-black text-[#00D9FF] drop-shadow-[0_0_30px_rgba(0,217,255,0.8)]">
                   $2,999
                 </div>
-                <span className="text-gray-300 text-xl">MX - Pago único</span>
+                <span className="text-white text-2xl font-bold">MX - Pago único</span>
               </div>
             </div>
 
@@ -293,24 +276,8 @@ export default function ComoTrabajamos() {
 
             {/* Urgencia */}
             <div className="text-center">
-              <p className="text-[#FFE45E] font-bold text-lg mb-3">
-                ⏰ Oferta válida solo hasta el 15 de Junio 2026
+              <p className="text-[#FFE45E] font-black text-xl">
               </p>
-              <div className="flex justify-center gap-4">
-                {[
-                  { label: "Días", value: countdown.days },
-                  { label: "Horas", value: countdown.hours },
-                  { label: "Min", value: countdown.minutes },
-                  { label: "Seg", value: countdown.seconds },
-                ].map(({ label, value }) => (
-                  <div key={label} className="flex flex-col items-center bg-black/40 border border-[#00D9FF]/30 rounded-xl px-4 py-2 min-w-[64px]">
-                    <span className="text-3xl font-black text-[#00D9FF]">
-                      {String(value).padStart(2, "0")}
-                    </span>
-                    <span className="text-xs text-gray-400 font-semibold">{label}</span>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </motion.div>

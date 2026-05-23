@@ -232,7 +232,7 @@ export default function Precios() {
               <span className="text-[#00D9FF]">Nuestros Planes</span>
             </h2>
             <p className="text-gray-400 text-center mb-12 text-lg">
-              Elige el plan perfecto para tu negocio 🚀
+              Elige el plan perfecto para <span className="text-[#FFE45E] font-semibold">tu negocio</span> 🚀
             </p>
           </motion.div>
 
@@ -285,7 +285,7 @@ export default function Precios() {
                 transition={{ duration: 0.5 }}
               >
                 <p className="text-gray-400 text-center mb-12 text-lg">
-                  Diseños listos para impulsar tu negocio en menos de una semana 🚀
+                  Diseños listos para impulsar <span className="text-[#00D9FF] font-semibold">tu negocio</span> en menos de <span className="text-[#FF6B35] font-semibold">una semana</span> 🚀
                 </p>
                 <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                   {planesExpress.map(renderPlanCard)}
@@ -302,7 +302,7 @@ export default function Precios() {
                 transition={{ duration: 0.5 }}
               >
                 <p className="text-gray-400 text-center mb-12 text-lg">
-                  Soluciones integrales con Hosting y Dominio por 1 año
+                  Soluciones integrales con <span className="text-[#00D9FF] font-semibold">Hosting</span> y <span className="text-[#FF6B35] font-semibold">Dominio</span> por <span className="text-[#FFE45E] font-semibold">1 año</span>
                 </p>
                 <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                   {planesPremium.map(renderPlanCard)}

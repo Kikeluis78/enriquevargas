@@ -23,7 +23,7 @@ export default function LoadingScreen({ onComplete }) {
     // Progreso estable
     progressInterval.current = setInterval(() => {
       setProgress((p) => (p < 100 ? p + 1 : 100));
-    }, 9);
+    }, 4);
 
     // Rota imágenes
     imageInterval.current = setInterval(() => {

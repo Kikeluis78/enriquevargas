@@ -84,9 +84,16 @@ export default function Home() {
               <span className="text-[#00D9FF]">Android</span>
             </h1>
 
-            <p className="text-xl text-gray-400 mb-8 max-w-md">
-              Tu negocio merece estar en internet. <span className="text-white font-semibold">Desde $699 MXN.</span>
-            </p>
+            <div className="mb-8 max-w-md">
+              <p className="text-2xl md:text-3xl font-black text-white leading-snug">
+                Tu negocio merece<br />
+                <span className="text-[#FFE45E]">estar en internet.</span>
+              </p>
+              <p className="mt-3 text-xl md:text-2xl font-black">
+                <span className="text-[#00D9FF]">Planes desde </span>
+                <span className="text-[#FF6B35] text-3xl md:text-4xl">$699 MXN</span>
+              </p>
+            </div>
 
             <p className="text-lg text-[#00D9FF] mb-8 font-mono h-7">
               {currentText}
@@ -173,26 +180,24 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
               Lo Que Dicen <span className="text-[#00D9FF]">Mis Clientes</span>
             </h2>
-            <p className="text-gray-400 text-lg">
-              Testimonios reales de proyectos exitosos
-            </p>
+          
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
                 name: "Pizza Express MX",
-                role: "Restaurante — Cliente real",
+                role: "Restaurante Comida Rapida",
                 text: "Ahora mis clientes pueden ver el menú y hacer pedidos por WhatsApp desde la página. Las ventas aumentaron desde el primer mes.",
               },
               {
                 name: "Tarjeta Digital Oficios",
-                role: "Servicios para el hogar — Cliente real",
+                role: "Servicios para el hogar ",
                 text: "Antes nadie me encontraba en internet. Con mi tarjeta digital profesional los clientes me llaman directo y confían más en mi trabajo.",
               },
               {
-                name: "Sistema Universal de Citas",
-                role: "Salud y bienestar — Cliente real",
+                name: "Sistema  de Citas",
+                role: "Salud y bienestar ",
                 text: "Mis pacientes agendan solos desde el celular. Ya no pierdo tiempo en llamadas y mi agenda siempre está organizada.",
               },
             ].map((testimonial, index) => (

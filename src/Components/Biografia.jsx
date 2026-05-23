@@ -57,66 +57,36 @@ export default function Biografia() {
 
               {/* 🟦 CONTENEDOR */}
               <div className="bg-[#0A0A0A] w-full p-4 md:p-8 rounded-3xl border border-gray-800 shadow-xl md:max-w-2xl">
-                <p className="text-base md:text-lg text-gray-300 mb-5 leading-relaxed md:leading-loose">
-                  Hola, soy
-                  <span className="text-[#00D9FF] font-semibold">
-                    {" "}
-                    Enrique Vargas
-                  </span>
-                  .<br />
-                  Desarrollador web y de aplicaciones Android. Trabajo con{" "}
-                  <span className="text-[#FF6B35] font-semibold">
-                    IA y tecnología moderna
-                  </span>{" "}
-                  para crear soluciones digitales reales.
+                <p className="text-base md:text-lg mb-5 leading-relaxed md:leading-loose">
+                  <span className="text-white font-semibold">Mucho gusto, soy </span>
+                  <span className="text-[#00D9FF] font-bold">Enrique Vargas</span>
+                  <span className="text-white font-semibold">.<br />No soy una agencia enorme… y esa es precisamente </span>
+                  <span className="text-[#FFE45E] font-bold">mi ventaja.</span>
                 </p>
 
                 <p className="text-base md:text-lg text-gray-300 mb-5 leading-relaxed md:leading-loose">
-                  Mi enfoque es simple:{" "}
-                  <span className="text-[#00D9FF] font-semibold">
-                    resultados reales, código limpio y honestidad total
-                  </span>
-                  . Especializado en{" "}
-                  <span className="text-[#FF6B35] font-semibold">
-                    PWA
-                  </span>{" "}
-                  y{" "}
-                  <span className="text-[#FF6B35] font-semibold">
-                    aplicaciones Android
-                  </span>{" "}
-                  rápidas, responsivas y escalables.
+                  Trabajo directamente contigo y con{" "}
+                  <span className="text-[#FF6B35] font-semibold">negocios reales</span>{" "}
+                  que necesitan soluciones prácticas, modernas y funcionales. Mi objetivo es ayudarte a{" "}
+                  <span className="text-[#00D9FF] font-semibold">competir al nivel de grandes empresas</span>
+                  , pero sin pagar los precios exagerados de una agencia.
                 </p>
 
-                <span className="text-[rgb(251,255,0)] font-semibold">
-                  ¿Qué obtienes?
-                </span>
-                <ul className="text-base md:text-lg text-gray-300 list-disc pl-6 space-y-2 mt-3">
-                  <li>
-                    <span className="text-[#FF6B35] font-semibold">
-                      Diseño 100% responsivo
-                    </span>
-                  </li>
-                  <li>
-                    <span className="text-[#FF6B35] font-semibold">
-                      Apps Android optimizadas
-                    </span>
-                  </li>
-                  <li>
-                    <span className="text-[#FF6B35] font-semibold">
-                      Código limpio y mantenible
-                    </span>
-                  </li>
-                  <li>
-                    <span className="text-[#FF6B35] font-semibold">
-                      Precios justos
-                    </span>
-                  </li>
-                  <li>
-                    <span className="text-[#FF6B35] font-semibold">
-                      Consultoría gratuita
-                    </span>
-                  </li>
-                </ul>
+                <p className="text-base md:text-lg text-gray-300 mb-5 leading-relaxed md:leading-loose">
+                  Gracias a la{" "}
+                  <span className="text-[#C084FC] font-semibold">tecnología e IA actuales</span>
+                  , puedo desarrollar sitios web, sistemas de pedidos y soluciones digitales de forma{" "}
+                  <span className="text-[#FF6B35] font-semibold">rápida, profesional</span>{" "}
+                  y a un{" "}
+                  <span className="text-[#FFE45E] font-bold">precio justo.</span>
+                </p>
+
+                <p className="text-base md:text-lg mb-5 leading-relaxed md:leading-loose">
+                  <span className="text-white font-semibold">¿Tienes dudas o una idea para tu negocio?<br /></span>
+                  <span className="text-[#00D9FF] font-semibold">Contáctame. </span>
+                  <span className="text-gray-300">La asesoría es </span>
+                  <span className="text-[#FFE45E] font-bold">gratuita y personalizada.</span>
+                </p>
 
                 {/* BOTÓN */}
                 <div className="w-full flex justify-center mt-8">

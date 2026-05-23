@@ -157,12 +157,12 @@ export default function Contacto() {
 
   
   const steps = [
-    "Registra tus datos",
-    "Firma tu contrato",
-    "50% de anticipo",
-    "Revisa y apruebas",
-    "Lo ves en internet",
-    "Liquidas",
+    { label: "Registra tus datos",   color: "#00D9FF" },
+    { label: "Firma tu contrato",    color: "#FF6B35" },
+    { label: "50% de anticipo",      color: "#FFE45E" },
+    { label: "Revisa y apruebas",    color: "#C084FC" },
+    { label: "Lo ves en internet",   color: "#00D9FF" },
+    { label: "Liquidas",             color: "#FF6B35" },
   ];
 
   return (
@@ -207,8 +207,8 @@ export default function Contacto() {
                   >
                     {index + 1}
                   </Box>
-                  <Typography sx={{ color: "#e5e7eb", fontWeight: 600 }}>
-                    {step}
+                  <Typography sx={{ color: step.color, fontWeight: 600 }}>
+                    {step.label}
                   </Typography>
 
                   {index !== steps.length - 1 && (
@@ -257,8 +257,8 @@ export default function Contacto() {
                 >
                   {index + 1}
                 </Box>
-                <Typography sx={{ color: "white", fontWeight: 600 }}>
-                  {step}
+                <Typography sx={{ color: step.color, fontWeight: 600 }}>
+                  {step.label}
                 </Typography>
               </Paper>
             ))}
