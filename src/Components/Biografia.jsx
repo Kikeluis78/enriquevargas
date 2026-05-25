@@ -25,23 +25,22 @@ export default function Biografia() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="grid md:grid-cols-2 gap-14 items-start"
+            className="grid md:grid-cols-2 gap-14 items-stretch"
           >
             {/* 📷 FOTO */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="flex justify-center"
+              className="relative group w-full min-h-[400px] md:min-h-[500px]"
             >
-              <div className="relative group w-60 md:w-80">
-                <img
-                  src="/fotomia.png"
-                  alt="Foto de Enrique Vargas"
-                  className="rounded-3xl w-full shadow-2xl border-4 border-[#00D9FF]/30 transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-3xl" />
-              </div>
+              <img
+                src="/luis3.png"
+                alt="Foto de Enrique Vargas"
+                className="w-full h-full object-cover object-top rounded-3xl shadow-2xl border-4 border-[#00D9FF]/30 transition-transform duration-500 group-hover:scale-[1.02]"
+                style={{ minHeight: "400px" }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent rounded-3xl" />
             </motion.div>
 
             {/* 🧠 TEXTO */}

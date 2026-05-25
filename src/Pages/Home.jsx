@@ -71,11 +71,11 @@ export default function Home() {
       }}
     >
       <Container maxWidth="xl">
-        <div className="grid md:grid-cols-2 gap-16 items-center w-full">
+        <div className="grid md:grid-cols-2 gap-12 items-center w-full">
           {/* ------------ TEXTO ------------ */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="flex flex-col justify-center"
           >
@@ -100,52 +100,29 @@ export default function Home() {
               <span className="animate-pulse">|</span>
             </p>
 
-            {/* ✅ CTA PRINCIPAL */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 component={Link}
                 to="/precios"
                 sx={{
-                  px: 6,
-                  py: 2,
-                  borderRadius: 3,
-                  fontWeight: 700,
-                  fontSize: "1.1rem",
-                  background: "linear-gradient(45deg, #00D9FF, #FF6B35)",
-                  color: "white",
+                  px: 6, py: 2, borderRadius: 3, fontWeight: 700, fontSize: "1.1rem",
+                  background: "linear-gradient(45deg, #00D9FF, #FF6B35)", color: "white",
                   boxShadow: "0 0 20px rgba(0, 217, 255, 0.4)",
-                  "&:hover": {
-                    background: "linear-gradient(45deg, #00C4E6, #E55A30)",
-                    transform: "translateY(-3px)",
-                    boxShadow: "0 10px 30px rgba(0, 217, 255, 0.5)",
-                  },
+                  "&:hover": { background: "linear-gradient(45deg, #00C4E6, #E55A30)", transform: "translateY(-3px)", boxShadow: "0 10px 30px rgba(0, 217, 255, 0.5)" },
                   transition: "all 0.3s ease",
                 }}
-              >
-                🚀 Ver Planes
-              </Button>
+              >🚀 Ver Planes</Button>
               <Button
                 component={Link}
                 to="/contacto"
                 sx={{
-                  px: 6,
-                  py: 2,
-                  borderRadius: 3,
-                  fontWeight: 700,
-                  fontSize: "1.1rem",
-                  background: "linear-gradient(45deg, #FF6B35, #FF3CAC)",
-                  color: "white",
+                  px: 6, py: 2, borderRadius: 3, fontWeight: 700, fontSize: "1.1rem",
+                  background: "linear-gradient(45deg, #FF6B35, #FF3CAC)", color: "white",
                   boxShadow: "0 0 20px rgba(255, 107, 53, 0.4)",
-                  "&:hover": {
-                    background: "linear-gradient(45deg, #E55A30, #E030A0)",
-                    transform: "translateY(-3px)",
-                    boxShadow: "0 10px 30px rgba(255, 107, 53, 0.5)",
-                  },
+                  "&:hover": { background: "linear-gradient(45deg, #E55A30, #E030A0)", transform: "translateY(-3px)", boxShadow: "0 10px 30px rgba(255, 107, 53, 0.5)" },
                   transition: "all 0.3s ease",
                 }}
-              >
-                📞 Contactar
-              </Button>
+              >📞 Contactar</Button>
             </div>
           </motion.div>
 
@@ -166,7 +143,6 @@ export default function Home() {
             </div>
             <div className="absolute -bottom-6 -right-6 w-72 h-72 bg-[#00D9FF]/20 rounded-full blur-3xl"></div>
           </motion.div>
-
         </div>
 
         {/* ------------ TESTIMONIOS ------------ */}
