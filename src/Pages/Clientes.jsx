@@ -113,11 +113,11 @@ export default function Clientes() {
 
   const proyectos = [
     {
-      title: "Pizza Express MX",
+      title: "Menu Digital",
       category: "Diseño Web",
       description: "Sitio web profesional para pizzería con menú digital y pedidos por WhatsApp.",
       image: "/capturas/Pizza Express MX.png",
-      url: "https://pizzerias-eight.vercel.app/",
+      url: "https://oliver-pizzas.vercel.app/",
     },
     {
       title: "Tarjeta Digital Oficios",
