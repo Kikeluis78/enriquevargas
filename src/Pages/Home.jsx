@@ -162,7 +162,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
-                name: "Pizza Express MX",
+                name: "Oliver Pizza",
                 role: "Restaurante Comida Rapida",
                 text: "Ahora mis clientes pueden ver el menú y hacer pedidos por WhatsApp desde la página. Las ventas aumentaron desde el primer mes.",
               },

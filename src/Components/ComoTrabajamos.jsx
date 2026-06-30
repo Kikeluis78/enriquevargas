@@ -249,7 +249,7 @@ export default function ComoTrabajamos() {
 
               <Button
                 component="a"
-                href="https://pizzerias-eight.vercel.app/"
+                href= "https://oliver-pizzas.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{
