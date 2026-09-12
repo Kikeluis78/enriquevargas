@@ -12,8 +12,10 @@
     <!-- V -->
     <path d="M20 4 L26 36 L32 4 L36 4 L28 40 L24 40 L16 4 Z" fill="url(#brandGradient)"/>
   </g>
-  <!-- Enrique Vargas -->
-  <text x="48" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">Enrique Vargas</text>
+  <!-- Enrique (blanco) -->
+  <text x="48" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">Enrique </text>
+  <!-- Vargas (cyan) -->
+  <text x="143" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#00D9FF">Vargas</text>
   <!-- Soluciones Digitales -->
   <text x="48" y="54" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="400" fill="#9CA3AF">Soluciones Digitales</text>
 </svg>

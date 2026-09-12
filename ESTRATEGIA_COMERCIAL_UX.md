@@ -907,3 +907,165 @@ El riesgo de confusión y expectativas no cumplidas es alto. Los cambios crític
 **Documento preparado por:** Kiro (asistente de desarrollo)  
 **Basado en:** Análisis de código fuente actual  
 **Sin modificar:** `Contacto.jsx`, `contact.js`, `script.gs`, lógica de cupones, número de WhatsApp
+---
+
+# Próximas fases
+
+## 1. Auditoría comercial de precios
+
+Revisar los precios actuales de las soluciones principales:
+
+* Sistema de pedidos desde Telegram
+* Tarjeta Digital
+* Agenda Digital
+* Menú Digital con pedidos detallados a WhatsApp
+
+Objetivo:
+
+Realizar una investigación de mercado antes de modificar cualquier precio.
+
+Analizar:
+
+* precios de soluciones similares en México;
+* competidores directos e indirectos;
+* pago único vs mensualidad;
+* qué incluye normalmente cada rango de precio;
+* costos de entrada para pequeños negocios;
+* percepción de valor;
+* riesgo de precios demasiado altos;
+* riesgo de precios excesivamente bajos.
+
+IMPORTANTE:
+
+No asumir que "más barato" siempre es mejor.
+
+Un precio demasiado bajo también puede generar desconfianza, transmitir baja calidad o hacer difícil explicar posteriormente un aumento.
+
+No modificar precios durante la auditoría.
+
+Primero investigar y posteriormente presentar una propuesta razonada.
+
+---
+
+## 2. Rediseño del Modal de Promociones
+
+Revisar:
+
+`ModalPromocion.jsx`
+
+y la configuración actual de promociones.
+
+Objetivo:
+
+Reemplazar la promoción actual por una experiencia de:
+
+**Ruleta de descuento adicional**
+
+Inspirada conceptualmente en experiencias comerciales como las ruletas promocionales utilizadas en e-commerce, pero SIN copiar diseño, textos, marca ni comportamiento exacto de ninguna empresa.
+
+La ruleta deberá estar relacionada con las soluciones reales disponibles.
+
+Antes de implementarla definir:
+
+* productos participantes;
+* descuentos posibles;
+* límites máximos;
+* probabilidades/reglas;
+* cuándo puede participar una persona;
+* cómo se conserva el descuento;
+* cómo se relaciona con Contacto;
+* vigencia;
+* condiciones.
+
+IMPORTANTE:
+
+La ruleta debe representar descuentos REALES.
+
+No crear resultados falsos o manipulados.
+
+No utilizar falsa escasez, contadores falsos, premios inexistentes ni porcentajes engañosos.
+
+Primero diseñar la lógica comercial y UX.
+Después implementar.
+
+También revisar y eliminar contradicciones con promociones antiguas o precios actuales.
+
+---
+
+## 3. Formulario de Contacto
+
+Última fase del sitio principal antes de revisar las plantillas.
+
+Revisar completamente:
+
+`Contacto.jsx`
+
+`src/utils/contact.js`
+
+`public/script.gs`
+
+Objetivos:
+
+* actualizar las soluciones disponibles;
+* eliminar opciones antiguas;
+* revisar nombres;
+* mejorar UX;
+* revisar validación;
+* revisar mensajes de éxito/error;
+* comprobar funcionamiento móvil;
+* preparar integración final.
+
+IMPORTANTE:
+
+No afirmar que el formulario funciona en producción hasta:
+
+1. actualizar el Google Apps Script desplegado;
+2. realizar una prueba real;
+3. confirmar recepción y almacenamiento.
+
+No modificar el Apps Script desplegado durante la fase inicial de revisión.
+
+---
+
+## 4. Revisión de plantillas
+
+Después de terminar:
+
+1. precios;
+2. promociones;
+3. formulario;
+
+comenzar revisión individual de las plantillas/demos.
+
+Revisarlas UNA POR UNA.
+
+No realizar cambios masivos.
+
+Para cada plantilla:
+
+* diseño;
+* responsive;
+* UX;
+* textos;
+* flujo comercial;
+* funcionalidad real;
+* personalización necesaria;
+* coherencia con lo prometido en enriquevargas;
+* preparación para mostrarse como demo comercial.
+
+No presentar las demos como clientes reales.
+
+---
+
+## ORDEN DE TRABAJO
+
+Mantener este orden:
+
+1. Investigación y auditoría de precios
+2. Decisión final de precios
+3. Ruleta / Modal de promociones
+4. Formulario de contacto
+5. Prueba real del formulario
+6. Revisión individual de plantillas
+
+No adelantar fases.

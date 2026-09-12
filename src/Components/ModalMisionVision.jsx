@@ -51,6 +51,7 @@ export default function ModalMisionVision({ isOpen, onClose }) {
           color: "#d1d5db",
           "&:hover": { color: "white" },
         }}
+        aria-label="Cerrar"
       >
         <X size={28} />
       </IconButton>
@@ -105,8 +106,10 @@ export default function ModalMisionVision({ isOpen, onClose }) {
                 fontSize: { xs: "1rem", md: "1.1rem" },
               }}
             >
-              Ayudar a pequeños y medianos negocios a modernizarse mediante
-              soluciones digitales accesibles, funcionales y profesionales.
+              Acercar herramientas digitales modernas y accesibles a pequeños
+              negocios, con soluciones prácticas que se adapten a sus
+              necesidades sin procesos complicados ni costos difíciles de
+              alcanzar.
             </Typography>
 
             <Typography
@@ -114,9 +117,9 @@ export default function ModalMisionVision({ isOpen, onClose }) {
                 fontSize: { xs: "1rem", md: "1.1rem" },
               }}
             >
-              Mi objetivo es crear páginas web, sistemas de pedidos y
-              herramientas digitales que mejoren la atención al cliente,
-              aumenten la presencia online y ayuden a cada negocio a crecer.
+              Mi propósito es que la tecnología sea una herramienta útil para
+              vender, organizar y conectar con sus clientes de una manera más
+              práctica.
             </Typography>
           </Box>
 
@@ -140,8 +143,9 @@ export default function ModalMisionVision({ isOpen, onClose }) {
                 fontSize: { xs: "1rem", md: "1.1rem" },
               }}
             >
-              Construir un entorno donde cualquier negocio, sin importar su
-              tamaño, pueda competir digitalmente de manera profesional.
+              Aprovechar la evolución de la tecnología y la inteligencia
+              artificial para crear soluciones cada vez más útiles, accesibles
+              e innovadoras.
             </Typography>
 
             <Typography
@@ -149,9 +153,10 @@ export default function ModalMisionVision({ isOpen, onClose }) {
                 fontSize: { xs: "1rem", md: "1.1rem" },
               }}
             >
-              Busco aprovechar la tecnología actual y la inteligencia artificial
-              para ofrecer soluciones rápidas, modernas y accesibles,
-              facilitando la transformación digital de negocios reales.
+              Mi visión es seguir desarrollando herramientas que permitan a
+              pequeños negocios incorporar tecnología moderna de una forma
+              sencilla y a un precio justo, sin necesitar grandes inversiones
+              para comenzar.
             </Typography>
           </Box>
 
@@ -174,8 +179,8 @@ export default function ModalMisionVision({ isOpen, onClose }) {
                 color: "#f9fafb",
               }}
             >
-              Tecnología moderna, soluciones reales y atención personalizada
-              para ayudarte a llevar tu negocio al siguiente nivel.
+              Tecnología moderna, soluciones prácticas y atención directa,
+              pensadas para pequeños negocios.
             </Typography>
           </Box>
         </Box>

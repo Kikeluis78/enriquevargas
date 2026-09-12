@@ -45,8 +45,8 @@ export default function Precios() {
         "✅ Soporte por WhatsApp",
       ],
       bestFor: ["Taquerías", "Torterías", "Cocinas pequeñas", "Micro negocios", "Negocios de comida"],
-      hasDemo: false,
-      demoUrl: null,
+      hasDemo: true,
+      demoUrl: "https://t.me/pizzas_test525_bot/httpsoliverpizzasvercelapp",
     },
     {
       name: "Tarjeta Digital",

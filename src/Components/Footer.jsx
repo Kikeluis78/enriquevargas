@@ -29,13 +29,10 @@ export default function Footer() {
       <div className="container mx-auto max-w-9xl">
         {/* 🧩 GRID PRINCIPAL */}
         <div className="grid sm:grid-cols-3 gap-8 mb-8">
-          {/* 🧩 Columna 1 - Logo e información */}
+          {/* 🧩 Columna 1 - Información */}
           <div className="space-y-4">
-            <div className="flex items-center justify-center sm:justify-start w-16 h-16 rounded-2xl bg-gradient-to-br from-[#00D9FF] to-[#0066FF] shadow-lg shadow-[#00D9FF]/30">
-              <span className="text-white font-extrabold text-2xl tracking-tight">EV</span>
-            </div>
-            <p className="text-gray-300 text-sm max-w-xs leading-relaxed">
-              Desarrollo soluciones digitales para pequeños negocios. Atención directa, sin intermediarios.
+            <p className="text-gray-300 text-sm max-w-xs mx-auto text-center sm:mx-0 sm:text-left leading-relaxed">
+              Desarrollo web profesional para pequeños negocios. Atención directa, sin intermediarios.
             </p>
           </div>
           

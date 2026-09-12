@@ -78,50 +78,27 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="flex flex-col justify-center"
           >
-            {/* Título principal: Soluciones Digitales */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight text-white text-center md:text-left">
-              Soluciones<br className="sm:hidden" />
-              <span className="text-[#00D9FF]"> Digitales</span>
-            </h1>
+           {/* Título principal */}
+<h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight text-white text-center md:text-left">
+  Digitaliza tu negocio
+  <br />
+  <span className="text-[#00D9FF]">de forma simple</span>
+</h1>
 
             {/* Texto de impacto comercial */}
             <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 max-w-lg text-center md:text-left leading-relaxed">
-              Herramientas digitales simples para vender, organizar y conectar mejor con tus clientes.
+             Vende y organiza de forma más práctica e innovadora, con herramientas modernas, accesibles y pensadas para tu negocio.
             </p>
 
             {/* Máquina de escribir */}
-            <div className="mb-6 min-h-[28px] flex items-center justify-center md:justify-start">
+            <div className="mb-6 min-h-28px flex items-center justify-center md:justify-start">
               <p className="text-base sm:text-lg text-[#00D9FF] font-mono">
                 {currentText}
                 <span className="animate-pulse">|</span>
               </p>
             </div>
 
-            {/* Botones CTA */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Button
-                component={Link}
-                to="/precios"
-                sx={{
-                  px: 6, py: 2, borderRadius: 3, fontWeight: 700, fontSize: "1.1rem",
-                  background: "linear-gradient(45deg, #00D9FF, #FF6B35)", color: "white",
-                  boxShadow: "0 0 20px rgba(0, 217, 255, 0.4)",
-                  "&:hover": { background: "linear-gradient(45deg, #00C4E6, #E55A30)", transform: "translateY(-3px)", boxShadow: "0 10px 30px rgba(0, 217, 255, 0.5)" },
-                  transition: "all 0.3s ease",
-                }}
-              >🚀 Ver Planes</Button>
-              <Button
-                component={Link}
-                to="/contacto"
-                sx={{
-                  px: 6, py: 2, borderRadius: 3, fontWeight: 700, fontSize: "1.1rem",
-                  background: "linear-gradient(45deg, #FF6B35, #FF3CAC)", color: "white",
-                  boxShadow: "0 0 20px rgba(255, 107, 53, 0.4)",
-                  "&:hover": { background: "linear-gradient(45deg, #E55A30, #E030A0)", transform: "translateY(-3px)", boxShadow: "0 10px 30px rgba(255, 107, 53, 0.5)" },
-                  transition: "all 0.3s ease",
-                }}
-              >📞 Contactar</Button>
-            </div>
+            
           </motion.div>
 
           {/* ------------ IMAGEN ------------ */}
@@ -131,7 +108,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative w-full flex justify-center"
           >
-            <div className="relative z-10 bg-gradient-to-br from-[#00D9FF]/20 to-[#FF6B35]/20 p-3 sm:p-4 rounded-3xl backdrop-blur-sm border border-[#00D9FF]/30 w-full max-w-lg">
+            <div className="relative z-10 bg-linear-to-br from-[#00D9FF]/20 to-[#FF6B35]/20 p-3 sm:p-4 rounded-3xl backdrop-blur-sm border border-[#00D9FF]/30 w-full max-w-lg">
               <img
                 src="/home-soluciones-digitales.webp"
                 alt="Soluciones digitales para pequeños negocios"
@@ -152,7 +129,7 @@ export default function Home() {
               { id: "telegram", image: "/img/telegram-pedidos.webp", name: "Sistema de pedidos desde Telegram", description: "Tus clientes consultan productos, arman su pedido y el negocio recibe el detalle por WhatsApp." },
               { id: "tarjeta", image: "/img/tarjeta-digital.webp", imageAlt: "Tarjeta digital con servicios, datos de contacto y WhatsApp", name: "Tarjeta Digital", description: "Presenta tus servicios, datos de contacto y WhatsApp en una página sencilla y profesional." },
               { id: "agenda", image: "/img/agenda-digital.webp", imageAlt: "Agenda digital con calendario, selección de horario y confirmación por WhatsApp o correo", name: "Agenda Digital", description: "Permite que tus clientes elijan día y horario y recibas la información de la cita de forma ordenada." },
-              { id: "pizzeria", icon: "🍕", name: "Menú Digital con Pedidos por WhatsApp", description: "Muestra tu menú y recibe pedidos por WhatsApp." },
+              { id: "pizzeria", image: "/img/menu-whatsapp-v3.webp", imageAlt: "Menú digital con carrito y pedido detallado recibido por WhatsApp", name: "Menú Digital con Pedidos Detallados a tu WhatsApp", description: "Tus clientes consultan el menú, arman su carrito y recibes el pedido detallado por WhatsApp." },
             ].map((solution) => (
               <article key={solution.id} className="flex flex-col p-6 rounded-2xl bg-[#0A0A0A] border border-[#00D9FF]/30">
                 {!solution.image && <span aria-hidden="true" className="text-4xl mb-4">{solution.icon}</span>}
@@ -167,12 +144,6 @@ export default function Home() {
               </article>
             ))}
           </div>
-        </section>
-
-        <section className="mt-12 p-6 rounded-2xl border border-[#00D9FF]/30 text-center" aria-labelledby="demos-inicio">
-          <h2 id="demos-inicio" className="text-2xl font-bold text-white mb-3">¿Quieres verlo funcionando?</h2>
-          <p className="text-gray-300 mb-4">Explora las demostraciones disponibles antes de decidir.</p>
-          <Link to="/precios" className="inline-flex min-h-12 items-center px-6 py-3 rounded-xl bg-[#00D9FF] text-black font-bold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Ver planes</Link>
         </section>
 
         {/* ------------ BIO ------------ */}

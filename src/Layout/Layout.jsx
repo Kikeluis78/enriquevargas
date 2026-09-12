@@ -25,9 +25,9 @@ export default function Layout({ children }) {
       <Header />
 
       {/* LOGO */}
-      <Box sx={{ py: 2, px: 3 }}>
+      <Container maxWidth="lg" sx={{ py: 2 }}>
         <Logo />
-      </Box>
+      </Container>
 
       {/* DIVISOR DECORATIVO */}
       <Divider sx={{ my: 1 }} />
