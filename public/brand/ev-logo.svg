@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="evGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6B35;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- E -->
+  <path d="M8 8 L20 8 L20 12 L12 12 L12 22 L18 22 L18 26 L12 26 L12 36 L20 36 L20 40 L8 40 Z" fill="url(#evGradient)"/>
+  <!-- V -->
+  <path d="M24 8 L30 40 L36 8 L40 8 L32 44 L28 44 L20 8 Z" fill="url(#evGradient)"/>
+</svg>

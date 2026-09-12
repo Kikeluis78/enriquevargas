@@ -28,22 +28,18 @@ export default function Footer() {
     >
       <div className="container mx-auto max-w-9xl">
         {/* 🧩 GRID PRINCIPAL */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-2 mb-2">
-          {/* 🧩 Columna 1 */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#00D9FF] to-[#0066FF] shadow-lg shadow-[#00D9FF]/30 mx-auto">
+        <div className="grid sm:grid-cols-3 gap-8 mb-8">
+          {/* 🧩 Columna 1 - Logo e información */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-center sm:justify-start w-16 h-16 rounded-2xl bg-gradient-to-br from-[#00D9FF] to-[#0066FF] shadow-lg shadow-[#00D9FF]/30">
               <span className="text-white font-extrabold text-2xl tracking-tight">EV</span>
             </div>
-
-            <p className="text-[#d1d5db] text-lg font-medium">
-              {/* Espacio para  mas texto */}
-            </p>
-
-            <p className="text-[#94a3b8] text-sm max-w-xs leading-relaxed">
-              {/* Espacio para  mas texto */}
+            <p className="text-gray-300 text-sm max-w-xs leading-relaxed">
+              Desarrollo soluciones digitales para pequeños negocios. Atención directa, sin intermediarios.
             </p>
           </div>
-          {/* 🌐 Columna 2 */}
+          
+          {/* 🌐 Columna 2 - Redes Sociales */}
           <div>
             <h4 className="font-semibold mb-6 text-[#00D9FF]">
               Redes Sociales
@@ -71,7 +67,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Columna 3  */}
+          {/* Columna 3 - Legal */}
           <div>
             <h4 className="font-semibold mb-4 text-[#FFE45E]">Legal</h4>
             <div className="space-y-2">
@@ -79,30 +75,6 @@ export default function Footer() {
                 ["Política de Privacidad", "/politica"],
                 ["Términos de Servicio", "/terminosServicio"],
                 ["Cookies", "/cookies"],
-              ].map(([name, link]) => (
-                <Link
-                  key={name}
-                  to={link}
-                  className="block text-gray-400 hover:text-[#00D9FF] transition-colors"
-                >
-                  {name}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* 🚀 Columna 4 */}
-          <div>
-            <h4 className="font-semibold mb-4 text-[#FF6B35]">
-              Otros Servicios
-            </h4>
-            <div className="space-y-2">
-              {[
-                ["Criptomonedas", "/proximamente"],
-                ["Consultoría Digital", "/proximamente"],
-                ["Branding", "/proximamente"],
-                ["Marketing Digital", "/proximamente"],
-                ["SEO", "/proximamente"],
               ].map(([name, link]) => (
                 <Link
                   key={name}

@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
-import { findCoupon, getDisponibles, validateCoupon, redeemCoupon } from "../utils/couponStorage";
+import { Link, useSearchParams } from "react-router-dom";
+import { CONTACT_SOLUTIONS, normalizePhone, submitContact, validateContact } from "../utils/contact";
+import { WHATSAPP_NUMBER } from "../utils/constants";
 import Swal from "sweetalert2";
 
 // ✅ Material UI
@@ -8,19 +10,20 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
-import Divider from "@mui/material/Divider";
-
-// ✅ Componentes propios
-import Contrato from "../Components/Contrato";
-import InfoContrato from "../Components/ImfoContrato";
+import Alert from "@mui/material/Alert";
 
 export default function Contacto() {
   const formRef = useRef(null);
-  const [datosCliente, setDatosCliente] = useState(null);
-  const [couponCode, setCouponCode] = useState("");
-  const [couponInfo, setCouponInfo] = useState(null); // { valid, message, coupon, disponibles }
+  const submittingRef = useRef(false);
+  const attemptRef = useRef(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requestedSolution = searchParams.get("solucion");
+  const solucion = Object.hasOwn(CONTACT_SOLUTIONS, requestedSolution) ? requestedSolution : "general";
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hola Enrique. Quiero consultar sobre: ${CONTACT_SOLUTIONS[solucion]}.`)}`;
 
   // 🎨 Estilos de inputs
   const inputStyles = {
@@ -36,134 +39,40 @@ export default function Contacto() {
     },
   };
 
-  const handleCouponChange = (e) => {
-    const val = e.target.value.toUpperCase();
-    setCouponCode(val);
-    if (!val) { setCouponInfo(null); return; }
-    const result = validateCoupon(val);
-    setCouponInfo(result);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (submittingRef.current) return;
     const formEl = formRef.current;
-
-    const nombre = formEl["nombre"].value.trim();
-    const negocio = formEl["negocio"].value.trim();
-    const giro = formEl["giro"].value.trim();
-    const telefono = formEl["telefono"].value.trim();
-    const correo = formEl["correo"].value.trim();
-
-    if (!nombre || !negocio || !giro || !telefono || !correo) {
-      Swal.fire({
-        icon: "error",
-        title: "Campos incompletos",
-        text: "Por favor, completa todos los campos antes de enviar.",
-        confirmButtonColor: "#2563EB",
-        background: "#1f2937",
-        color: "#f9fafb",
-      });
+    const values = new FormData(formEl);
+    const data = Object.fromEntries(["nombre", "negocio", "telefono", "correo", "necesidad", "cupon"].map((key) => [key, String(values.get(key) || "").trim()]));
+    data.telefono = normalizePhone(data.telefono);
+    data.solucion = solucion;
+    const error = validateContact(data);
+    if (error) {
+      Swal.fire({ icon: "error", title: "Revisa tu consulta", text: error, background: "#1f2937", color: "#f9fafb" });
       return;
     }
 
-    const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-    if (!isValidEmail(correo)) {
-      Swal.fire({
-        icon: "error",
-        title: "Correo inválido",
-        text: "Introduce un correo electrónico válido.",
-        confirmButtonColor: "#2563EB",
-        background: "#1f2937",
-        color: "#f9fafb",
-      });
-      return;
+    submittingRef.current = true;
+    setIsSubmitting(true);
+    setStatus(null);
+    try {
+      const fingerprint = JSON.stringify(data);
+      // Un reintento sin cambios conserva el identificador para no crear otra fila.
+      if (attemptRef.current?.fingerprint !== fingerprint) {
+        attemptRef.current = { fingerprint, id: crypto.randomUUID() };
+      }
+      const result = await submitContact(data, attemptRef.current.id);
+      setStatus({ severity: "success", text: `Tu consulta quedó registrada. Referencia: ${result.requestId}. Enrique revisará lo que necesitas para responder por teléfono o WhatsApp. Esto no confirma una contratación ni aplica un descuento.` });
+      formEl.reset();
+      attemptRef.current = null;
+    } catch {
+      setStatus({ severity: "warning", text: "No pudimos confirmar el registro. Tus datos siguen en el formulario. Puedes reintentar el envío o contactar por WhatsApp. Mantén esta página abierta para conservar los datos." });
+    } finally {
+      submittingRef.current = false;
+      setIsSubmitting(false);
     }
-
-    const isValidPhone = (tel) => /^\d{10}$/.test(tel);
-    if (!isValidPhone(telefono)) {
-      Swal.fire({
-        icon: "error",
-        title: "Teléfono inválido",
-        text: "El número debe tener exactamente 10 dígitos.",
-        confirmButtonColor: "#2563EB",
-        background: "#1f2937",
-        color: "#f9fafb",
-      });
-      return;
-    }
-
-    // Validar cupón si se ingresó uno
-    if (couponCode && (!couponInfo || !couponInfo.valid)) {
-      Swal.fire({
-        icon: "error",
-        title: "Cupón inválido",
-        text: couponInfo?.message || "El cupón ingresado no es válido.",
-        confirmButtonColor: "#2563EB",
-        background: "#1f2937",
-        color: "#f9fafb",
-      });
-      return;
-    }
-
-    Swal.fire({
-      title: "Enviando...",
-      allowOutsideClick: false,
-      showConfirmButton: false,
-      background: "#1f2937",
-      color: "#f9fafb",
-      didOpen: () => {
-        Swal.showLoading();
-
-        const formData = new URLSearchParams();
-        formData.append("nombre", nombre);
-        formData.append("negocio", negocio);
-        formData.append("giro", giro);
-        formData.append("telefono", telefono);
-        formData.append("correo", correo);
-        formData.append("cupon", couponCode || "Sin cupón");
-
-        fetch("https://script.google.com/macros/s/AKfycbwBqTQxVsqPPrMnVzYK6aEtd1PwGwipyHTsK0M4ocCkFZUsYnXad_GA6wOYF5WKqrIy5Q/exec", {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: formData.toString(),
-        })
-          .catch(() => {}) // Google Script responde con error CORS pero sí guarda los datos
-          .finally(() => {
-            if (couponCode && couponInfo?.valid) {
-              redeemCoupon(couponInfo.coupon.clave);
-              setCouponInfo(validateCoupon(couponCode));
-            }
-
-            Swal.fire({
-              icon: "success",
-              title: "Datos enviados",
-              text: couponInfo?.valid
-                ? `Tus datos fueron enviados. Cupón aplicado: ${couponInfo.coupon.descuento}`
-                : "Tus datos fueron enviados exitosamente.",
-              confirmButtonColor: "#2563EB",
-              background: "#1f2937",
-              color: "#f9fafb",
-            });
-
-            setDatosCliente({ nombre, negocio, giro, telefono, correo, cupon: couponCode || "Sin cupón" });
-            setCouponCode("");
-            setCouponInfo(null);
-            formEl.reset();
-          });
-      },
-    });
   };
-
-  
-  const steps = [
-    { label: "Registra tus datos",   color: "#00D9FF" },
-    { label: "Firma tu contrato",    color: "#FF6B35" },
-    { label: "50% de anticipo",      color: "#FFE45E" },
-    { label: "Revisa y apruebas",    color: "#C084FC" },
-    { label: "Lo ves en internet",   color: "#00D9FF" },
-    { label: "Liquidas",             color: "#FF6B35" },
-  ];
 
   return (
     <>
@@ -174,6 +83,7 @@ export default function Contacto() {
           {/* Título */}
           <Typography
             variant="h3"
+            component="h1"
             sx={{
               fontWeight: 700,
               textAlign: "center",
@@ -181,93 +91,12 @@ export default function Contacto() {
               mb: 4,
             }}
           >
-            <span style={{ color: "#60a5fa" }}>Últimos pasos para</span>{" "}
-            <span style={{ color: "#facc15" }}>Contratación</span>
+            <span style={{ color: "#60a5fa" }}>Cuéntame qué necesita</span>{" "}
+            <span style={{ color: "#facc15" }}>tu negocio</span>
           </Typography>
-
-          {/* Pasos Desktop */}
-          <Box sx={{ display: { xs: "none", md: "flex" }, mb: 6 }}>
-            <Grid container alignItems="center" justifyContent="space-between" spacing={2}>
-              {steps.map((step, index) => (
-                <Grid key={index} item xs="auto" sx={{ textAlign: "center", position: "relative" }}>
-                  <Box
-                    sx={{
-                      width: 48,
-                      height: 48,
-                      mx: "auto",
-                      borderRadius: "50%",
-                      bgcolor: "#3b82f6",
-                      color: "white",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      fontWeight: "bold",
-                      mb: 1,
-                    }}
-                  >
-                    {index + 1}
-                  </Box>
-                  <Typography sx={{ color: step.color, fontWeight: 600 }}>
-                    {step.label}
-                  </Typography>
-
-                  {index !== steps.length - 1 && (
-                    <Divider
-                      sx={{
-                        width: "100%",
-                        bgcolor: "#4b5563",
-                        height: 2,
-                        position: "absolute",
-                        top: 22,
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                      }}
-                    />
-                  )}
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-
-          {/* Pasos Mobile */}
-          <Box sx={{ display: { xs: "flex", md: "none" }, flexDirection: "column", gap: 2 }}>
-            {steps.map((step, index) => (
-              <Paper
-                key={index}
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  gap: 2,
-                  alignItems: "center",
-                  bgcolor: "#1f2937",
-                }}
-              >
-                <Box
-                  sx={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: "50%",
-                    bgcolor: "#facc15",
-                    color: "black",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontWeight: "bold",
-                  }}
-                >
-                  {index + 1}
-                </Box>
-                <Typography sx={{ color: step.color, fontWeight: 600 }}>
-                  {step.label}
-                </Typography>
-              </Paper>
-            ))}
-          </Box>
-
-          {/* InfoContrato */}
-          <Box sx={{ mt: 4, mb: 4 }}>
-            <InfoContrato />
-          </Box>
+          <Typography sx={{ color: "#d1d5db", mb: 3 }}>
+            Envía una consulta. Revisaré tu idea y te contactaré por teléfono o WhatsApp para definir el alcance. No necesitas firmar ni pagar para preguntar.
+          </Typography>
 
           {/* Formulario */}
           <Paper
@@ -284,11 +113,18 @@ export default function Contacto() {
               onSubmit={handleSubmit}
               noValidate
             >
-              <iframe name="dummyFrame" style={{ display: "none" }}></iframe>
+              <fieldset disabled={isSubmitting} style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}>
+              <TextField select disabled={isSubmitting} label="Solución que te interesa" name="solucion" value={solucion}
+                onChange={(event) => setSearchParams((current) => { current.set("solucion", event.target.value); return current; }, { replace: true })}
+                fullWidth margin="normal" InputProps={{ sx: inputStyles }} InputLabelProps={{ sx: { color: "white" } }}>
+                {Object.entries(CONTACT_SOLUTIONS).map(([value, label]) => <MenuItem key={value} value={value}>{label}</MenuItem>)}
+              </TextField>
 
               <TextField
                 label="Nombre Completo"
                 name="nombre"
+                autoComplete="name"
+                inputProps={{ maxLength: 120 }}
                 fullWidth
                 variant="outlined"
                 margin="normal"
@@ -298,23 +134,13 @@ export default function Contacto() {
               />
 
               <TextField
-                label="Nombre del Negocio"
+                label="Nombre del negocio (opcional)"
                 name="negocio"
+                autoComplete="organization"
+                inputProps={{ maxLength: 160 }}
                 fullWidth
                 variant="outlined"
                 margin="normal"
-                required
-                InputProps={{ sx: inputStyles }}
-                InputLabelProps={{ sx: { color: "white" } }}
-              />
-
-              <TextField
-                label="Giro del Negocio"
-                name="giro"
-                fullWidth
-                variant="outlined"
-                margin="normal"
-                required
                 InputProps={{ sx: inputStyles }}
                 InputLabelProps={{ sx: { color: "white" } }}
               />
@@ -327,78 +153,38 @@ export default function Contacto() {
                 variant="outlined"
                 margin="normal"
                 required
-                inputProps={{ maxLength: 10 }}
+                autoComplete="tel"
+                inputProps={{ maxLength: 24 }}
                 InputProps={{ sx: inputStyles }}
                 InputLabelProps={{ sx: { color: "white" } }}
               />
 
               <TextField
-                label="Correo Electrónico"
+                label="Correo electrónico (opcional)"
                 name="correo"
+                autoComplete="email"
+                inputProps={{ maxLength: 254 }}
                 type="email"
                 fullWidth
                 variant="outlined"
                 margin="normal"
-                required
                 InputProps={{ sx: inputStyles }}
                 InputLabelProps={{ sx: { color: "white" } }}
               />
 
-              {/* Campo Cupón con contador */}
-              <Box sx={{ display: "flex", alignItems: "flex-start", gap: 1, mt: 1 }}>
-                <TextField
-                  label="Cupón de descuento (opcional)"
-                  name="cupon"
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
-                  value={couponCode}
-                  onChange={handleCouponChange}
-                  inputProps={{ style: { textTransform: "uppercase" } }}
-                  InputProps={{
-                    sx: {
-                      ...inputStyles,
-                      ...(couponInfo?.valid && { borderColor: "#22c55e" }),
-                      ...(couponInfo && !couponInfo.valid && { borderColor: "#ef4444" }),
-                    },
-                  }}
-                  InputLabelProps={{ sx: { color: "white" } }}
-                  helperText={
-                    couponInfo
-                      ? couponInfo.valid
-                        ? `✅ ${couponInfo.coupon.descuento}`
-                        : `❌ ${couponInfo.message}`
-                      : " "
-                  }
-                  FormHelperTextProps={{
-                    sx: { color: couponInfo?.valid ? "#22c55e" : "#ef4444" },
-                  }}
-                />
-                {/* Contador total/disponibles */}
-                {couponInfo?.valid && (
-                  <Box
-                    sx={{
-                      mt: 2,
-                      minWidth: 72,
-                      textAlign: "center",
-                      bgcolor: "rgba(34,197,94,0.15)",
-                      border: "1px solid #22c55e",
-                      borderRadius: 2,
-                      px: 1.5,
-                      py: 1,
-                    }}
-                  >
-                    <Typography sx={{ color: "#22c55e", fontWeight: 700, fontSize: 13, lineHeight: 1 }}>
-                      {couponInfo.coupon.total}/{getDisponibles(couponInfo.coupon.clave)}
-                    </Typography>
-                    <Typography sx={{ color: "#9ca3af", fontSize: 10 }}>disponibles</Typography>
-                  </Box>
-                )}
-              </Box>
-
+              <TextField label="¿Qué necesitas resolver?" name="necesidad" required fullWidth multiline minRows={4} margin="normal"
+                inputProps={{ maxLength: 2000 }} InputProps={{ sx: inputStyles }} InputLabelProps={{ sx: { color: "white" } }} />
+              <TextField label="Código promocional (opcional)" name="cupon" fullWidth margin="normal"
+                inputProps={{ maxLength: 80 }} InputProps={{ sx: inputStyles }} InputLabelProps={{ sx: { color: "white" } }}
+                helperText="Si tienes un código, puedes incluirlo para revisión. Enviar la consulta no aplica un descuento."
+                FormHelperTextProps={{ sx: { color: "#d1d5db" } }} />
+              <Typography sx={{ color: "#d1d5db", mt: 2 }}>
+                Usaré estos datos para atender tu consulta. <Link to="/politica" className="text-[#00D9FF] underline">Consulta la política de privacidad</Link>.
+              </Typography>
 
               <Button
                 type="submit"
+                disabled={isSubmitting}
                 fullWidth
                 sx={{
                   mt: 2,
@@ -415,17 +201,19 @@ export default function Contacto() {
                   transition: "all 0.3s ease",
                 }}
               >
-                Enviar
+                {isSubmitting ? "Enviando consulta…" : "Enviar consulta"}
+              </Button>
+              </fieldset>
+              <div role="status" aria-live="polite" className="mt-4">
+                {isSubmitting && <Typography sx={{ color: "white" }}>Esperando confirmación del registro…</Typography>}
+                {status && <Alert role="presentation" severity={status.severity}>{status.text}</Alert>}
+              </div>
+              <Button component="a" href={whatsappUrl} target="_blank" rel="noopener noreferrer" sx={{ mt: 2, color: "#00D9FF", textTransform: "none" }}>
+                Consultar por WhatsApp (nueva pestaña)
               </Button>
             </form>
           </Paper>
 
-          {/* Contrato dinámico */}
-          {datosCliente && (
-            <Box sx={{ mt: 4, textAlign: "center" }}>
-              <Contrato datosCliente={datosCliente} />
-            </Box>
-          )}
         </Container>
       </Box>
     </>

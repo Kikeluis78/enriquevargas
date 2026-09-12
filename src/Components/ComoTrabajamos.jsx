@@ -1,37 +1,37 @@
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { ShoppingCart, Zap, TrendingUp, Clock, MessageCircle, CheckCircle2 } from "lucide-react";
+import { Zap, TrendingUp, Clock, MessageCircle } from "lucide-react";
 
 export default function ComoTrabajamos() {
   const beneficios = [
     {
       icon: <Zap size={48} />,
-      titulo: "Pedidos Instantáneos",
-      descripcion: "Tus clientes ordenan en segundos desde su celular",
-      stat: "3x más rápido",
+      titulo: "Menú digital",
+      descripcion: "Consulta los productos desde el navegador",
+      stat: "Menú",
       color: "#00D9FF",
     },
     {
       icon: <MessageCircle size={48} />,
       titulo: "Todo por WhatsApp",
-      descripcion: "Recibes pedidos completos directo a tu WhatsApp Business",
-      stat: "Sin apps extras",
+      descripcion: "Prepara un mensaje con el pedido para enviarlo por WhatsApp",
+      stat: "Mensaje",
       color: "#FFE45E",
     },
     {
       icon: <TrendingUp size={48} />,
-      titulo: "Aumenta Tus Ventas",
-      descripcion: "Clientes ordenan 24/7 aunque tu local esté cerrado",
-      stat: "+40% ventas",
+      titulo: "Carrito de compras",
+      descripcion: "Agrega productos y revisa tu selección",
+      stat: "Carrito",
       color: "#C084FC",
     },
     {
       icon: <Clock size={48} />,
-      titulo: "Ahorra Tiempo",
-      descripcion: "No más errores en pedidos telefónicos, todo llega por escrito",
-      stat: "Cero errores",
+      titulo: "Revisión del pedido",
+      descripcion: "Revisa los productos antes de continuar a WhatsApp",
+      stat: "Resumen",
       color: "#FF6B35",
     },
   ];
@@ -43,7 +43,7 @@ export default function ComoTrabajamos() {
 
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Hero Section */}
-        <motion.div
+        <Motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -61,20 +61,16 @@ export default function ComoTrabajamos() {
           </h2>
           
           <p className="text-gray-300 text-xl max-w-3xl mx-auto mb-8">
-            <span className="text-[#00D9FF] font-semibold">Menú online</span> + <span className="text-[#FF6B35] font-semibold">carrito de compras</span> = <span className="text-[#FFE45E] font-semibold">pedidos automáticos</span> a tu WhatsApp.
-            <br />
-            <span className="text-white font-semibold">Tu cliente no espera. </span>
-            <span className="text-[#00D9FF] font-semibold">Un CRM </span>
-            <span className="text-white font-semibold">que atiende tu negocio </span>
-            <span className="text-[#FF6B35] font-bold">24/7</span>
-            <span className="text-[#FFE45E] font-semibold">, sin que muevas un dedo.</span>
+            Explora un menú online con carrito de compras. La selección se prepara
+            como mensaje para WhatsApp; el usuario revisa y envía el mensaje.
+            La atención y confirmación del pedido corresponden al negocio.
           </p>
-        </motion.div>
+        </Motion.div>
 
         {/* Beneficios Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {beneficios.map((beneficio, index) => (
-            <motion.div
+            <Motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -111,12 +107,12 @@ export default function ComoTrabajamos() {
                 <h3 className="text-xl font-bold text-white mb-2 text-center">{beneficio.titulo}</h3>
                 <p className="text-gray-400 text-sm text-center">{beneficio.descripcion}</p>
               </div>
-            </motion.div>
+            </Motion.div>
           ))}
         </div>
 
         {/* Cómo Funciona - Simplificado */}
-        <motion.div
+        <Motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -143,7 +139,7 @@ export default function ComoTrabajamos() {
               {
                 numero: "3",
                 titulo: "Tú Recibes",
-                desc: "Pedido completo llega a tu WhatsApp listo para preparar",
+                desc: "El usuario envía el mensaje desde WhatsApp; el negocio debe confirmar el pedido",
                 icon: "📱",
               },
             ].map((paso, i) => (
@@ -160,127 +156,7 @@ export default function ComoTrabajamos() {
               </div>
             ))}
           </div>
-        </motion.div>
-
-        {/* Banner de Oferta Especial - Mejorado */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="relative p-4 md:p-12 rounded-3xl overflow-hidden"
-          style={{
-            background: "linear-gradient(135deg, #00D9FF22, #FF6B3522)",
-            border: "3px solid #00D9FF",
-            boxShadow: "0 0 60px rgba(0, 217, 255, 0.4)",
-          }}
-        >
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#00D9FF] opacity-10 rounded-full blur-3xl animate-pulse"></div>
-
-          <div className="relative z-10">
-            {/* Badge Animado */}
-            <div className="text-center mb-6">
-              <div className="inline-block px-6 py-3 bg-gradient-to-r from-[#FF6B35] to-[#FF2CD1] text-white font-bold rounded-full mb-4 animate-pulse shadow-lg">
-                🔥 OFERTA ESPECIAL - SOLO RESTAURANTES
-              </div>
-            </div>
-
-            {/* Título Principal */}
-            <h3 className="text-3xl md:text-5xl font-bold text-white mb-4 text-center leading-tight">
-              Sistema de Pedidos por WhatsApp
-              <br />
-              <span className="text-[#00D9FF]">Listo en 7 Días</span>
-            </h3>
-
-            {/* Precio Destacado */}
-            <div className="flex items-center justify-center gap-6 mb-8">
-              <div className="text-center">
-                <span className="text-gray-400 text-2xl font-bold line-through block">Antes $4,499</span>
-              </div>
-              <div className="text-center">
-                <div className="text-6xl md:text-8xl font-black text-[#00D9FF] drop-shadow-[0_0_30px_rgba(0,217,255,0.8)]">
-                  $2,999
-                </div>
-                <span className="text-white text-2xl font-bold">MX - Pago único</span>
-              </div>
-            </div>
-
-            {/* Incluye - Grid */}
-            <div className="grid md:grid-cols-2 gap-4 mb-8 max-w-3xl mx-auto">
-              {[
-                "✅ Menú digital completo",
-                "✅ Carrito de compras inteligente",
-                "✅ Hasta 30 productos",
-                "✅ Pedidos automáticos a WhatsApp",
-                "✅ Hosting + Dominio 1 año",
-                "✅ Soporte técnico 24/7",
-                "✅ Actualizaciones gratis",
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-2 text-gray-200 bg-[#0A0A0A]/50 p-3 rounded-lg">
-                  <CheckCircle2 size={20} className="text-[#00D9FF] flex-shrink-0" />
-                  <span className="text-sm font-medium">{item}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-              <Button
-                component={Link}
-                to="/contacto"
-                sx={{
-                  px: { xs: 4, sm: 10 },
-                  py: 2.5,
-                  borderRadius: 3,
-                  fontWeight: 700,
-                  fontSize: "1.2rem",
-                  whiteSpace: "nowrap",
-                  background: "linear-gradient(45deg, #00D9FF, #FF6B35)",
-                  color: "white",
-                  boxShadow: "0 0 40px rgba(0, 217, 255, 0.6)",
-                  "&:hover": {
-                    transform: "translateY(-4px) scale(1.02)",
-                    boxShadow: "0 15px 50px rgba(0, 217, 255, 0.7)",
-                  },
-                  transition: "all 0.3s ease",
-                }}
-              >
-                ⚡ ¡Lo Quiero Ya!
-              </Button>
-
-              <Button
-                component="a"
-                href= "https://oliver-pizzas.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{
-                  px: { xs: 4, sm: 10 },
-                  py: 2.5,
-                  borderRadius: 3,
-                  fontWeight: 700,
-                  fontSize: "1.2rem",
-                  whiteSpace: "nowrap",
-                  background: "linear-gradient(45deg, #00D9FF, #FF6B35)",
-                  color: "white",
-                  boxShadow: "0 0 20px rgba(0, 217, 255, 0.4)",
-                  "&:hover": {
-                    background: "linear-gradient(45deg, #00C4E6, #E55A30)",
-                    transform: "translateY(-4px)",
-                    boxShadow: "0 15px 50px rgba(0, 217, 255, 0.7)",
-                  },
-                  transition: "all 0.3s ease",
-                }}
-              >
-                👀 Ver Demo
-              </Button>
-            </div>
-
-            {/* Urgencia */}
-            <div className="text-center">
-              <p className="text-[#FFE45E] font-black text-xl">
-              </p>
-            </div>
-          </div>
-        </motion.div>
+        </Motion.div>
       </div>
     </section>
   );

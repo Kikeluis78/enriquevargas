@@ -14,7 +14,6 @@ import Button from "@mui/material/Button";
 import { motion } from "framer-motion";
 
 import Biografia from "../Components/Biografia";
-import ComoTrabajamos from "../Components/ComoTrabajamos";
 
 export default function Home() {
   const [currentText, setCurrentText] = useState("");
@@ -62,7 +61,7 @@ export default function Home() {
     <Box
       id="home"
       sx={{
-        pt: { xs: 10, md: 14 },
+        pt: { xs: 6, md: 10 },
         pb: 10,
         minHeight: "100vh",
         display: "flex",
@@ -71,7 +70,7 @@ export default function Home() {
       }}
     >
       <Container maxWidth="xl">
-        <div className="grid md:grid-cols-2 gap-12 items-center w-full">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center w-full">
           {/* ------------ TEXTO ------------ */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -79,28 +78,27 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="flex flex-col justify-center"
           >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
-              Diseño Web &<br />
-              <span className="text-[#00D9FF]">Android</span>
+            {/* Título principal: Soluciones Digitales */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight text-white text-center md:text-left">
+              Soluciones<br className="sm:hidden" />
+              <span className="text-[#00D9FF]"> Digitales</span>
             </h1>
 
-            <div className="mb-8 max-w-md">
-              <p className="text-2xl md:text-3xl font-black text-white leading-snug">
-                Tu negocio merece<br />
-                <span className="text-[#FFE45E]">estar en internet.</span>
-              </p>
-              <p className="mt-3 text-xl md:text-2xl font-black">
-                <span className="text-[#00D9FF]">Planes desde </span>
-                <span className="text-[#FF6B35] text-3xl md:text-4xl">$699 MXN</span>
+            {/* Texto de impacto comercial */}
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 max-w-lg text-center md:text-left leading-relaxed">
+              Herramientas digitales simples para vender, organizar y conectar mejor con tus clientes.
+            </p>
+
+            {/* Máquina de escribir */}
+            <div className="mb-6 min-h-[28px] flex items-center justify-center md:justify-start">
+              <p className="text-base sm:text-lg text-[#00D9FF] font-mono">
+                {currentText}
+                <span className="animate-pulse">|</span>
               </p>
             </div>
 
-            <p className="text-lg text-[#00D9FF] mb-8 font-mono h-7">
-              {currentText}
-              <span className="animate-pulse">|</span>
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4">
+            {/* Botones CTA */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Button
                 component={Link}
                 to="/precios"
@@ -133,91 +131,49 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative w-full flex justify-center"
           >
-            <div className="relative z-10 bg-gradient-to-br from-[#00D9FF]/20 to-[#FF6B35]/20 p-4 rounded-3xl backdrop-blur-sm border border-[#00D9FF]/30 w-full max-w-lg">
+            <div className="relative z-10 bg-gradient-to-br from-[#00D9FF]/20 to-[#FF6B35]/20 p-3 sm:p-4 rounded-3xl backdrop-blur-sm border border-[#00D9FF]/30 w-full max-w-lg">
               <img
-                src="https://images.pexels.com/photos/7988086/pexels-photo-7988086.jpeg"
-                alt="Diseñador trabajando"
+                src="/home-soluciones-digitales.webp"
+                alt="Soluciones digitales para pequeños negocios"
                 className="rounded-2xl w-full h-auto shadow-2xl"
-                loading="lazy"
+                loading="eager"
               />
             </div>
             <div className="absolute -bottom-6 -right-6 w-72 h-72 bg-[#00D9FF]/20 rounded-full blur-3xl"></div>
           </motion.div>
         </div>
 
-        {/* ------------ TESTIMONIOS ------------ */}
-        <Box sx={{ mt: 20 }}>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-              Lo Que Dicen <span className="text-[#00D9FF]">Mis Clientes</span>
-            </h2>
-          
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <section className="mt-16 scroll-mt-28" id="productos-inicio" aria-labelledby="soluciones-titulo">
+          <h2 id="soluciones-titulo" className="text-3xl md:text-4xl font-bold text-white text-center mb-8">
+            Soluciones <span className="text-[#00D9FF]">para tu negocio</span>
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              {
-                name: "Oliver Pizza",
-                role: "Restaurante Comida Rapida",
-                text: "Ahora mis clientes pueden ver el menú y hacer pedidos por WhatsApp desde la página. Las ventas aumentaron desde el primer mes.",
-              },
-              {
-                name: "Tarjeta Digital Oficios",
-                role: "Servicios para el hogar ",
-                text: "Antes nadie me encontraba en internet. Con mi tarjeta digital profesional los clientes me llaman directo y confían más en mi trabajo.",
-              },
-              {
-                name: "Sistema  de Citas",
-                role: "Salud y bienestar ",
-                text: "Mis pacientes agendan solos desde el celular. Ya no pierdo tiempo en llamadas y mi agenda siempre está organizada.",
-              },
-            ].map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="relative p-6 rounded-2xl bg-[#0A0A0A] border border-gray-800 hover:border-[#00D9FF]/50 transition-all duration-300"
-              >
-                <div className="mb-4">
-                  <h4 className="text-white font-bold">{testimonial.name}</h4>
-                  <p className="text-gray-400 text-sm">{testimonial.role}</p>
-                </div>
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  "{testimonial.text}"
-                </p>
-                <div className="absolute top-4 right-4 text-[#00D9FF] text-4xl opacity-20">
-                  "
-                </div>
-              </motion.div>
-            ))}
-
-            {/* Espacios disponibles */}
-            {[1, 2].map((i) => (
-              <motion.div
-                key={`empty-${i}`}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 + i * 0.1 }}
-                className="relative p-6 rounded-2xl border border-dashed border-[#00D9FF]/30 flex flex-col items-center justify-center text-center gap-3 min-h-[160px]"
-              >
-                <span className="text-3xl">🔒</span>
-                <p className="text-[#00D9FF] font-semibold text-sm">Este espacio te está esperando</p>
-                <p className="text-gray-500 text-xs">¿Tu negocio podría ser el siguiente?</p>
-              </motion.div>
+              { id: "telegram", image: "/img/telegram-pedidos.webp", name: "Sistema de pedidos desde Telegram", description: "Tus clientes consultan productos, arman su pedido y el negocio recibe el detalle por WhatsApp." },
+              { id: "tarjeta", image: "/img/tarjeta-digital.webp", imageAlt: "Tarjeta digital con servicios, datos de contacto y WhatsApp", name: "Tarjeta Digital", description: "Presenta tus servicios, datos de contacto y WhatsApp en una página sencilla y profesional." },
+              { id: "agenda", image: "/img/agenda-digital.webp", imageAlt: "Agenda digital con calendario, selección de horario y confirmación por WhatsApp o correo", name: "Agenda Digital", description: "Permite que tus clientes elijan día y horario y recibas la información de la cita de forma ordenada." },
+              { id: "pizzeria", icon: "🍕", name: "Menú Digital con Pedidos por WhatsApp", description: "Muestra tu menú y recibe pedidos por WhatsApp." },
+            ].map((solution) => (
+              <article key={solution.id} className="flex flex-col p-6 rounded-2xl bg-[#0A0A0A] border border-[#00D9FF]/30">
+                {!solution.image && <span aria-hidden="true" className="text-4xl mb-4">{solution.icon}</span>}
+                <h3 className="text-lg font-bold text-white mb-2">{solution.name}</h3>
+                {solution.image && (
+                  <img src={solution.image} alt={solution.imageAlt ?? "Sistema de pedidos desde Telegram con menú, carrito y envío a WhatsApp"} className="w-full h-auto mb-4" loading="lazy" />
+                )}
+                <p className="text-gray-300 text-sm mb-6">{solution.description}</p>
+                <Link to="/precios" aria-label={`Más información sobre ${solution.name}`} className="mt-auto inline-flex items-center justify-center min-h-12 px-4 py-3 rounded-xl border border-[#00D9FF] text-[#00D9FF] font-semibold hover:bg-cyan-950 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+                  Más información
+                </Link>
+              </article>
             ))}
           </div>
-        </Box>
+        </section>
 
-        {/* ------------ CÓMO TRABAJAMOS ------------ */}
-        <ComoTrabajamos />
+        <section className="mt-12 p-6 rounded-2xl border border-[#00D9FF]/30 text-center" aria-labelledby="demos-inicio">
+          <h2 id="demos-inicio" className="text-2xl font-bold text-white mb-3">¿Quieres verlo funcionando?</h2>
+          <p className="text-gray-300 mb-4">Explora las demostraciones disponibles antes de decidir.</p>
+          <Link to="/precios" className="inline-flex min-h-12 items-center px-6 py-3 rounded-xl bg-[#00D9FF] text-black font-bold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Ver planes</Link>
+        </section>
 
         {/* ------------ BIO ------------ */}
         <Box sx={{ mt: 16 }}>

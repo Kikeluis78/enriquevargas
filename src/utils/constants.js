@@ -1,6 +1,6 @@
 // Constantes de la aplicación
 
-export const WHATSAPP_NUMBER = "5611001627";
+export const WHATSAPP_NUMBER = "525611001627";
 export const WHATSAPP_MESSAGE = "¡Hola! Me interesa más información.";
 
 export const SOCIAL_LINKS = {
@@ -23,9 +23,8 @@ export const NEON_COLORS = {
 };
 
 export const MENU_ITEMS = [
-  { name: "Home", path: "/", color: "#22E3FF" },
+  { name: "Inicio", path: "/", color: "#22E3FF" },
   { name: "Precios", path: "/precios", color: "#FFE45E" },
-  { name: "Clientes", path: "/clientes", color: "#C084FC" },
   { name: "Contacto", path: "/contacto", color: "#FF2CD1" },
 ];
 
@@ -47,7 +46,8 @@ export const LOADING_PHRASES = [
 ];
 
 export const HOME_PHRASES = [
-  "Páginas web que convierten visitas en clientes 💰",
-  "Tu negocio abierto 24/7 en internet 🌐",
-  "Apps y webs listas en 7 días 🚀",
+  "Sistema de pedidos desde Telegram",
+  "Tarjeta Digital",
+  "Agenda Digital",
+  "Menú Digital con pedidos detallados a tu WhatsApp",
 ];
