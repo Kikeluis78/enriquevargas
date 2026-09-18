@@ -1,12 +1,25 @@
-import { useEffect, useRef, useState } from "react";
+import { createElement, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { SiTiktok, SiYoutube, SiFacebook, SiInstagram, SiThreads, SiX, SiTelegram } from "react-icons/si";
 
 import { SOCIAL_LINKS } from "../utils/constants";
 
 
 export default function Footer() {
   const footerRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    // Detectar preferencia de movimiento reducido
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = (e) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   useEffect(() => {
     const current = footerRef.current;
@@ -22,9 +35,9 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className={`bg-gradient-to-b from-[#0d1117] to-[#111827] border-t border-gray-800 py-12 px-6 w-full text-white transition-all duration-1000 ease-out ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      }`}
+      className={`bg-gradient-to-b from-[#0d1117] to-[#111827] border-t border-gray-800 py-12 px-6 w-full text-white ${
+        prefersReducedMotion ? "" : "transition-all duration-1000 ease-out"
+      } ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
     >
       <div className="container mx-auto max-w-9xl">
         {/* 🧩 GRID PRINCIPAL */}
@@ -32,7 +45,7 @@ export default function Footer() {
           {/* 🧩 Columna 1 - Información */}
           <div className="space-y-4">
             <p className="text-gray-300 text-sm max-w-xs mx-auto text-center sm:mx-0 sm:text-left leading-relaxed">
-              Desarrollo web profesional para pequeños negocios. Atención directa, sin intermediarios.
+              Soluciones digitales para pequeños negocios. Atención directa con Enrique.
             </p>
           </div>
           
@@ -41,24 +54,26 @@ export default function Footer() {
             <h4 className="font-semibold mb-6 text-[#00D9FF]">
               Redes Sociales
             </h4>
-            <div className="space-y-2">
+            <div className="flex flex-wrap gap-2">
               {[
-                ["TikTok", SOCIAL_LINKS.tiktok],
-                ["YouTube", SOCIAL_LINKS.youtube],
-                ["Facebook", SOCIAL_LINKS.facebook],
-                ["Instagram", SOCIAL_LINKS.instagram],
-                ["Threads", SOCIAL_LINKS.threads],
-                ["X", SOCIAL_LINKS.x],
-                ["Telegram", SOCIAL_LINKS.telegram],
-              ].map(([name, link]) => (
+                ["TikTok", SOCIAL_LINKS.tiktok, SiTiktok],
+                ["YouTube", SOCIAL_LINKS.youtube, SiYoutube],
+                ["Facebook", SOCIAL_LINKS.facebook, SiFacebook],
+                ["Instagram", SOCIAL_LINKS.instagram, SiInstagram],
+                ["Threads", SOCIAL_LINKS.threads, SiThreads],
+                ["X", SOCIAL_LINKS.x, SiX],
+                ["Telegram", SOCIAL_LINKS.telegram, SiTelegram],
+              ].map(([name, link, Icon]) => (
                 <a
                   key={name}
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-gray-400 hover:text-[#00D9FF] transition-colors"
+                  aria-label={name}
+                  title={`${name} (nueva pestaña)`}
+                  className="inline-flex items-center justify-center w-11 h-11 rounded-lg text-gray-300 hover:text-[#00D9FF] hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00D9FF] transition-colors"
                 >
-                  {name}
+                  {createElement(Icon, { size: 24, "aria-hidden": true, focusable: "false" })}
                 </a>
               ))}
             </div>

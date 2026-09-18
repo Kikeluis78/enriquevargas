@@ -1,13 +1,18 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { BASIC_SOLUTION_ORDER, SOLUTION_DETAILS } from "../utils/constants";
+import { BASIC_PLANS, PREMIUM_PLANS, ANDROID_PLAN } from "../data/pricingPlans";
+import SolutionPriceCard from "../Components/SolutionPriceCard";
+import ProjectConfigurator from "../Components/Contact/ProjectConfigurator";
 import ModalPromocion from "../Components/ModalPromocion";
-import { motion } from "framer-motion";
+import { getAdditionalFeatures } from "../data/projectFeatures";
+import { useSolutionConfig } from "../Hooks/useSolutionConfig";
+import { useSEOMetadata } from "../Hooks/useSEOMetadata";
+import { motion as Motion } from "framer-motion";
 
 // ✅ Material UI
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 
 // ✅ Accordion personalizado
 import Accordion from "../Components/Accordion";
@@ -16,447 +21,173 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 export default function Precios() {
-  const [activeTab, setActiveTab] = useState(0);
+  useSEOMetadata({
+    title: "Planes y Precios | Soluciones Digitales | Enrique Vargas",
+    description: "Descubre nuestros planes: desde tarjeta digital hasta soluciones Android. Precios claros desde el inicio. Consulta detalles sin compromiso.",
+    canonical: "https://enriquevargas.com.mx/precios",
+    ogTitle: "Planes y Precios | Enrique Vargas",
+    ogDescription: "Descubre nuestros planes: desde tarjeta digital hasta soluciones Android. Precios claros desde el inicio.",
+  });
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [expandedSolution, setExpandedSolution] = useState(searchParams.get("configurar") === "1" ? searchParams.get("solucion") : null);
+
+  const requestedSolution = searchParams.get("solucion");
+  const selectedSolution = Object.prototype.hasOwnProperty.call(SOLUTION_DETAILS, requestedSolution) ? requestedSolution : null;
+  const configuratorOpen = Boolean(selectedSolution && searchParams.get("configurar") === "1");
+  const activeTab = selectedSolution ? (BASIC_SOLUTION_ORDER.includes(selectedSolution) ? 0 : 1) : searchParams.get("categoria") === "premium" ? 1 : 0;
+  const setActiveTab = (tab) => {
+    const next = new URLSearchParams(searchParams);
+    next.delete("solucion");
+    next.delete("configurar");
+    setExpandedSolution(null);
+    next.set("categoria", tab === 1 ? "premium" : "basicos");
+    setSearchParams(next, { replace: true });
+  };
+
+  const { getDraft, toggleFeature, setPackageDecision } = useSolutionConfig();
+
+  useEffect(() => {
+    if (!selectedSolution) return;
+    const frame = requestAnimationFrame(() => document.getElementById(`solucion-${selectedSolution}`)?.scrollIntoView({ block: "start", behavior: "instant" }));
+    return () => cancelAnimationFrame(frame);
+  }, [selectedSolution, activeTab]);
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
 
-  // Productos principales (soluciones personalizables)
-  const planesExpress = [
-    {
-      name: "Sistema de pedidos desde Telegram",
-      price: "Desde $999",
-      description: "Una solución de pedidos que permite a tus clientes acceder a tu catálogo desde Telegram y realizar su pedido de forma sencilla.",
-      features: [
-        "✓ Acceso desde Telegram",
-        "✓ Catálogo digital personalizado",
-        "✓ Categorías de productos",
-        "✓ Carrito de compra",
-        "✓ Hasta 30 productos en la configuración inicial",
-        "✓ Personalización con logo, colores y datos del negocio",
-        "✓ Configuración inicial incluida",
-        "✓ Enlace directo al bot",
-        "✓ Código QR de acceso al bot",
-        "✓ Diseño adaptable a celular",
-        "✓ Soporte por WhatsApp",
-      ],
-      plus: ["QR directo al bot", "Configuración inicial incluida"],
-      clarification: "El precio base incluye la configuración inicial de hasta 30 productos. Más productos, integraciones o funciones especiales se cotizan por separado.",
-      bestFor: ["Taquerías", "Torterías", "Cocinas pequeñas", "Micro negocios", "Negocios de comida"],
-      hasDemo: true,
-      demoUrl: "https://t.me/pizzas_test525_bot",
-    },
-    {
-      name: "Tarjeta Digital",
-      price: "$699",
-      description: "Tu información profesional o de negocio en un solo lugar, lista para compartir con tus clientes.",
-      features: [
-        "✓ Diseño personalizado con tu información",
-        "✓ Botón directo a WhatsApp",
-        "✓ Teléfono y correo de contacto",
-        "✓ Enlaces a redes sociales",
-        "✓ Ubicación o mapa del negocio",
-        "✓ Código QR para compartir",
-        "✓ Opción para guardar el contacto",
-        "✓ Diseño adaptable a celular y computadora",
-        "✓ Configuración inicial incluida",
-        "✓ Soporte por WhatsApp",
-      ],
-      plus: ["QR para compartir", "Guardar contacto"],
-      clarification: "Incluye configuración inicial con la información proporcionada por el cliente.",
-      bestFor: ["Plomeros", "Electricistas", "Carpinteros", "Albañiles", "Mecánicos"],
-      hasDemo: true,
-      demoUrl: "https://web-oficios.vercel.app/",
-    },
-    {
-      name: "Agenda Digital",
-      price: "Desde $1,499",
-      description: "Una agenda digital para que tus clientes consulten tus servicios y soliciten o reserven una cita de forma sencilla.",
-      features: [
-        "✓ Diseño personalizado para tu negocio",
-        "✓ Información de servicios",
-        "✓ Horarios de atención",
-        "✓ Sistema de solicitud o reserva de citas",
-        "✓ Información de contacto",
-        "✓ Código QR directo a la agenda",
-        "✓ Configuración inicial incluida",
-        "✓ Diseño adaptable a celular y computadora",
-        "✓ Soporte por WhatsApp",
-      ],
-      plus: ["QR directo para reservar", "Configuración inicial incluida"],
-      clarification: "Funciones avanzadas, automatizaciones o integraciones adicionales se cotizan por separado.",
-      bestFor: ["Dentistas", "Podólogos", "Barberías", "Spa", "Tatuadores"],
-      hasDemo: true,
-      demoUrl: "https://podologos-ten.vercel.app/",
-    },
-    {
-      name: "Menú Digital con Pedidos a WhatsApp",
-      price: "Desde $3,999",
-      featured: true,
-      description: "Menú digital personalizado para que tus clientes consulten tus productos, armen su pedido y envíen el detalle directamente a tu WhatsApp.",
-      features: [
-        "✓ Menú digital personalizado",
-        "✓ Categorías de productos",
-        "✓ Carrito de compra",
-        "✓ Pedido detallado enviado a WhatsApp",
-        "✓ Hasta 50 productos en la configuración inicial",
-        "✓ Personalización con logo, colores y datos del negocio",
-        "✓ Código QR para mesas, mostrador o material impreso",
-        "✓ Configuración inicial incluida",
-        "✓ Diseño adaptable a celular y computadora",
-        "✓ Sin comisión de nuestra parte por cada pedido",
-        "✓ Soporte por WhatsApp",
-      ],
-      plus: ["QR listo para tu negocio", "Sin comisión nuestra por pedido"],
-      clarification: "El precio base incluye la configuración inicial de hasta 50 productos. Catálogos mayores, integraciones o funciones especiales se cotizan por separado.",
-      bestFor: ["Pizzerías", "Restaurantes", "Taquerías", "Negocios de comida"],
-      hasDemo: true,
-      demoUrl: "https://oliver-pizzas.vercel.app/",
-    },
-  ];
-
-  // Proyectos especiales (desarrollo de mayor alcance)
-  const planesPremium = [
-    {
-      name: "E-Commerce PRO",
-      price: "Desde $9,499",
-      description: "Tienda en línea personalizada para presentar tus productos y comenzar a vender por internet.",
-      features: [
-        "✓ Diseño personalizado",
-        "✓ Catálogo organizado por categorías",
-        "✓ Carrito de compra",
-        "✓ Proceso de compra",
-        "✓ Hasta 30 productos en la configuración inicial",
-        "✓ Diseño adaptable a celular y computadora",
-        "✓ Configuración inicial incluida",
-        "✓ Integración de información y contacto del negocio",
-        "✓ Dominio por 1 año",
-        "✓ Hosting por 1 año",
-        "✓ Soporte por WhatsApp",
-      ],
-      plus: ["Dominio + hosting por 1 año incluidos"],
-      clarification: "El precio base contempla hasta 30 productos en la configuración inicial. Catálogos mayores, pasarelas de pago, envíos, inventario, automatizaciones o integraciones especiales pueden modificar el precio final.",
-      bestFor: ["Tiendas físicas", "Emprendedores", "Marcas locales"],
-      hasDemo: false,
-    },
-    {
-      name: "Web Corporativa",
-      price: "Desde $9,999",
-      featured: true,
-      description: "Sitio web profesional para presentar tu empresa, servicios e información de contacto con una imagen sólida en internet.",
-      features: [
-        "✓ Diseño personalizado",
-        "✓ Hasta 5 secciones o páginas principales",
-        "✓ Presentación de empresa y servicios",
-        "✓ Información de contacto",
-        "✓ Enlaces a redes sociales",
-        "✓ Formulario de contacto",
-        "✓ Diseño adaptable a celular y computadora",
-        "✓ Configuración inicial incluida",
-        "✓ Dominio por 1 año",
-        "✓ Hosting por 1 año",
-        "✓ Soporte por WhatsApp",
-      ],
-      plus: ["Dominio + hosting por 1 año incluidos"],
-      clarification: "Secciones, funcionalidades e integraciones adicionales se cotizan según las necesidades del proyecto.",
-      bestFor: ["Empresas", "Agencias", "Consultorías", "Startups"],
-      hasDemo: false,
-    },
-    {
-      name: "Web + App Android",
-      price: "Desde $13,999",
-      description: "Solución web con experiencia adaptada para Android, pensada para proyectos que necesitan presencia web y acceso desde dispositivos móviles.",
-      features: [
-        "✓ Desarrollo web personalizado",
-        "✓ Diseño adaptable a celular y computadora",
-        "✓ Experiencia adaptada para dispositivos Android cuando sea técnicamente viable",
-        "✓ Configuración inicial incluida",
-        "✓ Integración entre la experiencia web y móvil",
-        "✓ Dominio por 1 año",
-        "✓ Hosting por 1 año",
-        "✓ Soporte por WhatsApp",
-        "✓ Preparación según el alcance definido del proyecto",
-      ],
-      plus: ["Web + experiencia Android", "Dominio y hosting por 1 año"],
-      clarification: "El alcance de la aplicación depende de las funcionalidades requeridas. Integraciones o desarrollo móvil especializado se cotizan por separado.",
-      bestFor: ["Negocios en crecimiento", "Profesionales", "Tiendas digitales"],
-      hasDemo: false,
-    },
-  ];
-
-  const renderPlanCard = (plan, index) => {
-    return (
-      <motion.div
-        key={index}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: index * 0.1 }}
-        className={`relative min-w-0 p-6 sm:p-8 rounded-3xl ${
-          plan.featured
-            ? "bg-linear-to-br from-[#00D9FF]/20 to-[#FF6B35]/20 border-2 border-[#00D9FF]"
-            : "bg-[#0A0A0A] border border-gray-800"
-        }`}
-      >
-        {plan.featured && (
-          <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#00D9FF] text-black px-4 py-1 rounded-full text-sm font-semibold whitespace-nowrap">
-            Más Popular
-          </div>
-        )}
-
-        <h3 className="text-2xl md:text-xl lg:text-2xl font-bold mb-2 text-white">{plan.name}</h3>
-        <div className="mb-6">
-          {plan.price.startsWith("Desde ") && (
-            <span className="block text-sm text-gray-400 mb-1">Desde</span>
-          )}
-          <div className="flex flex-wrap items-baseline gap-x-2">
-            <span className="text-4xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#00D9FF]">
-              {plan.price.replace(/^Desde /, "")}
-            </span>
-            <span className="text-gray-400">MXN</span>
-          </div>
-        </div>
-
-        <p className="text-gray-400 mb-4 text-sm">{plan.description}</p>
-
-        {plan.hasDemo && (
-          <div className="mb-4">
-            <span className="inline-block px-3 py-1 text-xs font-bold text-black bg-[#FFE45E] rounded-full">
-              Demo disponible
-            </span>
-          </div>
-        )}
-
-        <div className="mb-4">
-          <p className="text-sm text-gray-400 mb-2">Ideal para:</p>
-          <div className="flex flex-wrap gap-1">
-            {plan.bestFor.map((profession, i) => (
-              <span
-                key={i}
-                className="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs"
-              >
-                {profession}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <p className="text-sm font-semibold text-gray-300 mb-3">Qué incluye:</p>
-        <ul className="space-y-3 mb-4">
-          {plan.features.map((feature, i) => (
-            <li key={i} className="flex items-start gap-3">
-              <span className="text-gray-300 text-sm">{feature}</span>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mb-4 border-l-2 border-[#00D9FF]/50 pl-3">
-          <p className="text-sm font-semibold text-[#00D9FF] mb-1">PLUS incluido</p>
-          <p className="text-gray-300 text-sm leading-relaxed">{plan.plus.join(" + ")}</p>
-        </div>
-
-        <p className="text-gray-400 text-sm leading-relaxed">{plan.clarification}</p>
-
-        <Box sx={{ mt: 6, textAlign: "center" }}>
-          {plan.hasDemo && (
-            <Button
-              component="a"
-              href={plan.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                mb: 2,
-                width: "100%",
-                borderRadius: 2,
-                fontWeight: 600,
-                border: "2px solid #00D9FF",
-                color: "#00D9FF",
-                "&:hover": { bgcolor: "rgba(0, 217, 255, 0.1)" },
-              }}
-            >
-              Ver Demo
-            </Button>
-          )}
-          <Button
-            component={Link}
-            to="/contacto"
-            sx={{
-              px: 4,
-              py: 1.5,
-              width: "100%",
-              borderRadius: 2,
-              fontWeight: 700,
-              background: plan.featured
-                ? "linear-gradient(to right, #00D9FF, #FF6B35)"
-                : "linear-gradient(to right, #22d3ee, #60a5fa)",
-              color: "white",
-              "&:hover": {
-                opacity: 0.9,
-                transform: "translateY(-2px)",
-                boxShadow: "0 10px 20px rgba(0, 217, 255, 0.3)",
-              },
-              transition: "all 0.3s ease",
-            }}
-          >
-            Consultar
-          </Button>
-        </Box>
-      </motion.div>
-    );
+  const handleOpenConfigurator = (solution) => {
+    setExpandedSolution(solution);
+    const next = new URLSearchParams(searchParams);
+    next.set("solucion", solution);
+    next.set("configurar", "1");
+    setSearchParams(next, { replace: true });
   };
+  const handleCloseConfigurator = () => {
+    setExpandedSolution(selectedSolution);
+    const next = new URLSearchParams(searchParams);
+    next.delete("configurar");
+    setSearchParams(next, { replace: true });
+  };
+  const continueToContact = (solution, decision) => {
+    setPackageDecision(solution, decision);
+    navigate(`/contacto?solucion=${solution}`);
+  };
+  const cardProps = (solution) => ({
+    selected: selectedSolution === solution,
+    open: (configuratorOpen ? selectedSolution : expandedSolution) === solution,
+    onToggle: () => setExpandedSolution((current) => current === solution ? null : solution),
+    onCloseJourney: () => setExpandedSolution(null),
+    onOpenConfigurator: handleOpenConfigurator,
+    onContinueInitial: () => continueToContact(solution, "inicial"),
+  });
+  const applicableFeatures = selectedSolution ? getAdditionalFeatures(selectedSolution) : [];
+  const currentDraft = getDraft(selectedSolution);
 
   return (
     <>
       {/* ✅ Sección de Precios */}
-      <section id="precios" className="py-20 px-6 bg-[#1A1A1A]">
+      <section id="precios" className="py-4 px-3 sm:px-2 bg-[#1A1A1A] rounded-2xl">
         <div className="container mx-auto">
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center text-[#00D9FF]">
-              Mis precios
-            </h2>
-            <p className="text-gray-400 text-center mb-12 text-lg">
-              Elige la opción que mejor se adapte a <span className="text-[#FFE45E] font-semibold">tu negocio</span>
-            </p>
-          </motion.div>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center text-[#00D9FF]">
+              Mis Precios
+            </h1>
+
+          </Motion.div>
 
           {/* ✅ SELECTOR SEGMENTADO MODERNO */}
           <div className="flex justify-center mb-8 px-0 sm:px-4">
             <div className="flex bg-[#0A0A0A] border border-gray-700 rounded-xl p-1 w-full max-w-md">
               <button
                 onClick={() => setActiveTab(0)}
-                role="tab"
-                aria-selected={activeTab === 0}
-                aria-label="Precios accesibles"
-                className={`flex-1 py-3 px-2 sm:px-6 rounded-lg font-semibold text-xs min-[375px]:text-sm sm:text-base transition-all duration-300 ease-in-out whitespace-normal min-[375px]:whitespace-nowrap ${
+                aria-pressed={activeTab === 0}
+                aria-label="Básicos y funcionales"
+                className={`flex-1 py-3 px-2 sm:px-6 rounded-lg font-semibold text-xs min-[375px]:text-sm sm:text-base transition-all duration-300 ease-in-out whitespace-normal min-w-0 ${
                   activeTab === 0
                     ? "bg-[#00D9FF] text-black shadow-lg shadow-[#00D9FF]/50"
                     : "text-gray-400 hover:text-gray-300"
                 }`}
               >
-                Precios accesibles
+                Básicos y funcionales
               </button>
               <button
                 onClick={() => setActiveTab(1)}
-                role="tab"
-                aria-selected={activeTab === 1}
-                aria-label="Precios Premium"
-                className={`flex-1 py-3 px-2 sm:px-6 rounded-lg font-semibold text-xs min-[375px]:text-sm sm:text-base transition-all duration-300 ease-in-out whitespace-normal min-[375px]:whitespace-nowrap ${
+                aria-pressed={activeTab === 1}
+                aria-label="Premium"
+                className={`flex-1 py-3 px-2 sm:px-6 rounded-lg font-semibold text-xs min-[375px]:text-sm sm:text-base transition-all duration-300 ease-in-out whitespace-normal min-w-0 ${
                   activeTab === 1
                     ? "bg-[#00D9FF] text-black shadow-lg shadow-[#00D9FF]/50"
                     : "text-gray-400 hover:text-gray-300"
                 }`}
               >
-                Precios Premium
+                Premium
               </button>
             </div>
           </div>
-
+            <p className="text-gray-400 text-center mb-4 text-lg">
+              Soluciones practicas para <span className="text-[#FFE45E] font-semibold">tu negocio</span>
+            </p>
           {/* ✅ CONTENIDO DE TABS */}
           {activeTab === 0 && (
             <>
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
               >
-                <p className="text-gray-400 text-center mb-12 text-lg">
-                  Productos ya desarrollados que <span className="text-[#00D9FF] font-semibold">personalizo</span> con tu logo, colores e información.
-                </p>
-                <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                  {planesExpress.map(renderPlanCard)}
+
+                <div className="grid md:grid-cols-2 gap-5 items-start">
+                  {BASIC_SOLUTION_ORDER.map((id) => <SolutionPriceCard key={id} plan={BASIC_PLANS.find((plan) => plan.solution === id)} {...cardProps(id)} />)}
                 </div>
-              </motion.div>
+              </Motion.div>
             </>
           )}
 
           {activeTab === 1 && (
             <>
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
               >
                 <p className="text-gray-400 text-center mb-12 text-lg">
-                  Proyectos de mayor alcance. Según tus necesidades, pueden requerir <span className="text-[#FFE45E] font-semibold">cotización adicional</span>.
+                  Proyectos que requieren mayor definición de alcance. Podemos hablar de tu idea sin que tengas que elegir funciones técnicas.
                 </p>
-                <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                  {planesPremium.map(renderPlanCard)}
+                <div className="grid md:grid-cols-2 gap-5 items-start">
+                  {[...PREMIUM_PLANS, ANDROID_PLAN].map((plan) => <SolutionPriceCard key={plan.solution} plan={plan} {...cardProps(plan.solution)} />)}
                 </div>
-
-                {/* 🧩 Bloque Especial - Aplicaciones Android (Cotización Personalizada) */}
-                <motion.div
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                  className="max-w-2xl mx-auto mt-20 bg-gradient-to-br from-[#0A0A0A] to-[#0F1419] border border-[#00D9FF]/40 rounded-2xl p-6 sm:p-8 md:p-10"
-                >
-                  {/* Contenedor flex vertical */}
-                  <div className="text-center">
-                    {/* Título */}
-                    <h3 className="text-2xl min-[375px]:text-3xl sm:text-4xl font-bold text-[#00D9FF] mb-3">
-                      Aplicaciones Android
-                    </h3>
-
-                    {/* Descripción principal */}
-                    <p className="text-gray-300 text-base sm:text-lg mb-4 leading-relaxed">
-                      Desarrollo de aplicaciones adaptadas a las necesidades de tu proyecto.
-                    </p>
-
-                    {/* Texto secundario */}
-                    <p className="text-gray-400 text-sm sm:text-base mb-6">
-                      Las funciones, integraciones y complejidad se definen según tus requerimientos.
-                    </p>
-
-                    {/* Sección de cotización personalizada */}
-                    <div className="bg-[#0A0A0A]/60 border border-gray-700/50 rounded-xl p-5 sm:p-6 mb-6">
-                      <p className="text-gray-400 text-xs sm:text-sm uppercase tracking-wider mb-2">
-                        Precio
-                      </p>
-                      <p className="text-[19px] min-[375px]:text-2xl sm:text-3xl font-bold text-[#FFE45E] mb-1">
-                        Cotización personalizada
-                      </p>
-                      <p className="text-gray-500 text-xs sm:text-sm">
-                        Según funcionalidades e integraciones
-                      </p>
-                    </div>
-
-                    {/* Botón CTA */}
-                    <Box sx={{ textAlign: "center" }}>
-                      <Button
-                        component={Link}
-                        to="/contacto"
-                        sx={{
-                          px: { xs: 4, sm: 6 },
-                          py: 1.75,
-                          width: { xs: "100%", sm: "auto" },
-                          borderRadius: 2,
-                          fontWeight: 700,
-                          fontSize: { xs: "0.95rem", sm: "1rem" },
-                          background: "linear-gradient(to right, #00D9FF, #FF6B35)",
-                          color: "white",
-                          boxShadow: "0 0 20px rgba(0, 217, 255, 0.3)",
-                          "&:hover": {
-                            background: "linear-gradient(to right, #00C4E6, #E55A30)",
-                            transform: "translateY(-2px)",
-                            boxShadow: "0 10px 30px rgba(0, 217, 255, 0.4)",
-                          },
-                          transition: "all 0.3s ease",
-                        }}
-                      >
-                        Cotiza tu aplicación
-                      </Button>
-                    </Box>
-                  </div>
-                </motion.div>
-              </motion.div>
+              </Motion.div>
             </>
           )}
+
+          <section aria-labelledby="proceso-contratacion" className="mt-16 max-w-6xl mx-auto">
+            <h2 id="proceso-contratacion" className="text-3xl font-bold text-center text-[#00D9FF] mb-8">
+              ¿Cómo trabajaremos?
+            </h2>
+            <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { title: "Elige tu solución", description: "Selecciona la solución que mejor se adapte a tu negocio." },
+                { title: "Envía tus datos", description: "Puedes explicar tu necesidad ahora o dejarla para nuestra conversación." },
+                { title: "Definimos tu proyecto", description: "Revisamos contigo el alcance, precio final y condiciones antes de comenzar." },
+                { title: "Comenzamos", description: "Después de aprobar tu propuesta y convenio y realizar el anticipo, iniciamos el proyecto." },
+              ].map((step, index) => (
+                <li key={step.title} className="min-w-0 bg-[#0A0A0A] border border-gray-800 rounded-2xl p-5">
+                  <span aria-hidden="true" className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-[#00D9FF]/15 text-[#00D9FF] font-bold mb-4">
+                    {index + 1}
+                  </span>
+                  <h3 className="text-base font-semibold text-white mb-2">{step.title}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{step.description}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
 
           {/* 📝 Aclaración comercial discreta */}
           <div className="mt-16 pt-8 border-t border-gray-800/50">
@@ -488,7 +219,7 @@ export default function Precios() {
         </Typography>
 
         <Accordion
-          question="⏳ ¿En cuánto tiempo estará lista mi página?"
+          question="⏳ ¿Cuándo estará lista mi solución?"
           answer="El tiempo de entrega se define según el alcance y la información necesaria para configurar tu solución."
         />
         <Accordion
@@ -496,19 +227,41 @@ export default function Precios() {
           answer="E-Commerce PRO, Web Corporativa y Web + App Android incluyen dominio y hosting por 1 año. En las demás soluciones, las condiciones se confirman antes de contratar. Renovaciones, mantenimiento y servicios posteriores al periodo incluido se cotizan por separado."
         />
         <Accordion
-          question="🔄 ¿Puedo actualizar mi página en el futuro?"
+          question="🔄 ¿Puedo ampliar mi solución en el futuro?"
           answer="Sí. Las modificaciones posteriores, funciones nuevas e integraciones se evalúan y cotizan por separado."
         />
         <Accordion
-          question="📱 ¿Mi página se verá bien en celulares?"
-          answer="Sí, todos nuestros diseños son 100% responsivos y adaptables."
+          question="📱 ¿Puedo usar estas soluciones desde el celular?"
+          answer="Los diseños se adaptan a celulares. Las funciones específicas de Android se revisan según viabilidad y alcance."
         />
         <Accordion
           question="🔧 ¿Para qué profesiones son estos planes?"
           answer="Perfectos para oficios, tiendas locales, consultorios, salones de belleza y todo tipo de pequeños negocios."
         />
+        <Accordion question="¿Qué sucede después de enviar mi solicitud?" answer="Me pondré en contacto contigo para revisar tu necesidad, alcance y precio final. El desarrollo comienza después de aprobar propuesta y convenio y realizar el anticipo." />
+        <Accordion question="¿Qué significa el precio Desde?" answer="Es el precio inicial del alcance base descrito. Más productos, funciones o integraciones pueden modificar el precio final, que revisaremos antes de contratar." />
+        <Accordion question="¿Qué pasa si no sé cuál elegir?" answer="Puedes solicitar una llamada de orientación con tu nombre, teléfono y horario preferido. Acordaremos contigo la llamada; no necesitas definir un proyecto técnico." />
       </Box>
+      <section className="my-10 p-6 rounded-2xl border border-cyan-400/30 text-white text-center" aria-labelledby="precios-cierre">
+        <h2 id="precios-cierre" className="text-2xl font-bold mb-3">¿Ya sabes qué necesita tu negocio?</h2>
+        <p className="text-gray-300 mb-5">Elige una solución o solicita orientación si todavía tienes dudas.</p>
+        <div className="flex flex-wrap justify-center gap-3">
+          <a href="#precios" className="inline-flex min-h-12 items-center px-5 py-3 rounded-xl border border-cyan-400 text-cyan-300">Elegir solución</a>
+          <Link to="/contacto?solucion=general" className="inline-flex min-h-12 items-center px-5 py-3 rounded-xl bg-cyan-400 text-slate-950 font-bold">Solicitar orientación</Link>
+        </div>
+      </section>
       <ModalPromocion />
+
+      <ProjectConfigurator
+        open={configuratorOpen}
+        onClose={handleCloseConfigurator}
+        features={applicableFeatures}
+        selectedIds={currentDraft.ids}
+        onToggle={(id) => toggleFeature(selectedSolution, id)}
+        onContinue={() => continueToContact(selectedSolution, "personalizado")}
+        onExited={() => document.getElementById(`explore-${selectedSolution}`)?.focus()}
+        key={selectedSolution || "none"}
+      />
     </>
   );
 }

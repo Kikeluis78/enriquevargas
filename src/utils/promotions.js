@@ -4,7 +4,7 @@
 export const PROMOTIONS = [
   {
     id: 1,
-    active: true, // Cambia a null o false para desactivar
+    active: false, // Retirada: precio y compromisos no corresponden a la oferta aprobada.
     title: "🎉 OFERTA ESPECIAL 🎉",
     subtitle: "Web + Android",
     description: "¡Lleva tu negocio al siguiente nivel!",

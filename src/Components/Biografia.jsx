@@ -1,118 +1,19 @@
-/* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
-
-// Material UI
-import Container from "@mui/material/Container";
-
-// Framer Motion
-import { motion } from "framer-motion";
-import ModalMisionVision from "./ModalMisionVision";
+import { Link } from "react-router-dom";
 
 export default function Biografia() {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  useEffect(() => {
-    AOS.init({ duration: 900, once: true });
-  }, []);
-
   return (
-    <>
-      <section className="py-20 px-6 bg-[#1A1A1A]" id="biografia">
-        <Container maxWidth="xl" disableGutters>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 gap-14 items-stretch"
-          >
-            {/* 📷 FOTO */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              className="relative group w-full min-h-400px md:min-h-500px"
-            >
-              <img
-                src="/luis3.png"
-                alt="Foto de Enrique Vargas"
-                className="w-full h-full object-cover object-top rounded-3xl shadow-2xl border-4 border-[#00D9FF]/30 transition-transform duration-500 group-hover:scale-[1.02]"
-                style={{ minHeight: "400px" }}
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent rounded-3xl" />
-            </motion.div>
+    <section id="biografia" aria-labelledby="sobre-enrique" className="grid md:grid-cols-[1fr_2fr] gap-8 items-center p-5 sm:p-8 rounded-3xl bg-[#1a1a1a] text-white">
+      <h2 id="sobre-enrique" className="text-3xl font-bold mb-4">Enrique <span className="text-cyan-400"> Vargas</span></h2>
+      <div className="w-full max-w-xs mx-auto aspect-square rounded-[50%] overflow-hidden border border-cyan-400/30">
 
-            {/* 🧠 TEXTO */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9 }}
-              className="text-center md:text-left"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-                Sobre <span className="text-[#00D9FF]">Mí</span>
-              </h2>
+        <img src="/luis3.png" alt="Enrique Vargas" loading="lazy" className="w-full h-full object-cover object-top" />
+      </div>
+      <div>
 
-              {/* 🟦 CONTENEDOR */}
-              <div className="bg-[#0A0A0A] w-full p-4 md:p-8 rounded-3xl border border-gray-800 shadow-xl md:max-w-2xl">
-                <p className="text-base md:text-lg mb-5 leading-relaxed md:leading-loose">
-                  <span className="text-white font-semibold">Mucho gusto, soy </span>
-                  <span className="text-[#00D9FF] font-bold">Enrique Vargas</span>
-                  <span className="text-white font-semibold">.<br />No soy una agencia enorme… y esa es precisamente </span>
-                  <span className="text-[#FFE45E] font-bold">mi ventaja.</span>
-                </p>
-
-                <p className="text-base md:text-lg text-gray-300 mb-5 leading-relaxed md:leading-loose">
-                  Trabajo directamente contigo para entender{" "}
-                  <span className="text-[#FF6B35] font-semibold">
-                    qué necesita tu negocio
-                  </span>{" "}
-                  y ofrecerte una solución práctica, moderna y funcional,{" "}
-                  <span className="text-[#00D9FF] font-semibold">
-                    sin procesos complicados ni intermediarios.
-                  </span>
-                </p>
-
-                <p className="text-base md:text-lg text-gray-300 mb-5 leading-relaxed md:leading-loose">
-                  Mi enfoque es crear{" "}
-                  <span className="text-[#C084FC] font-semibold">
-                    herramientas digitales accesibles
-                  </span>{" "}
-                  que puedan adaptarse a pequeños negocios y ayudarlos a vender,
-                  organizarse y conectar con sus clientes de una manera más práctica.
-                </p>
-
-                <p className="text-base md:text-lg mb-5 leading-relaxed md:leading-loose">
-                  <span className="text-white font-semibold">
-                    ¿Tienes dudas o una idea para tu negocio?
-                    <br />
-                  </span>
-                  <span className="text-[#00D9FF] font-semibold">Contáctame. </span>
-                  <span className="text-gray-300">
-                    Podemos revisar qué solución se adapta mejor a lo que necesitas.
-                  </span>
-                </p>
-
-                {/* BOTÓN */}
-                <div className="w-full flex justify-center mt-8">
-                  <button
-                    onClick={() => setModalOpen(true)}
-                    className="px-6 py-3 rounded-full font-semibold text-black bg-linear-to-r from-[#00D9FF] to-[#FF6B35] shadow-lg transition-all duration-300 hover:opacity-90 hover:-translate-y-1"
-                  >
-                    Misión <span className="ml-1">y Visión</span>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </Container>
-      </section>
-
-      <ModalMisionVision
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-      />
-    </>
+        <p className="text-gray-300 mb-4">Te escucho para entender qué necesita tu negocio y revisar contigo una solución práctica, sin intermediarios.</p>
+        <p className="text-gray-300 mb-5">Podemos partir de una solución existente o definir un proyecto especial. Antes de comenzar, acordamos alcance, precio y condiciones.</p>
+        <Link to="/contacto?solucion=general" className="inline-flex items-center min-h-12 px-5 py-3 rounded-xl bg-cyan-400 text-slate-950 font-bold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white hover:bg-cyan-300">Programar Cita</Link>
+      </div>
+    </section>
   );
 }

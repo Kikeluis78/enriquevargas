@@ -34,7 +34,7 @@ export default function Header() {
   });
 
   return (
-    <header>
+    <header className="sticky top-0 z-40 w-full">
       {isDesktop ? (
         <nav aria-label="Navegación principal" className="flex flex-wrap justify-center gap-3 p-4 bg-black/60 border-b border-white/10 shadow-lg">
           {renderItems()}
@@ -47,7 +47,7 @@ export default function Header() {
               <span className="ml-2 text-base font-bold">Menú</span>
             </IconButton>
           </div>
-          <Drawer anchor="right" open={menuOpen} onClose={() => setMenuOpen(false)} slotProps={{ paper: { sx: { width: 300, maxWidth: "100vw", bgcolor: "#0c0f15", color: "white", p: 2 } } }}>
+          <Drawer anchor="right" open={menuOpen} onClose={() => setMenuOpen(false)} slotProps={{ paper: { sx: { width: 300, maxWidth: "100vw", bgcolor: "#0c0f15", color: "white", p: 2, zIndex: 41 } } }}>
             <div className="flex items-center justify-between mb-4">
               <span className="font-bold">Menú</span>
               <IconButton aria-label="Cerrar menú de navegación" onClick={() => setMenuOpen(false)} sx={{ color: "white", "&.Mui-focusVisible": { outline: "2px solid #22E3FF" } }}><X size={28} /></IconButton>

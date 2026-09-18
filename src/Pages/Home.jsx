@@ -1,156 +1,235 @@
-/* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { HOME_PHRASES } from "../utils/constants";
-
-// Material UI
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-
-// Framer Motion
-import { motion } from "framer-motion";
-
+import { BASIC_SOLUTION_ORDER, SOLUTION_DETAILS } from "../utils/constants";
+import { CONTACT_SOLUTIONS } from "../utils/contact";
 import Biografia from "../Components/Biografia";
+import { useSEOMetadata } from "../Hooks/useSEOMetadata";
+
+const secondary =
+  "inline-flex items-center justify-center min-h-12 px-4 py-3 rounded-xl border border-cyan-400 text-cyan-300 font-semibold text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white hover:bg-cyan-950";
 
 export default function Home() {
-  const [currentText, setCurrentText] = useState("");
-  const [phraseIndex, setPhraseIndex] = useState(0);
-
-  useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
-  }, []);
-
-  useEffect(() => {
-    let isMounted = true;
-    const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-
-    const write = async () => {
-      while (isMounted) {
-        const text = HOME_PHRASES[phraseIndex];
-
-        for (let i = 0; i <= text.length; i++) {
-          if (!isMounted) return;
-          setCurrentText(text.slice(0, i));
-          await delay(90);
-        }
-
-        await delay(1300);
-
-        setCurrentText("");
-        await delay(300);
-
-        setPhraseIndex((p) => (p + 1) % HOME_PHRASES.length);
-      }
-    };
-
-    write();
-    return () => {
-      isMounted = false;
-    };
-  }, [phraseIndex]);
-
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) section.scrollIntoView({ behavior: "smooth" });
-  };
+  useSEOMetadata({
+    title: "Enrique Vargas | Soluciones digitales para pequeños negocios",
+    description: "Soluciones para presentar tu negocio, recibir pedidos y organizar citas. Atención directa con Enrique; alcance y precio acordados antes de comenzar.",
+    canonical: "https://enriquevargas.com.mx/",
+    ogTitle: "Enrique Vargas | Soluciones Digitales",
+    ogDescription: "Recibe pedidos, organiza citas y presenta tu negocio en línea. Soluciones digitales con atención directa de Enrique.",
+  });
 
   return (
-    <Box
-      id="home"
-      sx={{
-        pt: { xs: 6, md: 10 },
-        pb: 10,
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        backgroundColor: "#0a0a0a",
-      }}
-    >
-      <Container maxWidth="xl">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center w-full">
-          {/* ------------ TEXTO ------------ */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col justify-center"
+    <div id="home" className="text-white pb-4">
+      <section
+        aria-labelledby="soluciones-titulo"
+        className="grid md:grid-cols-2 gap-6 items-center pt-3 md:pt-2"
+      >
+        <div className="text-center md:text-left">
+          <h1
+            id="soluciones-titulo"
+            className="text-4xl font-bold mb-4 text-center md:text-left"
           >
-           {/* Título principal */}
-<h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight text-white text-center md:text-left">
-  Digitaliza tu negocio
-  <br />
-  <span className="text-[#00D9FF]">de forma simple</span>
-</h1>
+            Tengo una solución para{" "}
+            <span className="text-cyan-400">lo que necesitas resolver</span>
+          </h1>
 
-            {/* Texto de impacto comercial */}
-            <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 max-w-lg text-center md:text-left leading-relaxed">
-             Vende y organiza de forma más práctica e innovadora, con herramientas modernas, accesibles y pensadas para tu negocio.
+          <div className="text-gray-300 max-w-3xl mb-8 text-center md:text-left">
+            <p className="text-yellow-400">
+              Tal vez necesitas organizar citas o
             </p>
 
-            {/* Máquina de escribir */}
-            <div className="mb-6 min-h-28px flex items-center justify-center md:justify-start">
-              <p className="text-base sm:text-lg text-[#00D9FF] font-mono">
-                {currentText}
-                <span className="animate-pulse">|</span>
-              </p>
-            </div>
+            <p>Recibir pedidos a tu WhatsApp.</p>
 
-            
-          </motion.div>
-
-          {/* ------------ IMAGEN ------------ */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative w-full flex justify-center"
-          >
-            <div className="relative z-10 bg-linear-to-br from-[#00D9FF]/20 to-[#FF6B35]/20 p-3 sm:p-4 rounded-3xl backdrop-blur-sm border border-[#00D9FF]/30 w-full max-w-lg">
-              <img
-                src="/home-soluciones-digitales.webp"
-                alt="Soluciones digitales para pequeños negocios"
-                className="rounded-2xl w-full h-auto shadow-2xl"
-                loading="eager"
-              />
-            </div>
-            <div className="absolute -bottom-6 -right-6 w-72 h-72 bg-[#00D9FF]/20 rounded-full blur-3xl"></div>
-          </motion.div>
+            <p className="text-yellow-400">Ya es "Tiempo de Mostrar" tus servicios en línea,</p>
+          </div>
         </div>
 
-        <section className="mt-16 scroll-mt-28" id="productos-inicio" aria-labelledby="soluciones-titulo">
-          <h2 id="soluciones-titulo" className="text-3xl md:text-4xl font-bold text-white text-center mb-8">
-            Soluciones <span className="text-[#00D9FF]">para tu negocio</span>
-          </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { id: "telegram", image: "/img/telegram-pedidos.webp", name: "Sistema de pedidos desde Telegram", description: "Tus clientes consultan productos, arman su pedido y el negocio recibe el detalle por WhatsApp." },
-              { id: "tarjeta", image: "/img/tarjeta-digital.webp", imageAlt: "Tarjeta digital con servicios, datos de contacto y WhatsApp", name: "Tarjeta Digital", description: "Presenta tus servicios, datos de contacto y WhatsApp en una página sencilla y profesional." },
-              { id: "agenda", image: "/img/agenda-digital.webp", imageAlt: "Agenda digital con calendario, selección de horario y confirmación por WhatsApp o correo", name: "Agenda Digital", description: "Permite que tus clientes elijan día y horario y recibas la información de la cita de forma ordenada." },
-              { id: "pizzeria", image: "/img/menu-whatsapp-v3.webp", imageAlt: "Menú digital con carrito y pedido detallado recibido por WhatsApp", name: "Menú Digital con Pedidos Detallados a tu WhatsApp", description: "Tus clientes consultan el menú, arman su carrito y recibes el pedido detallado por WhatsApp." },
-            ].map((solution) => (
-              <article key={solution.id} className="flex flex-col p-6 rounded-2xl bg-[#0A0A0A] border border-[#00D9FF]/30">
-                {!solution.image && <span aria-hidden="true" className="text-4xl mb-4">{solution.icon}</span>}
-                <h3 className="text-lg font-bold text-white mb-2">{solution.name}</h3>
-                {solution.image && (
-                  <img src={solution.image} alt={solution.imageAlt ?? "Sistema de pedidos desde Telegram con menú, carrito y envío a WhatsApp"} className="w-full h-auto mb-4" loading="lazy" />
-                )}
-                <p className="text-gray-300 text-sm mb-6">{solution.description}</p>
-                <Link to="/precios" aria-label={`Más información sobre ${solution.name}`} className="mt-auto inline-flex items-center justify-center min-h-12 px-4 py-3 rounded-xl border border-[#00D9FF] text-[#00D9FF] font-semibold hover:bg-cyan-950 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
-                  Más información
+        <img
+          src="/home-soluciones-digitales.webp"
+          alt="Soluciones digitales para pequeños negocios"
+          className="rounded-3xl border border-cyan-400/30 w-full max-w-lg mx-auto"
+          loading="eager"
+        />
+      </section>
+
+      <section
+        id="productos-inicio"
+        aria-labelledby="soluciones-titulo"
+        className="mt-16 scroll-mt-8"
+      >
+        <h2
+          id="hero-title"
+          className="text-2xl sm:text-2xl lg:text-3xl font-bold leading-tight mb-5 text-center md:text-left"
+        >
+          Puedes comenzar con una solución practica,economica y concreta {" "}
+          <span className="text-cyan-400">
+            y revisar ampliaciones cuando tu negocio las necesite.
+          </span>
+        </h2>
+
+        <p className="text-lg text-gray-300 mb-6 text-center md:text-left">
+          Estas soluciones digitales están pensadas para cualquier tipo de
+          negocio.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {BASIC_SOLUTION_ORDER.map((id) => {
+            const solution = SOLUTION_DETAILS[id];
+            return (
+              <article
+                key={id}
+                className="flex flex-col min-w-0 p-5 rounded-2xl bg-[#0a0a0a] border border-cyan-400/30"
+              >
+                <h3 className="text-lg font-bold text-cyan-300 mb-3">
+                  {CONTACT_SOLUTIONS[id]}
+                </h3>
+                <img
+                  src={solution.image}
+                  alt={`Vista ilustrativa de ${CONTACT_SOLUTIONS[id]}`}
+                  className="w-full h-auto rounded-lg mb-4"
+                  loading="lazy"
+                />
+                <ul className="text-gray-300 text-sm mb-4 space-y-2">
+                  {(Array.isArray(solution.summary)
+                    ? solution.summary
+                    : [solution.summary]
+                  ).map((item, index) => (
+                    <li key={index} className="flex items-start gap-2">
+                      <span aria-hidden="true" className="text-green-400 font-bold shrink-0">✓</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="font-bold text-cyan-300 mb-4"></p>
+                <Link
+                  to={`/precios?solucion=${id}`}
+                  aria-label={`Ver precio y alcance de ${CONTACT_SOLUTIONS[id]}`}
+                  className={`${secondary} mt-auto`}
+                >
+                  Más Información
                 </Link>
               </article>
-            ))}
-          </div>
-        </section>
+            );
+          })}
+        </div>
 
-        {/* ------------ BIO ------------ */}
-        <Box sx={{ mt: 16 }}>
-          <Biografia />
-        </Box>
-      </Container>
-    </Box>
+      </section>
+
+<section aria-labelledby="avanzamos-title" className="mt-16">
+  <div className="text-center md:text-left mb-8">
+    <p className="text-yellow-400 font-semibold text-sm uppercase tracking-widest mb-2">
+      Simple, claro y paso a paso
+    </p>
+
+    <h2
+      id="avanzamos-title"
+      className="text-3xl lg:text-4xl font-bold mb-3"
+    >
+      Así ponemos en marcha{" "}
+      <span className="text-cyan-400">tu proyecto</span>
+    </h2>
+
+    <p className="text-gray-300 max-w-2xl mx-auto md:mx-0">
+      Desde que eliges una solución hasta que comenzamos a trabajar,
+      sabrás qué sigue en cada etapa.
+    </p>
+  </div>
+
+  <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    {[
+      {
+        number: "01",
+        title: "Elige tu solución",
+        description:
+          "Revisa las opciones o solicita orientación si todavía no sabes cuál necesitas.",
+        color: "text-cyan-400",
+        border: "border-cyan-400/40",
+        glow: "shadow-cyan-400/10",
+      },
+      {
+        number: "02",
+        title: "Cuéntame qué necesitas",
+        description:
+          "Envíame tus datos y me pondré en contacto contigo para conocer mejor tu proyecto.",
+        color: "text-yellow-400",
+        border: "border-yellow-400/40",
+        glow: "shadow-yellow-400/10",
+      },
+      {
+        number: "03",
+        title: "Definimos los detalles",
+        description:
+          "Revisamos juntos el alcance, precio y condiciones antes de comenzar.",
+        color: "text-purple-400",
+        border: "border-purple-400/40",
+        glow: "shadow-purple-400/10",
+      },
+      {
+        number: "04",
+        title: "¡Comenzamos!",
+        description:
+          "Con la propuesta y el convenio aprobados, y realizado el anticipo, ponemos en marcha tu proyecto.",
+        color: "text-green-400",
+        border: "border-green-400/40",
+        glow: "shadow-green-400/10",
+      },
+    ].map((step) => (
+      <li
+        key={step.number}
+        className={`
+          relative overflow-hidden
+          p-6 pt-8
+          rounded-2xl
+          bg-linear-to-b from-[#111827] to-[#070707]
+          border ${step.border}
+          shadow-lg ${step.glow}
+          transition-all duration-300
+          hover:-translate-y-1
+          hover:shadow-xl
+        `}
+      >
+        {/* Número decorativo */}
+        <span
+          aria-hidden="true"
+          className={`
+            absolute -top-3 right-3
+            text-7xl font-black
+            opacity-10
+            ${step.color}
+          `}
+        >
+          {step.number}
+        </span>
+
+        {/* Número principal */}
+        <div
+          className={`
+            relative
+            w-12 h-12
+            flex items-center justify-center
+            rounded-xl
+            bg-white/5
+            border border-white/10
+            text-xl font-black
+            mb-5
+            ${step.color}
+          `}
+        >
+          {step.number}
+        </div>
+
+        <h3 className={`text-lg font-bold mb-3 ${step.color}`}>
+          {step.title}
+        </h3>
+
+        <p className="text-sm text-gray-300 leading-relaxed">
+          {step.description}
+        </p>
+      </li>
+    ))}
+  </ol>
+</section>
+      <div className="mt-16">
+        <Biografia />
+      </div>
+
+    </div>
   );
 }
