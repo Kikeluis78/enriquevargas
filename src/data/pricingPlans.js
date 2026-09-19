@@ -67,7 +67,7 @@ export const BASIC_PLANS = [
       clarification: "El precio base incluye la configuración inicial de hasta 30 productos. Más productos, integraciones o funciones especiales se cotizan por separado.",
       bestFor: ["Taquerías", "Torterías", "Cocinas pequeñas", "Micro negocios", "Negocios de comida"],
       hasDemo: true,
-      demoUrl: "https://t.me/pizzas_test525_bot",
+      demoUrl: "https://t.me/dummytelegram_bot",
     },
     {
       solution: "tarjeta",
